@@ -1,73 +1,56 @@
-
 import { useMemo, useState } from "react";
-import Card from "./UI/Card.jsx";
-import { getBestsellers } from "../data/Data.js";
+import Card from "../components/UI/Card.jsx";
+import { getPopularProducts } from "../data/Data.js";
 import { ArrowRight } from "lucide-react";
-
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
-const PRODUCTS = getBestsellers();
+const PRODUCTS = getPopularProducts();
 const DISCOVERY_CHIPS = [
-  { id: "for-you", label: "For You" },
-  { id: "trending", label: "Trending" },
-  { id: "under-500", label: "Under ₹500" },
+  { id: "community", label: "Community Picks" },
+  { id: "value", label: "Best Value" },
+  { id: "premium", label: "Premium Picks" },
 ];
 
 const getProductMood = (title = "") => {
   const lowered = title.toLowerCase();
-  if (lowered.includes("kids")) return "Kids Pick";
-  if (lowered.includes("travel") || lowered.includes("mug")) return "Commute Hero";
-  if (lowered.includes("flask")) return "Hot Seller";
-  return "Daily Essential";
+  if (lowered.includes("kids")) return "Family Favorite";
+  if (lowered.includes("travel") || lowered.includes("mug")) return "On-The-Go";
+  if (lowered.includes("flask")) return "Top Choice";
+  return "Most Chosen";
 };
 
 const getSocialProof = (index) => {
-  const labels = ["23 bought today", "Low stock", "Back in demand", "Fast moving"];
+  const labels = ["Popular this week", "Shoppers' pick", "Hot right now", "Selling fast"];
   return labels[index % labels.length];
 };
 
-// ─── Product Card ─────────────────────────────────────────────────────────────
-
-function ProductCard({ product, badges }) {
-  return (
-    <Card product={product} badges={badges} />
-  );
-}
-
 // ─── Bestsellers section ──────────────────────────────────────────────────────
 
-export default function Bestsellers() {
-  const [activeChip, setActiveChip] = useState("for-you");
+export default function PopularProducts() {
+  const [activeChip, setActiveChip] = useState("community");
 
   const visibleProducts = useMemo(() => {
-    const scored = PRODUCTS.slice().map((item) => {
-      const title = item.title.toLowerCase();
-      const intentScore = title.includes("flask") || title.includes("bottle") ? 2 : 1;
-      return { ...item, __intentScore: intentScore };
-    });
+    const list = PRODUCTS.slice();
 
-    if (activeChip === "under-500") {
-      return scored.filter((item) => Number(item.price) <= 500);
+    if (activeChip === "value") {
+      return list.sort((a, b) => (b.off || 0) - (a.off || 0));
     }
 
-    if (activeChip === "trending") {
-      return scored.sort((a, b) => (b.off || 0) - (a.off || 0));
+    if (activeChip === "premium") {
+      return list.sort((a, b) => (b.price || 0) - (a.price || 0));
     }
 
-    return scored.sort((a, b) => {
-      if (b.__intentScore !== a.__intentScore) return b.__intentScore - a.__intentScore;
-      return (b.off || 0) - (a.off || 0);
-    });
+    return list.sort((a, b) => (b.off || 0) - (a.off || 0));
   }, [activeChip]);
 
   return (
     <section className="container-box container-main flex flex-col items-center gap-6 py-5 sm:py-7  lg:gap-8 lg:py-10">
 
       {/* Header */}
-      <div className="flex w-full flex-col items-center gap-2 text-center md:gap-3">
-        <h2 className="text-2xl font-bold capitalize leading-snug sm:text-3xl lg:text-4xl">
-          <span className="outline text-white">Our</span> Bestsellers
+      <div className="flex flex-col items-center gap-2 text-center md:gap-3">
+        <h2 className="font-bold capitalize leading-snug text-3xl lg:text-4xl" >
+          <span className="outline text-white">Our</span> Popular Products
         </h2>
         <a
           href="/collections/bestseller-nw"
@@ -83,11 +66,10 @@ export default function Bestsellers() {
               key={chip.id}
               type="button"
               onClick={() => setActiveChip(chip.id)}
-              className={`rounded-full border px-3 py-1 text-xs font-semibold transition sm:text-sm ${
-                activeChip === chip.id
+              className={`rounded-full border px-3 py-1 text-xs font-semibold transition sm:text-sm ${activeChip === chip.id
                   ? "border-primary bg-primary text-white"
                   : "border-zinc-300 bg-white text-zinc-700 hover:border-primary/50 hover:text-primary"
-              }`}
+                }`}
             >
               {chip.label}
             </button>
@@ -106,7 +88,7 @@ export default function Bestsellers() {
             className="relative flex h-full shrink-0 animate-slide-up"
             style={{ animationDelay: `${i * 80}ms` }}
           >
-            <ProductCard
+            <Card
               product={product}
               badges={[
                 { tone: "light", text: getProductMood(product.title) },

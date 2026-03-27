@@ -210,7 +210,7 @@ export const productDetail = {
     "Return Policy": {
       heading: "Return Policy",
       bullets: [
-        "Returns accepted within 7 days of delivery.",
+        "Returns accepted within7 days of delivery.",
         "Item must be unused and in original packaging.",
         "Damaged or defective items must be reported upon delivery.",
       ],
@@ -236,14 +236,14 @@ export const productDetail = {
   terms: [
     "Products are subject to availability",
     "Color and finish may slightly vary from product images",
-    "Please check product details before placing the order",
+    "Please check product details before placing order",
   ],
 };
 
 export const relatedProducts = [
   {
     title: "Puro Steel-X Neo 900 Insulated Water Bottle, 720ml",
-    price: 329,
+    price:329,
     mrp: 528,
     off: 38,
     colours: 6,
@@ -259,7 +259,7 @@ export const relatedProducts = [
   },
   {
     title: "Era 3D Design Insulated Kids Water Bottle, 400ml",
-    price: 329,
+    price:329,
     mrp: 479,
     off: 31,
     colours: 6,
@@ -422,165 +422,119 @@ export const ALL_PRODUCTS = [
 // ProductGrid Tiles Data
 export const GRID_TILES = {
   mobile: {
-    rows: [
-      [
-        {
-          href: "/collections/hydration",
-          label: "Shop Now",
-          title: "Hydration",
-          animate: "slideLeft",
-          images: {
-            mobile: ["/images/c-bottle-mobile.webp", "/images/c-bottle-mobile.webp"],
-            desktop: ["/images/p2-bottle-1.webp", "/images/p2-bottle-1.webp"]
-          }
-        },
-        {
-          href: "/collections/kitchen",
-          label: "Explore",
-          title: "Combos",
-          animate: "slideRight",
-          images: {
-            mobile: ["/images/c-cookware-mobile.webp", "/images/c-cookware-mobile.webp"],
-            desktop: ["/images/p-combo-2.webp", "/images/p-combo-2.webp"]
-          }
-        }
-      ],
-      [
-        {
-          href: "/collections/tableware",
-          label: "Browse",
-          title: "Pencil Boxes",
-          animate: "slideLeft",
-          images: {
-            mobile: ["/images/c-tableware-mobile.webp", "/images/c-tableware-mobile.webp"],
-            desktop: ["/images/p-pbox-2.webp", "/images/p-pbox-2.webp"]
-          }
-        },
-        {
-          href: "/collections/tiffin-boxes",
-          label: "Discover",
-          title: "Tiffin Boxes",
-          animate: "slideRight",
-          images: {
-            mobile: ["/images/c-cookware-mobile-1.webp", "/images/c-cookware-mobile-1.webp"],
-            desktop: ["/images/p-tiffin-1.webp", "/images/p-tiffin-1.webp"]
-          }
-        }
-      ],
-      [
-        {
-          href: "/collections/kidzbee",
-          label: "Everyday Use",
-          title: "Kitchen",
-          animate: "slideRight",
-          tall: true,
-          images: {
-            mobile: ["/images/c-kids-mobile.webp", "/images/c-kids-mobile.webp"],
-            desktop: ["/images/p-casserol-1.webp", "/images/p-casserol-1.webp"]
-          }
-        },
-        {
-          href: "/collections/appliances",
-          label: "Essentials",
-          title: "Appliances",
-          animate: "slideUp",
-          images: {
-            mobile: ["/images/c-tiffin-mobile.webp", "/images/c-tiffin-mobile.webp"],
-            desktop: ["/images/p-jug-1.webp", "/images/p-jug-1.webp"]
-          }
-        },
-        {
-          href: "/collections/kidzbee",
-          label: "For Kids",
-          title: "Kidzbee",
-          animate: "slideLeft",
-          images: {
-            mobile: ["/images/c-apps-mobile.webp", "/images/c-apps-mobile.webp"],
-            desktop: ["/images/p-kids-bottle-2.webp", "/images/p-kids-bottle-2.webp"]
-          }
-        }
-      ]
-    ]
+    row1: [
+      {
+        label: "Shop Now",
+        title: "Hydration",
+        mobile: { href: "/collections/hydration", img1x: "/images/c-bottle-mobile.webp", img2x: "/images/c-bottle-mobile.webp" },
+        desktop: { href: "/collections/hydration", img1x: "/images/p2-bottle-1.webp", img2x: "/images/p2-bottle-1.webp" },
+        animate: "slideLeft",
+      },
+      {
+        label: "Explore",
+        title: "Combos",
+        mobile: { href: "/collections/kitchen", img1x: "/images/c-cookware-mobile.webp", img2x: "/images/c-cookware-mobile.webp" },
+        desktop: { href: "/collections/cookware-1", img1x: "/images/p-combo-2.webp", img2x: "/images/p-combo-2.webp" },
+        animate: "slideRight",
+      },
+    ],
+    row2: [
+      {
+        label: "Browse",
+        title: "Pencil Boxes",
+        mobile: { href: "/collections/tableware", img1x: "/images/c-tableware-mobile.webp", img2x: "/images/c-tableware-mobile.webp" },
+        desktop: { href: "/collections/tableware", img1x: "/images/p-pbox-2.webp", img2x: "/images/p-pbox-2.webp" },
+        animate: "slideLeft",
+      },
+      {
+        label: "Discover",
+        title: "Tiffin Boxes",
+        mobile: { href: "/collections/cookware-1", img1x: "/images/c-cookware-mobile-1.webp", img2x: "/images/c-cookware-mobile-1.webp" },
+        desktop: { href: "/collections/tiffin-boxes", img1x: "/images/p-tiffin-1.webp", img2x: "/images/p-tiffin-1.webp" },
+        animate: "slideRight",
+      },
+    ],
+    row3: [
+      {
+        label: "Everyday Use",
+        title: "Kitchen",
+        mobile: { href: "/collections/kidzbee", img1x: "/images/c-kids-mobile.webp", img2x: "/images/c-kids-mobile.webp" },
+        desktop: { href: "/collections/kitchen", img1x: "/images/p-casserol-1.webp", img2x: "/images/p-casserol-1.webp" },
+        animate: "slideRight",
+        tall: true,
+      },
+      {
+        label: "Essentials",
+        title: "Appliances",
+        mobile: { href: "/collections/tiffin-boxes", img1x: "/images/c-tiffin-mobile.webp", img2x: "/images/c-tiffin-mobile.webp" },
+        desktop: { href: "/collections/appliances", img1x: "/images/p-jug-1.webp", img2x: "/images/p-jug-1.webp" },
+        animate: "slideUp",
+      },
+      {
+        label: "For Kids",
+        title: "Kidzbee",
+        mobile: { href: "/collections/appliances", img1x: "/images/c-apps-mobile.webp", img2x: "/images/c-apps-mobile.webp" },
+        desktop: { href: "/collections/kidzbee", img1x: "/images/p-kids-bottle-2.webp", img2x: "/images/p-kids-bottle-2.webp" },
+        animate: "slideLeft",
+      },
+    ],
   },
   desktop: {
-    rows: [
-      [
-        {
-          href: "/collections/hydration",
-          label: "Shop Now",
-          title: "Hydration",
-          animate: "slideLeft",
-          images: {
-            mobile: ["/images/c-bottle-mobile.webp", "/images/c-bottle-mobile.webp"],
-            desktop: ["/images/p2-bottle-1.webp", "/images/p2-bottle-1.webp"]
-          }
-        },
-        {
-          href: "/collections/kitchen",
-          label: "Explore",
-          title: "Combos",
-          animate: "slideRight",
-          images: {
-            mobile: ["/images/c-cookware-mobile.webp", "/images/c-cookware-mobile.webp"],
-            desktop: ["/images/p-combo-2.webp", "/images/p-combo-2.webp"]
-          }
-        },
-        {
-          href: "/collections/tableware",
-          label: "Browse",
-          title: "Pencil Boxes",
-          animate: "slideLeft",
-          images: {
-            mobile: ["/images/c-tableware-mobile.webp", "/images/c-tableware-mobile.webp"],
-            desktop: ["/images/p-pbox-2.webp", "/images/p-pbox-2.webp"]
-          }
-        },
-        {
-          href: "/collections/tiffin-boxes",
-          label: "Discover",
-          title: "Tiffin Boxes",
-          animate: "slideRight",
-          images: {
-            mobile: ["/images/c-cookware-mobile-1.webp", "/images/c-cookware-mobile-1.webp"],
-            desktop: ["/images/p-tiffin-1.webp", "/images/p-tiffin-1.webp"]
-          }
-        }
-      ],
-      [
-        {
-          href: "/collections/kidzbee",
-          label: "Everyday Use",
-          title: "Kitchen",
-          animate: "slideRight",
-          tall: true,
-          images: {
-            mobile: ["/images/c-kids-mobile.webp", "/images/c-kids-mobile.webp"],
-            desktop: ["/images/p-casserol-1.webp", "/images/p-casserol-1.webp"]
-          }
-        },
-        {
-          href: "/collections/appliances",
-          label: "Essentials",
-          title: "Appliances",
-          animate: "slideUp",
-          images: {
-            mobile: ["/images/c-tiffin-mobile.webp", "/images/c-tiffin-mobile.webp"],
-            desktop: ["/images/p-jug-1.webp", "/images/p-jug-1.webp"]
-          }
-        },
-        {
-          href: "/collections/kidzbee",
-          label: "For Kids",
-          title: "Kidzbee",
-          animate: "slideLeft",
-          images: {
-            mobile: ["/images/c-apps-mobile.webp", "/images/c-apps-mobile.webp"],
-            desktop: ["/images/p-kids-bottle-2.webp", "/images/p-kids-bottle-2.webp"]
-          }
-        }
-      ]
-    ]
-  }
+    row1: [
+      {
+        label: "Shop Now",
+        title: "Hydration",
+        mobile: { href: "/collections/hydration", img1x: "/images/c-bottle-mobile.webp", img2x: "/images/c-bottle-mobile.webp" },
+        desktop: { href: "/collections/hydration", img1x: "/images/p2-bottle-1.webp", img2x: "/images/p2-bottle-1.webp" },
+        animate: "slideLeft",
+      },
+      {
+        label: "Explore",
+        title: "Combos",
+        mobile: { href: "/collections/kitchen", img1x: "/images/c-cookware-mobile.webp", img2x: "/images/c-cookware-mobile.webp" },
+        desktop: { href: "/collections/cookware-1", img1x: "/images/p-combo-2.webp", img2x: "/images/p-combo-2.webp" },
+        animate: "slideRight",
+      },
+      {
+        label: "Browse",
+        title: "Pencil Boxes",
+        mobile: { href: "/collections/tableware", img1x: "/images/c-tableware-mobile.webp", img2x: "/images/c-tableware-mobile.webp" },
+        desktop: { href: "/collections/tableware", img1x: "/images/p-pbox-2.webp", img2x: "/images/p-pbox-2.webp" },
+        animate: "slideLeft",
+      },
+      {
+        label: "Discover",
+        title: "Tiffin Boxes",
+        mobile: { href: "/collections/cookware-1", img1x: "/images/c-cookware-mobile-1.webp", img2x: "/images/c-cookware-mobile-1.webp" },
+        desktop: { href: "/collections/tiffin-boxes", img1x: "/images/p-tiffin-1.webp", img2x: "/images/p-tiffin-1.webp" },
+        animate: "slideRight",
+      },
+    ],
+    row2: [
+      {
+        label: "Everyday Use",
+        title: "Kitchen",
+        mobile: { href: "/collections/kidzbee", img1x: "/images/c-kids-mobile.webp", img2x: "/images/c-kids-mobile.webp" },
+        desktop: { href: "/collections/kitchen", img1x: "/images/p-casserol-1.webp", img2x: "/images/p-casserol-1.webp" },
+        animate: "slideRight",
+        tall: true,
+      },
+      {
+        label: "Essentials",
+        title: "Appliances",
+        mobile: { href: "/collections/tiffin-boxes", img1x: "/images/c-tiffin-mobile.webp", img2x: "/images/c-tiffin-mobile.webp" },
+        desktop: { href: "/collections/appliances", img1x: "/images/p-jug-1.webp", img2x: "/images/p-jug-1.webp" },
+        animate: "slideUp",
+      },
+      {
+        label: "For Kids",
+        title: "Kidzbee",
+        mobile: { href: "/collections/appliances", img1x: "/images/c-apps-mobile.webp", img2x: "/images/c-apps-mobile.webp" },
+        desktop: { href: "/collections/kidzbee", img1x: "/images/p-kids-bottle-2.webp", img2x: "/images/p-kids-bottle-2.webp" },
+        animate: "slideLeft",
+      },
+    ],
+  },
 };
 
 // Helper functions for getting products by category
@@ -588,20 +542,3 @@ export const getBestsellers = () => ALL_PRODUCTS.filter(p => p.tags.includes('be
 export const getPopularProducts = () => ALL_PRODUCTS.filter(p => p.tags.includes('popular'));
 export const getNewArrivals = () => ALL_PRODUCTS.filter(p => p.tags.includes('new-arrival'));
 export const getGeneralProducts = () => ALL_PRODUCTS.filter(p => p.tags.includes('general'));
-
-// Helper functions for grid tiles
-export const getTileRows = (device) => GRID_TILES[device].rows;
-export const getTileByIndex = (device, rowIndex, tileIndex) => {
-  return GRID_TILES[device].rows[rowIndex][tileIndex];
-};
-
-// Validation helpers
-export const validateTile = (tile) => {
-  const required = ['href', 'images', 'animate'];
-  return required.every(prop => tile[prop]);
-};
-
-export const validateAllTiles = () => {
-  const allTiles = [...GRID_TILES.mobile.rows.flat(), ...GRID_TILES.desktop.rows.flat()];
-  return allTiles.every(validateTile);
-};

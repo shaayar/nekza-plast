@@ -7,8 +7,10 @@ import Contact from "./pages/Contact.jsx";
 import Products from "./pages/Products.jsx";
 import ProductDetails from "./pages/ProductDetails.jsx";
 import Cart from "./pages/Cart.jsx";
-import PopularProducts from "./pages/PopularProducts.jsx";
+import PopularProducts from "./components/PopularProducts.jsx";
 import NotFound from "./pages/NotFound.jsx";
+import ProductShowcase from "./pages/ProductShowcase.jsx";
+import Testimonials from "./components/Testimonials.jsx";
 
 function App() {
   return (
@@ -19,11 +21,14 @@ function App() {
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/products" element={<Products />} />
+        <Route path="/products/*" element={<ProductDetails />} />
         <Route path="/products/:categorySlug/:productSlug" element={<ProductDetails />} />
         <Route path="/collections/:collectionSlug" element={<Products />} />
         <Route path="/popular-products" element={<PopularProducts />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/demo" element={<ProductShowcase />} />
+        <Route path="/testimonials" element={<Testimonials />} />
       </Routes>
       <Footer />
     </>

@@ -60,7 +60,7 @@ const FooterLink = ({ href, label, external = false }) => (
         href={href}
         target={external ? "_blank" : "_self"}
         rel={external ? "noopener noreferrer" : undefined}
-        className="font-eudoxus group flex items-center gap-2 py-1 text-sm transition-colors duration-200 hover:text-primary md:text-base font-light"
+        className=" group flex items-center gap-2 py-1 text-sm transition-colors duration-200 hover:text-primary md:text-base font-light"
     >
         {label}
         {external && <ExternalIcon />}

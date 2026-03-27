@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ShoppingCart, Check } from "lucide-react";
 import { useCart } from "../contexts/CartContext.jsx";
 
-export default function AddToCartButton({ product, selectedColor, selectedSize, className = "" }) {
+export default function AddToCartButton({ product, selectedColor, selectedSize, quantity = 1, className = "" }) {
   const { addToCart, isInCart } = useCart();
   const [isAdding, setIsAdding] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -16,7 +16,7 @@ export default function AddToCartButton({ product, selectedColor, selectedSize, 
     
     try {
       addToCart(product, {
-        quantity: 1,
+        quantity,
         color: selectedColor,
         size: selectedSize,
       });

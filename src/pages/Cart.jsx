@@ -1,9 +1,19 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Plus, Minus, X, ShoppingBag, ArrowRight } from "lucide-react";
 import { useCart } from "../contexts/CartContext.jsx";
 
 function Cart() {
+  const navigate = useNavigate();
   const { cartItems, removeFromCart, updateQuantity, getCartSubtotal, getCartTotalMRP } = useCart();
+
+  const handleContinueShopping = (e) => {
+    e.preventDefault();
+    if (window.history.length > 1) {
+      navigate(-1);
+      return;
+    }
+    navigate("/products");
+  };
 
   const calculateSavings = () => {
     return getCartTotalMRP() - getCartSubtotal();
@@ -29,6 +39,7 @@ function Cart() {
             <p className="text-gray-400 mb-8">Looks like you haven't added any products to your cart yet.</p>
             <Link
               to="/products"
+              onClick={handleContinueShopping}
               className="inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-full hover:bg-gray-200 transition"
             >
               Continue Shopping
@@ -41,11 +52,11 @@ function Cart() {
   }
 
   return (
-    <div className="min-h-screen bg-[#111] text-white">
+    <div className="min-h-screen">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-light mb-2">Shopping Cart</h1>
+          <h1 className="text-4xl font-bold mb-2"><span className="outline text-transparent">Shopping</span> Cart</h1>
           <p className="text-gray-400">
             {cartItems.length} {cartItems.length === 1 ? 'item' : 'items'} in your cart
           </p>
@@ -55,10 +66,10 @@ function Cart() {
           {/* Cart Items */}
           <div className="lg:col-span-2 space-y-4">
             {cartItems.map((item) => (
-              <div key={item.id} className="bg-black border border-white/10 rounded-xl p-6">
+              <div key={item.id} className=" border border-black/10 rounded-xl p-6">
                 <div className="flex gap-4">
                   {/* Product Image */}
-                  <div className="w-24 h-24 bg-white/10 rounded-lg overflow-hidden shrink-0">
+                  <div className="w-24 h-24 bg-black/10 rounded-lg overflow-hidden shrink-0">
                     <img
                       src={item.image}
                       alt={item.title}
@@ -119,7 +130,8 @@ function Cart() {
             <div className="mt-6">
               <Link
                 to="/products"
-                className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition"
+                onClick={handleContinueShopping}
+                className="inline-flex items-center gap-2 text-black hover:text-primary transition"
               >
                 <ArrowRight size={20} className="rotate-180" />
                 Continue Shopping
@@ -129,7 +141,7 @@ function Cart() {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="bg-black border border-white/10 rounded-xl p-6 sticky top-24">
+            <div className="border border-black/10 rounded-xl p-6 sticky top-24">
               <h2 className="text-xl font-semibold mb-6">Order Summary</h2>
 
               <div className="space-y-3 mb-6">

@@ -1,7 +1,5 @@
 import { useState, useRef } from "react";
-import { useParams } from "react-router-dom";
 import { productDetail as PRODUCT, relatedProducts as RELATED } from "../data/Data";
-import { useCart } from "../contexts/CartContext.jsx";
 import AddToCartButton from "../components/AddToCartButton.jsx";
 
 // ─── Icons ────────────────────────────────────────────────────────────────────
@@ -16,20 +14,10 @@ const ChevronRight = ({ cls = "" }) => (
     <path d="M7 4L12 9L7 14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
-const SparkleIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-    <path d="M8 1v14M1 8h14M3.5 3.5l9 9M12.5 3.5l-9 9" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-  </svg>
-);
 const CartIcon = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
     <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" />
     <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
-  </svg>
-);
-const ExternalIcon = () => (
-  <svg width="11" height="11" viewBox="0 0 13 13" fill="none">
-    <path d="M2.08 11.73L11.48 2.33V12.94h1V.62H.17v1h10.6L1.37 11.02l.71.71Z" fill="currentColor" />
   </svg>
 );
 const CheckIcon = () => (
@@ -179,9 +167,9 @@ function TabSection({ tabs }) {
 
 function RelatedCard({ product }) {
   return (
-    <div className="flex flex-col gap-2 group border">
+    <div className="flex flex-col gap-2 group shadow-2xl rounded-xl">
       {/* Image */}
-      <div className="relative overflow-hidden rounded-xl bg-gray-50 aspect-square">
+      <div className="relative overflow-hidden bg-gray-50 aspect-square">
         <img
           src={product.img}
           alt={product.title}
@@ -190,34 +178,36 @@ function RelatedCard({ product }) {
       </div>
 
 
-      {/* Title */}
-      <p className="text-xs md:text-sm font-medium text-gray-900 leading-snug line-clamp-2">
-        {product.title}
-      </p>
-
-      {/* Price */}
-      <div className="flex items-center gap-2 flex-wrap">
-        {product.price ? (
-          <>
-            <span className="text-sm font-bold text-gray-900">₹{product.price}</span>
-            <span className="text-xs text-gray-400 line-through">MRP ₹{product.mrp}</span>
-            {product.off && (
-              <span className="text-xs font-medium text-green-600">{product.off}% off</span>
+      <div className="px-3 pb-2 flex flex-col justify-between h-[100px]">
+        <div>
+          {/* Title */}
+          <p className="text-xs md:text-sm font-medium text-gray-900 leading-snug line-clamp-2">
+            {product.title}
+          </p>
+          {/* Price */}
+          <div className="flex items-center gap-2 flex-wrap">
+            {product.price ? (
+              <>
+                <span className="text-sm font-bold text-gray-900">₹{product.price}/pc</span>
+                <span className="text-xs text-gray-400 line-through">MRP ₹{product.mrp}</span>
+                {product.off && (
+                  <span className="text-xs font-medium text-green-600">{product.off}% off</span>
+                )}
+              </>
+            ) : (
+              <span className="text-xs text-gray-500">MRP ₹{product.mrp}</span>
             )}
-          </>
-        ) : (
-          <span className="text-xs text-gray-500">MRP ₹{product.mrp}</span>
-        )}
+          </div>
+        </div>
+        {/* CTA */}
+        <button className="flex items-center justify-between w-full mt-auto pt-2 text-sm font-medium text-gray-800 hover:text-red-600 transition-colors border-t border-gray-100">
+          <span>View Details</span>
+          <span className="flex size-7 items-center justify-center rounded-full border border-current relative">
+            <CartIcon />
+            <span className="absolute -top-1 -right-1 size-3.5 flex items-center justify-center rounded-full bg-red-600 text-[8px] text-white font-bold">0</span>
+          </span>
+        </button>
       </div>
-
-      {/* CTA */}
-      <button className="flex items-center justify-between w-full mt-auto pt-2 text-sm font-medium text-gray-800 hover:text-red-600 transition-colors border-t border-gray-100">
-        <span>View Details</span>
-        <span className="flex size-7 items-center justify-center rounded-full border border-current relative">
-          <CartIcon />
-          <span className="absolute -top-1 -right-1 size-3.5 flex items-center justify-center rounded-full bg-red-600 text-[8px] text-white font-bold">0</span>
-        </span>
-      </button>
     </div>
   );
 }
@@ -225,12 +215,9 @@ function RelatedCard({ product }) {
 // ─── Main component ───────────────────────────────────────────────────────────
 
 export default function ProductDetail() {
-  const { categorySlug, productSlug } = useParams();
-  const { addToCart } = useCart();
   const [size, setSize]         = useState(0);
   const [qty, setQty]           = useState(1);
   const [pincode, setPincode]   = useState("");
-  const [noPersonalize, setNoPersonalize] = useState(false);
 
   // Create product object for cart
   const productForCart = {
@@ -242,16 +229,8 @@ export default function ProductDetail() {
   };
 
   const discount = Math.round(((PRODUCT.mrp - PRODUCT.price) / PRODUCT.mrp) * 100);
-  const formatCrumb = (value) =>
-    value
-      ? value
-          .split("-")
-          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(" ")
-      : "";
-
   return (
-    <div className="font-eudoxus bg-white min-h-screen">
+    <div className="bg-white min-h-screen">
       <div className="container-box container-main px-4 sm:px-6 md:px-8 lg:px-10 py-6 md:py-10 max-w-7xl mx-auto">
 
         {/* ══ Top Product Section ══════════════════════════════════════════════ */}
@@ -259,24 +238,11 @@ export default function ProductDetail() {
 
           {/* ── Left: Image Gallery ── */}
           <div className="w-full">
-            {/* Personalize badge — above image on mobile */}
-            <div className="flex justify-end mb-2 md:hidden">
-              <button className="flex items-center gap-1.5 text-xs font-semibold text-gray-700 tracking-wider uppercase hover:text-red-600 transition-colors">
-                <SparkleIcon /> Personalize
-              </button>
-            </div>
             <ImageGallery images={PRODUCT.images} />
           </div>
 
           {/* ── Right: Product Info ── */}
           <div className="flex flex-col gap-5">
-
-            {/* Personalize — desktop only */}
-            <div className="hidden md:flex justify-end">
-              <button className="flex items-center gap-1.5 text-xs font-semibold text-gray-700 tracking-wider uppercase hover:text-red-600 transition-colors">
-                <SparkleIcon /> Personalize
-              </button>
-            </div>
 
             {/* Title */}
             <h1 className="text-xl md:text-2xl font-bold text-gray-900 leading-snug">
@@ -294,31 +260,19 @@ export default function ProductDetail() {
             {/* Size */}
             <SizeSelector sizes={PRODUCT.sizes} selected={size} onChange={setSize} />
 
-
-            {/* Add Personalization CTA */}
-            <button className="flex w-full items-center justify-center gap-2 rounded-lg bg-gray-900 py-3.5 text-sm font-semibold text-white
-                               hover:bg-red-600 transition-colors duration-200">
-              <SparkleIcon /> Add Personalization
-            </button>
+            {/* Quantity */}
+            <div className="space-y-2">
+              <p className="text-sm font-bold text-gray-900">Quantity</p>
+              <QuantitySelector qty={qty} onChange={setQty} />
+            </div>
 
             {/* Add to Cart Button */}
             <AddToCartButton 
               product={productForCart}
               selectedSize={PRODUCT.sizes[size]}
+              quantity={qty}
               className="w-full"
             />
-
-            {/* No personalize checkbox */}
-            <label className="flex items-center gap-2.5 cursor-pointer group">
-              <div
-                onClick={() => setNoPersonalize((v) => !v)}
-                className={`flex size-4 shrink-0 items-center justify-center rounded border transition-colors
-                            ${noPersonalize ? "bg-gray-900 border-gray-900" : "border-gray-400 group-hover:border-gray-600"}`}
-              >
-                {noPersonalize && <CheckIcon />}
-              </div>
-              <span className="text-sm text-gray-600">I don't want to personalize this product.</span>
-            </label>
 
             {/* Divider */}
             <div className="border-t border-gray-100" />
