@@ -1,0 +1,22 @@
+@config "../tailwind.config.js";
+@import "tailwindcss";
+
+:root {
+  font-size: 16px;
+    --primary-color: #EA343A;
+    --alt-yellow: #F9F312;
+}
+
+body {
+  font-size: 1rem; /* 16px */
+  font-family: 'Comfortaa', sans-serif;
+}
+
+/* Optional: enforce always in navbar as requested */
+nav {
+  font-size: 1rem;
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
