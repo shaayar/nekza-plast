@@ -112,7 +112,7 @@ export default function HeroSlider() {
               {/* CTA */}
               <a
                 href="#"
-                className="group mt-8 md:mt-12 inline-flex items-center gap-3 w-fit border border-white/35 text-white text-[11px] md:text-xs font-medium tracking-[0.08em] uppercase px-6 py-3.5 transition-all duration-200 hover:bg-red-600 hover:border-red-600"
+                className="pressable group mt-8 md:mt-12 inline-flex items-center gap-3 w-fit border border-white/35 text-white text-[11px] md:text-xs font-medium tracking-[0.08em] uppercase px-6 py-3.5 transition-colors duration-200 hover:bg-red-600 hover:border-red-600"
               >
                 Discover Collection
                 <svg
@@ -140,7 +140,7 @@ export default function HeroSlider() {
       <button
         onClick={() => swiperRef.current?.slidePrev()}
         aria-label="Previous slide"
-        className="hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center text-white bg-black/30 transition-colors duration-200 hover:bg-red-600/75 hover:border-transparent"
+        className="pressable hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center text-white bg-black/30 transition-colors duration-200 hover:bg-red-600/75 hover:border-transparent"
       >
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
           <path d="M11 4L6 9L11 14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
@@ -150,7 +150,7 @@ export default function HeroSlider() {
       <button
         onClick={() => swiperRef.current?.slideNext()}
         aria-label="Next slide"
-        className="hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center text-white bg-black/30 transition-colors duration-200 hover:bg-red-600/75 hover:border-transparent"
+        className="pressable hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center text-white bg-black/30 transition-colors duration-200 hover:bg-red-600/75 hover:border-transparent"
       >
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
           <path d="M7 4L12 9L7 14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
@@ -164,7 +164,7 @@ export default function HeroSlider() {
             key={i}
             onClick={() => swiperRef.current?.slideToLoop(i)}
             aria-label={`Go to slide ${i + 1}`}
-            className="relative h-1 overflow-hidden bg-white/25 cursor-pointer transition-all duration-300"
+            className="pressable relative h-1 overflow-hidden bg-white/25 cursor-pointer transition-[width,background-color] duration-300"
             style={{ width: activeIndex === i ? 60 : 32 }}
           >
             {activeIndex === i && (

@@ -9,12 +9,33 @@ html {
   html {
     scroll-behavior: auto;
   }
+
+  .animate-ken-burns,
+  .animate-slide-up,
+  .animate-fill-bar {
+    animation: none !important;
+  }
+
+  .pressable {
+    transition: none !important;
+  }
+
+  .pressable:active {
+    transform: none !important;
+  }
 }
 
 :root {
   font-size: 16px;
-    --primary-color: #EA343A;
-    --alt-yellow: #F9F312;
+  --primary-color: #EA343A;
+  --alt-yellow: #F9F312;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+  --dur-press: 120ms;
+  --dur-fast: 180ms;
+  --dur-base: 240ms;
+  --dur-slow: 320ms;
 }
 
 body {
@@ -33,4 +54,12 @@ body::-webkit-scrollbar {
 
 .outline {
   -webkit-text-stroke: 1.5px var(--primary-color);
+}
+
+.pressable {
+  transition: transform var(--dur-press) var(--ease-out);
+}
+
+.pressable:active {
+  transform: scale(0.97);
 }

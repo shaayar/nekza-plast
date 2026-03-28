@@ -1,16 +1,29 @@
 import { useParams } from "react-router-dom";
 import Card from "../components/UI/Card.jsx";
-import { getGeneralProducts } from "../data/Data.js";
+import {
+  getGeneralProducts,
+  getProductsByCategory,
+  getProductsByCollection,
+} from "../data/Data.js";
 
 function Products() {
-  const { slug } = useParams();
+  const { collectionSlug, categorySlug, slug } = useParams();
+  const activeSlug = collectionSlug || categorySlug || slug;
 
-  const sampleProducts = getGeneralProducts();
+  let sampleProducts = getGeneralProducts();
+
+  if (collectionSlug) {
+    const collectionProducts = getProductsByCollection(collectionSlug);
+    sampleProducts = collectionProducts.length > 0 ? collectionProducts : getGeneralProducts();
+  } else if (categorySlug) {
+    const categoryProducts = getProductsByCategory(categorySlug);
+    sampleProducts = categoryProducts.length > 0 ? categoryProducts : getGeneralProducts();
+  }
 
   return (
     <div className="min-h-screen p-10">
       <h1 className="text-5xl font-bold capitalize mb-8">
-        {slug ? slug.replace(/-/g, " ") : "All Products"}
+        {activeSlug ? activeSlug.replace(/-/g, " ") : "All Products"}
       </h1>
       
       {/* Horizontal scroll row — hides scrollbar */}
@@ -19,7 +32,7 @@ function Products() {
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         {sampleProducts.map((product) => (
-          <Card key={product.id} product={product} slug={slug} />
+          <Card key={product.id} product={product} slug={activeSlug} />
         ))}
       </div>
     </div>

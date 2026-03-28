@@ -29,6 +29,7 @@ const ENTERED_STYLE = { transform: "translate(0, 0)", opacity: 1 };
 function Tile({ tile, index, hoveredIndex, setHoveredIndex, className = "", delay = 0 }) {
   const innerRef = useRef(null);
   const [entered, setEntered] = useState(tile.animate === "none");
+  const hasAnimated = useRef(tile.animate === "none");
 
   useEffect(() => {
     if (tile.animate === "none") return;
@@ -40,13 +41,15 @@ function Tile({ tile, index, hoveredIndex, setHoveredIndex, className = "", dela
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
+          if (hasAnimated.current) return;
           setEntered(false);
           if (timeoutId) clearTimeout(timeoutId);
-          timeoutId = setTimeout(() => setEntered(true), delay);
+          timeoutId = setTimeout(() => {
+            setEntered(true);
+            hasAnimated.current = true;
+          }, delay);
           return;
         }
-
-        setEntered(false);
       },
       { threshold: 0.15 }
     );
@@ -70,7 +73,7 @@ function Tile({ tile, index, hoveredIndex, setHoveredIndex, className = "", dela
         group relative flex overflow-hidden rounded-lg md:rounded-xl
         shadow-[4px_4px_24px_0px_#00000040_inset]
         will-change-transform
-        transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]
+        transition-[transform,opacity,box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]
         ${className}
         ${isActive ? "z-30 scale-[1.04] shadow-xl" : "z-0"}
         ${isInactive ? "opacity-60 scale-[0.98]" : ""}
@@ -82,7 +85,7 @@ function Tile({ tile, index, hoveredIndex, setHoveredIndex, className = "", dela
           width: "100%",
           height: "100%",
           transition:
-            "transform 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 800ms ease",
+            "transform 360ms cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 320ms ease",
           ...(entered ? ENTERED_STYLE : getInitStyle(tile.animate)),
         }}
         className="relative"
@@ -90,7 +93,7 @@ function Tile({ tile, index, hoveredIndex, setHoveredIndex, className = "", dela
         {/* Mobile image */}
         <a
           href={tile.href}
-          className="flex size-full items-center justify-center rounded transition-all duration-200 md:hidden"
+          className="flex size-full items-center justify-center rounded transition-opacity duration-200 md:hidden"
         >
           <img
             alt={tile.title}
@@ -106,7 +109,7 @@ function Tile({ tile, index, hoveredIndex, setHoveredIndex, className = "", dela
         {/* Desktop image */}
         <a
           href={tile.href}
-          className="flex size-full items-center justify-center rounded transition-all duration-200"
+          className="flex size-full items-center justify-center rounded transition-opacity duration-200"
         >
           <img
             alt={tile.title}
@@ -123,7 +126,7 @@ function Tile({ tile, index, hoveredIndex, setHoveredIndex, className = "", dela
         <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/65 via-black/15 to-transparent opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
 
         {/* Text content */}
-        <div className="pointer-events-none absolute bottom-4 left-4 z-10 text-white transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-y-[-2px]">
+        <div className="pointer-events-none absolute bottom-4 left-4 z-10 text-white transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-y-[-2px]">
           <p className="text-[11px] uppercase tracking-[0.2em] text-white/80 md:text-xs">
             {tile.label}
           </p>
@@ -144,7 +147,7 @@ export default function CategoryGrid() {
   return (
     <div className="relative">
       {hoveredIndex !== null && (
-        <div className="pointer-events-none fixed inset-0 z-10 hidden bg-black/20 backdrop-blur-sm backdrop-saturate-150 transition-all duration-300 md:block" />
+        <div className="pointer-events-none fixed inset-0 z-10 hidden bg-black/20 backdrop-blur-sm backdrop-saturate-150 transition-opacity duration-300 md:block" />
       )}
 
       <section className="relative z-20 w-full px-4 py-5 sm:py-7 md:px-9 lg:py-10 container-box container-main">

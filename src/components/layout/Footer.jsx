@@ -78,7 +78,7 @@ const AccordionSection = ({ section }) => {
         <div className="border-b border-gray-100">
             <button
                 onClick={() => setOpen((v) => !v)}
-                className="flex w-full items-center justify-between py-3.5 text-left"
+                className="pressable flex w-full items-center justify-between py-3.5 text-left"
             >
                 <span className="text-sm font-bold text-primary">{section.heading}</span>
                 <ChevronIcon open={open} />

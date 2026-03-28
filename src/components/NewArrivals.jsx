@@ -51,7 +51,7 @@ export default function NewArrivals() {
           </h2>
           <a
             href="/collections/new-arrivals"
-            className=" group flex items-center justify-center rounded text-base text-black hover:underline underline-offset-2 transition-all duration-200 sm:text-lg lg:text-xl"
+            className="pressable group flex items-center justify-center rounded text-base text-black hover:underline underline-offset-2 transition-colors duration-200 sm:text-lg lg:text-xl"
           >
             Explore More
             <ArrowRight />
@@ -63,7 +63,7 @@ export default function NewArrivals() {
                 key={chip.id}
                 type="button"
                 onClick={() => setActiveChip(chip.id)}
-                className={`rounded-full border px-3 py-1 text-xs font-semibold transition sm:text-sm ${
+                className={`pressable rounded-full border px-3 py-1 text-xs font-semibold transition sm:text-sm ${
                   activeChip === chip.id
                     ? "border-primary bg-primary text-white"
                     : "border-zinc-300 bg-white text-zinc-700 hover:border-primary/50 hover:text-primary"

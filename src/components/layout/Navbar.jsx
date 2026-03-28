@@ -29,11 +29,12 @@ function Navbar() {
           {/* Mobile menu button */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
+            className="pressable transition-colors"
           >
-            {mobileOpen ? <X size={28} /> : <i class="ri-menu-4-fill text-2xl"></i>}
+            {mobileOpen ? <X size={28} /> : <i className="ri-menu-4-fill text-2xl"></i>}
           </button>
 
-          <Link to="/account">
+          <Link to="/account" className="pressable">
             <User size={22} />
           </Link>
         </div>
@@ -59,11 +60,11 @@ function Navbar() {
 
         {/* RIGHT */}
         <div className="flex items-center gap-4 md:gap-6">
-          <button className="lg:hidden">
+          <button className="pressable lg:hidden transition-colors">
             <Search size={22} />
           </button>
 
-          <Link to="/account" className="hidden lg:block">
+          <Link to="/account" className="pressable hidden lg:block">
             <User size={22} />
           </Link>
 
@@ -140,8 +141,11 @@ function Navbar() {
       </nav>
 
       {/* MOBILE MENU */}
-      {mobileOpen && (
-        <div className="lg:hidden bg-black border-t border-white/10 px-4 py-4 space-y-4">
+      <div
+        className={`lg:hidden overflow-hidden bg-black border-t border-white/10 px-4 space-y-4 transition-[max-height,opacity,padding] duration-200 ${
+          mobileOpen ? "max-h-[80vh] opacity-100 py-4" : "max-h-0 opacity-0 py-0 pointer-events-none"
+        }`}
+      >
           {/* Mobile Search */}
           <div className="flex items-center bg-[#111] border border-white/10 rounded-xl px-4 h-12">
             <Search size={18} className="text-gray-400" />
@@ -158,7 +162,7 @@ function Navbar() {
               <div className="flex items-center justify-between">
                 <Link
                   to={item.path}
-                  className={`text-[16px] ${item.featured ? "text-primary" : "text-white hover:text-primary"
+                  className={`pressable text-[16px] ${item.featured ? "text-primary" : "text-white hover:text-primary"
                     }`}
                   onClick={() => setMobileOpen(false)}
                 >
@@ -166,7 +170,7 @@ function Navbar() {
                 </Link>
 
                 {item.dropdown && (
-                  <button onClick={() => toggleMobileDropdown(index)}>
+                  <button className="pressable transition-transform" onClick={() => toggleMobileDropdown(index)}>
                     <ChevronDown
                       size={18}
                       className={`transition-transform ${mobileDropdown === index ? "rotate-180" : ""
@@ -208,21 +212,20 @@ function Navbar() {
           <div className="pt-2 space-y-3">
             <Link
               to="/about"
-              className="block text-white"
+              className="pressable block text-white"
               onClick={() => setMobileOpen(false)}
             >
               Learn
             </Link>
             <Link
               to="/contact"
-              className="block text-white"
+              className="pressable block text-white"
               onClick={() => setMobileOpen(false)}
             >
               Contact
             </Link>
           </div>
-        </div>
-      )}
+      </div>
     </header>
   );
 }

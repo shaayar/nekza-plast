@@ -36,13 +36,13 @@ export default function AddToCartButton({ product, selectedColor, selectedSize, 
       onClick={handleAddToCart}
       disabled={isAdding || itemInCart}
       className={`
-        relative overflow-hidden
+        pressable relative overflow-hidden
         ${itemInCart 
           ? 'bg-green-600 text-white cursor-not-allowed' 
           : 'bg-white text-black hover:bg-gray-200'
         }
         ${isAdding ? 'opacity-75 cursor-wait' : ''}
-        px-8 py-4 rounded-full font-medium transition-all duration-300 transform
+        px-8 py-4 rounded-full font-medium transition-colors duration-200
         ${className}
       `}
     >

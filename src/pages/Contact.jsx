@@ -90,7 +90,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={!consent}
-                  className={`px-6 py-3 rounded-lg font-medium transition ${
+                  className={`pressable px-6 py-3 rounded-lg font-medium transition-colors duration-200 ${
                     consent
                       ? "bg-black text-white hover:bg-gray-800"
                       : "bg-gray-200 text-gray-400 cursor-not-allowed"
@@ -123,7 +123,7 @@ export default function Contact() {
                       href="https://api.whatsapp.com/send?phone=917045552112&text=Hi"
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-2 bg-black text-white px-5 py-3 rounded-lg hover:bg-gray-800 transition"
+                      className="pressable inline-flex items-center gap-2 bg-black text-white px-5 py-3 rounded-lg hover:bg-gray-800 transition-colors duration-200"
                     >
                       Chat On WhatsApp <ArrowRight />
                     </a>

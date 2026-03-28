@@ -21,11 +21,11 @@ function ProductCard({ product, itemInCart, onAddToCart, onBuyNow, onOpenProduct
 
   return (
     <div
-      className="group flex h-auto w-full cursor-pointer flex-col gap-2 overflow-hidden rounded-xl border border-gray-300 bg-white px-2 pb-2 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md md:gap-3"
+      className="group flex h-auto w-full cursor-pointer flex-col gap-2 overflow-hidden rounded-xl border border-gray-300 bg-white px-2 pb-2 transition-[box-shadow,border-color] duration-200 hover:shadow-md md:gap-3"
       onClick={() => onOpenProduct(productPath)}
     >
       <div className="flex flex-col overflow-hidden rounded-md bg-white-off md:rounded-lg">
-        <div className="group relative flex aspect-350/400 w-full items-center justify-center overflow-hidden rounded bg-white-off transition-all duration-200">
+        <div className="group relative flex aspect-350/400 w-full items-center justify-center overflow-hidden rounded bg-white-off transition-opacity duration-200">
           <img
             src={img}
             alt={product.title}
@@ -50,7 +50,7 @@ function ProductCard({ product, itemInCart, onAddToCart, onBuyNow, onOpenProduct
         </div>
       </div>
 
-      <div className="flex items-center justify-start rounded transition-all duration-200">
+      <div className="flex items-center justify-start rounded transition-colors duration-200">
         <h3 className="font-aspekta line-clamp-2 text-wrap text-sm capitalize leading-snug sm:text-base lg:text-lg">
           {product.title}
         </h3>
@@ -80,7 +80,7 @@ function ProductCard({ product, itemInCart, onAddToCart, onBuyNow, onOpenProduct
               e.stopPropagation();
               onAddToCart(product);
             }}
-            className={`inline-flex h-9 w-9 items-center justify-center rounded-md border transition ${
+            className={`pressable inline-flex h-9 w-9 items-center justify-center rounded-md border transition-colors duration-200 ${
               itemInCart
                 ? "border-green-600 bg-green-50 text-green-700"
                 : "border-zinc-300 text-zinc-700 hover:border-primary hover:text-primary"
@@ -96,7 +96,7 @@ function ProductCard({ product, itemInCart, onAddToCart, onBuyNow, onOpenProduct
               e.stopPropagation();
               onBuyNow(product);
             }}
-            className="h-9 rounded-md bg-primary px-3 text-xs font-semibold text-white hover:opacity-90 md:text-sm"
+            className="pressable h-9 rounded-md bg-primary px-3 text-xs font-semibold text-white transition-opacity duration-200 hover:opacity-90 md:text-sm"
           >
             Buy Now
           </button>
@@ -178,7 +178,7 @@ export default function ProductShowcase() {
           <div className="flex flex-wrap items-center gap-3">
             <button
               onClick={() => setMobileFiltersOpen(true)}
-              className="inline-flex items-center gap-2 rounded-md border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-800 transition hover:border-primary/50 hover:bg-primary/5 lg:hidden"
+              className="pressable inline-flex items-center gap-2 rounded-md border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-800 transition-colors duration-200 hover:border-primary/50 hover:bg-primary/5 lg:hidden"
             >
               <SlidersHorizontal className="h-4 w-4" />
               Filters
@@ -218,7 +218,7 @@ export default function ProductShowcase() {
           <div className="sticky top-0 p-5">
             <div className="mb-6 flex items-center justify-between">
               <h2 className="text-sm font-bold tracking-wide">FILTERS</h2>
-              <button onClick={clearFilters} className="text-xs font-semibold text-primary hover:opacity-90">
+              <button onClick={clearFilters} className="pressable text-xs font-semibold text-primary transition-opacity duration-200 hover:opacity-90">
                 CLEAR ALL
               </button>
             </div>
@@ -290,7 +290,7 @@ export default function ProductShowcase() {
           <div className="absolute left-0 top-0 h-full w-[85%] max-w-sm overflow-y-auto bg-white shadow-xl">
             <div className="sticky top-0 z-10 flex items-center justify-between border-b border-zinc-200 bg-white px-4 py-4">
               <h2 className="text-base font-semibold">Filters</h2>
-              <button onClick={() => setMobileFiltersOpen(false)} className="rounded-md p-2 hover:bg-primary/5">
+              <button onClick={() => setMobileFiltersOpen(false)} className="pressable rounded-md p-2 transition-colors duration-200 hover:bg-primary/5">
                 <X className="h-5 w-5" />
               </button>
             </div>
@@ -333,13 +333,13 @@ export default function ProductShowcase() {
               <div className="mt-6 flex gap-3">
                 <button
                   onClick={clearFilters}
-                  className="flex-1 rounded-md border border-zinc-300 px-4 py-3 text-sm font-medium hover:bg-zinc-50"
+                  className="pressable flex-1 rounded-md border border-zinc-300 px-4 py-3 text-sm font-medium transition-colors duration-200 hover:bg-zinc-50"
                 >
                   Clear All
                 </button>
                 <button
                   onClick={() => setMobileFiltersOpen(false)}
-                  className="flex-1 rounded-md bg-primary px-4 py-3 text-sm font-semibold text-white hover:opacity-90"
+                  className="pressable flex-1 rounded-md bg-primary px-4 py-3 text-sm font-semibold text-white transition-opacity duration-200 hover:opacity-90"
                 >
                   Apply
                 </button>

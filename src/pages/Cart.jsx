@@ -1,18 +1,45 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Plus, Minus, X, ShoppingBag, ArrowRight } from "lucide-react";
 import { useCart } from "../contexts/CartContext.jsx";
+import { useToast } from "../contexts/ToastContext.jsx";
 
 function Cart() {
   const navigate = useNavigate();
+  const { showToast } = useToast();
   const { cartItems, removeFromCart, updateQuantity, getCartSubtotal, getCartTotalMRP } = useCart();
+
+  const notify = (message, type = "info") => {
+    showToast({ message, type });
+  };
 
   const handleContinueShopping = (e) => {
     e.preventDefault();
+    notify("Taking you back to browse more products.", "info");
     if (window.history.length > 1) {
       navigate(-1);
       return;
     }
     navigate("/products");
+  };
+
+  const handleRemoveItem = (item) => {
+    removeFromCart(item.id);
+    notify(`${item.title} removed from your cart.`, "warning");
+  };
+
+  const handleDecreaseQty = (item) => {
+    if (item.quantity <= 1) return;
+    updateQuantity(item.id, item.quantity - 1);
+    notify(`Reduced quantity for ${item.title} to ${item.quantity - 1}.`, "info");
+  };
+
+  const handleIncreaseQty = (item) => {
+    updateQuantity(item.id, item.quantity + 1);
+    notify(`Increased quantity for ${item.title} to ${item.quantity + 1}.`, "success");
+  };
+
+  const handleProceedToCheckout = () => {
+    notify("Checkout flow will be available soon.", "info");
   };
 
   const calculateSavings = () => {
@@ -27,20 +54,20 @@ function Cart() {
 
   if (cartItems.length === 0) {
     return (
-      <div className="min-h-screen bg-[#111] text-white">
+      <div className="min-h-screen bg-white text-zinc-900">
         <div className="container mx-auto px-4 py-16">
           <div className="text-center">
             <div className="flex justify-center mb-8">
-              <div className="w-32 h-32 bg-white/10 rounded-full flex items-center justify-center">
-                <ShoppingBag size={48} className="text-gray-400" />
+              <div className="w-32 h-32 bg-zinc-100 rounded-full flex items-center justify-center">
+                <ShoppingBag size={48} className="text-zinc-500" />
               </div>
             </div>
             <h1 className="text-4xl font-light mb-4">Your cart is empty</h1>
-            <p className="text-gray-400 mb-8">Looks like you haven't added any products to your cart yet.</p>
+            <p className="text-zinc-500 mb-8">Looks like you haven't added any products to your cart yet.</p>
             <Link
               to="/products"
               onClick={handleContinueShopping}
-              className="inline-flex items-center gap-2 bg-white text-black px-8 py-4 rounded-full hover:bg-gray-200 transition"
+              className="pressable inline-flex items-center gap-2 bg-black text-white px-8 py-4 rounded-full hover:bg-zinc-800 transition"
             >
               Continue Shopping
               <ArrowRight size={20} />
@@ -52,12 +79,12 @@ function Cart() {
   }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white text-zinc-900">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-2"><span className="outline text-transparent">Shopping</span> Cart</h1>
-          <p className="text-gray-400">
+          <p className="text-zinc-500">
             {cartItems.length} {cartItems.length === 1 ? 'item' : 'items'} in your cart
           </p>
         </div>
@@ -66,10 +93,10 @@ function Cart() {
           {/* Cart Items */}
           <div className="lg:col-span-2 space-y-4">
             {cartItems.map((item) => (
-              <div key={item.id} className=" border border-black/10 rounded-xl p-6">
+              <div key={item.id} className="border border-zinc-200 bg-white rounded-xl p-6 shadow-sm">
                 <div className="flex gap-4">
                   {/* Product Image */}
-                  <div className="w-24 h-24 bg-black/10 rounded-lg overflow-hidden shrink-0">
+                  <div className="w-24 h-24 bg-zinc-100 rounded-lg overflow-hidden shrink-0">
                     <img
                       src={item.image}
                       alt={item.title}
@@ -82,13 +109,13 @@ function Cart() {
                     <div className="flex justify-between mb-2">
                       <div>
                         <h3 className="text-lg font-medium mb-1">{item.title}</h3>
-                        <p className="text-sm text-gray-400">
+                        <p className="text-sm text-zinc-500">
                           {item.color} • {item.size}
                         </p>
                       </div>
                       <button
-                        onClick={() => removeFromCart(item.id)}
-                        className="text-gray-400 hover:text-white transition"
+                        onClick={() => handleRemoveItem(item)}
+                        className="pressable text-zinc-500 hover:text-primary transition-colors"
                       >
                         <X size={20} />
                       </button>
@@ -96,18 +123,18 @@ function Cart() {
 
                     <div className="flex justify-between items-end">
                       {/* Quantity Controls */}
-                      <div className="flex items-center gap-3 bg-white/5 rounded-lg px-3 py-2">
+                      <div className="flex items-center gap-3 bg-zinc-100 rounded-lg px-3 py-2">
                         <button
-                          onClick={() => updateQuantity(item.id, item.quantity - 1)}
-                          className="text-gray-400 hover:text-white transition"
+                          onClick={() => handleDecreaseQty(item)}
+                          className="pressable text-zinc-500 hover:text-primary transition-colors"
                           disabled={item.quantity <= 1}
                         >
                           <Minus size={16} />
                         </button>
                         <span className="w-8 text-center">{item.quantity}</span>
                         <button
-                          onClick={() => updateQuantity(item.id, item.quantity + 1)}
-                          className="text-gray-400 hover:text-white transition"
+                          onClick={() => handleIncreaseQty(item)}
+                          className="pressable text-zinc-500 hover:text-primary transition-colors"
                         >
                           <Plus size={16} />
                         </button>
@@ -116,7 +143,7 @@ function Cart() {
                       {/* Price */}
                       <div className="text-right">
                         <div className="text-xl font-semibold">₹{item.price * item.quantity}</div>
-                        <div className="text-sm text-gray-400 line-through">
+                        <div className="text-sm text-zinc-400 line-through">
                           ₹{item.mrp * item.quantity}
                         </div>
                       </div>
@@ -131,7 +158,7 @@ function Cart() {
               <Link
                 to="/products"
                 onClick={handleContinueShopping}
-                className="inline-flex items-center gap-2 text-black hover:text-primary transition"
+                className="pressable inline-flex items-center gap-2 text-zinc-800 hover:text-primary transition-colors"
               >
                 <ArrowRight size={20} className="rotate-180" />
                 Continue Shopping
@@ -141,16 +168,16 @@ function Cart() {
 
           {/* Order Summary */}
           <div className="lg:col-span-1">
-            <div className="border border-black/10 rounded-xl p-6 sticky top-24">
+            <div className="border border-zinc-200 bg-zinc-50 rounded-xl p-6 sticky top-24">
               <h2 className="text-xl font-semibold mb-6">Order Summary</h2>
 
               <div className="space-y-3 mb-6">
-                <div className="flex justify-between text-gray-400">
+                <div className="flex justify-between text-zinc-600">
                   <span>Subtotal ({cartItems.reduce((sum, item) => sum + item.quantity, 0)} items)</span>
                   <span>₹{subtotal}</span>
                 </div>
                 
-                <div className="flex justify-between text-gray-400">
+                <div className="flex justify-between text-zinc-600">
                   <span>Total MRP</span>
                   <span>₹{totalMRP}</span>
                 </div>
@@ -162,18 +189,18 @@ function Cart() {
                   </div>
                 )}
 
-                <div className="flex justify-between text-gray-400">
+                <div className="flex justify-between text-zinc-600">
                   <span>Shipping</span>
                   <span>{shipping === 0 ? 'FREE' : `₹${shipping}`}</span>
                 </div>
 
                 {shipping > 0 && (
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-zinc-500">
                     Add ₹{1000 - subtotal} more for free shipping
                   </p>
                 )}
 
-                <div className="border-t border-white/10 pt-3">
+                <div className="border-t border-zinc-200 pt-3">
                   <div className="flex justify-between text-lg font-semibold">
                     <span>Total</span>
                     <span>₹{finalTotal}</span>
@@ -186,17 +213,20 @@ function Cart() {
                 <input
                   type="text"
                   placeholder="Enter promo code"
-                  className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white placeholder:text-gray-500 focus:outline-none focus:border-white/30 transition"
+                  className="w-full bg-white border border-zinc-300 rounded-lg px-4 py-3 text-zinc-900 placeholder:text-zinc-400 focus:outline-none focus:border-zinc-600 transition-colors"
                 />
               </div>
 
               {/* Checkout Button */}
-              <button className="w-full bg-white text-black py-4 rounded-full font-medium hover:bg-gray-200 transition">
+              <button
+                onClick={handleProceedToCheckout}
+                className="pressable w-full bg-black text-white py-4 rounded-full font-medium hover:bg-zinc-800 transition-colors"
+              >
                 Proceed to Checkout
               </button>
 
               {/* Security Badge */}
-              <div className="mt-6 text-center text-xs text-gray-500">
+              <div className="mt-6 text-center text-xs text-zinc-500">
                 <p>Secure checkout powered by Razorpay</p>
               </div>
             </div>

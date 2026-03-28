@@ -70,7 +70,7 @@ export default function LifeWithNekza() {
               {/* CTA */}
               <a
                 href={card.href}
-                className="group flex items-center justify-between bg-red-600 px-4 py-3 text-white text-base md:text-lg font-medium transition hover:bg-red-700"
+                className="pressable group flex items-center justify-between bg-red-600 px-4 py-3 text-white text-base md:text-lg font-medium transition-colors duration-200 hover:bg-red-700"
               >
                 <span>Shop now</span>
                 <svg
