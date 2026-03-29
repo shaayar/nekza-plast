@@ -46,7 +46,7 @@ const REASONS = [
 
 export default function WhyUs() {
   return (
-    <section className="container-box container-main px-4 py-8 sm:px-6 sm:py-10 lg:px-10 lg:py-12">
+    <section className="section-shell px-4 py-8 sm:px-6 sm:py-10 lg:px-10 lg:py-12">
       <div className="relative overflow-hidden rounded-[2rem] border border-zinc-200 bg-white p-5 sm:p-8 lg:p-10">
         <div className="pointer-events-none absolute -left-16 -top-16 h-44 w-44 rounded-full bg-primary/15 blur-2xl" />
         <div className="pointer-events-none absolute -bottom-16 -right-16 h-48 w-48 rounded-full bg-amber-200/40 blur-2xl" />

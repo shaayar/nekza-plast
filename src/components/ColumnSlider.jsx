@@ -71,6 +71,7 @@ function DesktopColumn({ slide, active, onEnter, onLeave }) {
       style={{ height: "63vh" }}
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
+      data-cursor="Shop"
     >
       {/* Background */}
       <div
@@ -127,6 +128,7 @@ export default function ColumnSlider() {
           pagination={{ clickable: true }}
           className="w-full [&_.swiper-pagination-bullet-active]:bg-white [&_.swiper-pagination-bullet]:bg-white/60"
           style={{ height: "63vh" }}
+          data-cursor="Drag"
         >
           {SLIDES.map((slide, i) => (
             <SwiperSlide key={i} className="relative overflow-hidden">
@@ -138,7 +140,7 @@ export default function ColumnSlider() {
               {/* Overlay */}
               <div className="absolute inset-0 bg-black/30" />
               {/* Link */}
-              <a href={slide.href} className="absolute inset-0 z-20" aria-label={slide.title} />
+              <a href={slide.href} className="absolute inset-0 z-20" aria-label={slide.title} data-cursor="Shop" />
               <SlideCaption slide={slide} />
             </SwiperSlide>
           ))}

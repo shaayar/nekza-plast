@@ -54,8 +54,8 @@ function Cart() {
 
   if (cartItems.length === 0) {
     return (
-      <div className="min-h-screen bg-white text-zinc-900">
-        <div className="container mx-auto px-4 py-16">
+      <section className="section-shell min-h-screen bg-white px-4 py-16 text-zinc-900 sm:px-6 md:px-8 lg:px-10">
+        <div className="mx-auto">
           <div className="text-center">
             <div className="flex justify-center mb-8">
               <div className="w-32 h-32 bg-zinc-100 rounded-full flex items-center justify-center">
@@ -68,19 +68,20 @@ function Cart() {
               to="/products"
               onClick={handleContinueShopping}
               className="pressable inline-flex items-center gap-2 bg-black text-white px-8 py-4 rounded-full hover:bg-zinc-800 transition"
+              data-cursor="Shop"
             >
               Continue Shopping
               <ArrowRight size={20} />
             </Link>
           </div>
         </div>
-      </div>
+      </section>
     );
   }
 
   return (
-    <div className="min-h-screen bg-white text-zinc-900">
-      <div className="container mx-auto px-4 py-8">
+    <section className="section-shell min-h-screen bg-white px-4 py-8 text-zinc-900 sm:px-6 md:px-8 lg:px-10">
+      <div className="mx-auto">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-4xl font-bold mb-2"><span className="outline text-transparent">Shopping</span> Cart</h1>
@@ -116,6 +117,7 @@ function Cart() {
                       <button
                         onClick={() => handleRemoveItem(item)}
                         className="pressable text-zinc-500 hover:text-primary transition-colors"
+                        data-cursor="Shop"
                       >
                         <X size={20} />
                       </button>
@@ -128,6 +130,7 @@ function Cart() {
                           onClick={() => handleDecreaseQty(item)}
                           className="pressable text-zinc-500 hover:text-primary transition-colors"
                           disabled={item.quantity <= 1}
+                          data-cursor="Shop"
                         >
                           <Minus size={16} />
                         </button>
@@ -135,6 +138,7 @@ function Cart() {
                         <button
                           onClick={() => handleIncreaseQty(item)}
                           className="pressable text-zinc-500 hover:text-primary transition-colors"
+                          data-cursor="Shop"
                         >
                           <Plus size={16} />
                         </button>
@@ -159,6 +163,7 @@ function Cart() {
                 to="/products"
                 onClick={handleContinueShopping}
                 className="pressable inline-flex items-center gap-2 text-zinc-800 hover:text-primary transition-colors"
+                data-cursor="Shop"
               >
                 <ArrowRight size={20} className="rotate-180" />
                 Continue Shopping
@@ -221,6 +226,7 @@ function Cart() {
               <button
                 onClick={handleProceedToCheckout}
                 className="pressable w-full bg-black text-white py-4 rounded-full font-medium hover:bg-zinc-800 transition-colors"
+                data-cursor="Shop"
               >
                 Proceed to Checkout
               </button>
@@ -233,7 +239,7 @@ function Cart() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
 

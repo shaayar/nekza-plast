@@ -49,6 +49,7 @@ function ImageGallery({ images }) {
           onClick={prev}
           className="pressable absolute left-3 top-1/2 -translate-y-1/2 flex size-8 items-center justify-center
                      rounded-full bg-white shadow-md text-gray-600 hover:text-red-600 transition-colors"
+          data-cursor="Open"
         >
           <ChevronLeft />
         </button>
@@ -56,19 +57,21 @@ function ImageGallery({ images }) {
           onClick={next}
           className="pressable absolute right-3 top-1/2 -translate-y-1/2 flex size-8 items-center justify-center
                      rounded-full bg-white shadow-md text-gray-600 hover:text-red-600 transition-colors"
+          data-cursor="Open"
         >
           <ChevronRight />
         </button>
       </div>
 
       {/* Thumbnails */}
-      <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
+      <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide" data-cursor="Drag">
         {images.map((img, i) => (
           <button
             key={i}
             onClick={() => setActive(i)}
             className={`pressable shrink-0 size-16 md:size-[72px] rounded-lg overflow-hidden border-2 transition-colors duration-200
                         ${active === i ? "border-red-600" : "border-gray-200 hover:border-gray-400"}`}
+            data-cursor="View"
           >
             <img src={img} alt={`Thumb ${i + 1}`} className="h-full w-full object-contain p-1 bg-gray-50" />
           </button>
@@ -87,6 +90,7 @@ function SizeSelector({ sizes, selected, onChange }) {
           key={s}
           onClick={() => onChange(i)}
           className="pressable inline-block pb-1 text-base font-bold text-gray-900 relative"
+          data-cursor="Open"
         >
           {s}
           {selected === i && (
@@ -105,6 +109,7 @@ function QuantitySelector({ qty, onChange }) {
         onClick={() => onChange(Math.max(1, qty - 1))}
         className="pressable flex size-8 items-center justify-center rounded-full border border-gray-300
                    text-gray-600 hover:border-red-600 hover:text-red-600 transition-colors text-lg leading-none"
+        data-cursor="Shop"
       >
         −
       </button>
@@ -115,6 +120,7 @@ function QuantitySelector({ qty, onChange }) {
         onClick={() => onChange(qty + 1)}
         className="pressable flex size-8 items-center justify-center rounded-full border border-gray-300
                    text-gray-600 hover:border-red-600 hover:text-red-600 transition-colors text-lg leading-none"
+        data-cursor="Shop"
       >
         +
       </button>
@@ -133,6 +139,7 @@ function TabSection({ tabs }) {
       <div
         ref={scrollRef}
         className="flex gap-0 overflow-x-auto border-b border-gray-200 scrollbar-hide"
+        data-cursor="Drag"
       >
         {TAB_KEYS.map((tab) => (
           <button
@@ -140,6 +147,7 @@ function TabSection({ tabs }) {
             onClick={() => setActive(tab)}
             className={`pressable shrink-0 px-4 py-3 text-sm font-medium whitespace-nowrap transition-colors duration-150 relative
                         ${active === tab ? "text-gray-900" : "text-gray-500 hover:text-gray-700"}`}
+            data-cursor="Open"
           >
             {tab}
             {active === tab && (
@@ -200,7 +208,7 @@ function RelatedCard({ product }) {
           </div>
         </div>
         {/* CTA */}
-        <button className="pressable flex items-center justify-between w-full mt-auto pt-2 text-sm font-medium text-gray-800 hover:text-red-600 transition-colors border-t border-gray-100">
+        <button className="pressable flex items-center justify-between w-full mt-auto pt-2 text-sm font-medium text-gray-800 hover:text-red-600 transition-colors border-t border-gray-100" data-cursor="View">
           <span>View Details</span>
           <span className="flex size-7 items-center justify-center rounded-full border border-current relative">
             <CartIcon />
@@ -230,8 +238,8 @@ export default function ProductDetail() {
 
   const discount = Math.round(((PRODUCT.mrp - PRODUCT.price) / PRODUCT.mrp) * 100);
   return (
-    <div className="bg-white min-h-screen">
-      <div className="container-box container-main px-4 sm:px-6 md:px-8 lg:px-10 py-6 md:py-10 max-w-7xl mx-auto">
+    <section className="section-shell min-h-screen bg-white px-4 py-6 sm:px-6 md:px-8 md:py-10 lg:px-10">
+      <div className="mx-auto max-w-[1800px]">
 
         {/* ══ Top Product Section ══════════════════════════════════════════════ */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-14">
@@ -288,7 +296,7 @@ export default function ProductDetail() {
                   placeholder="Enter pin code"
                   className="flex-1 py-2 text-sm text-gray-700 placeholder-gray-400 bg-transparent outline-none"
                 />
-                <button className="pressable flex items-center gap-1 text-xs font-semibold text-gray-500 hover:text-gray-900 transition-colors pb-2">
+                <button className="pressable flex items-center gap-1 text-xs font-semibold text-gray-500 hover:text-gray-900 transition-colors pb-2" data-cursor="Open">
                   <CheckIcon /> Check
                 </button>
               </div>
@@ -316,10 +324,7 @@ export default function ProductDetail() {
 
         {/* ══ You May Also Like ════════════════════════════════════════════ */}
         <div className="mt-12 md:mt-16">
-          <h2
-            className="mb-6 text-center text-2xl md:text-3xl font-bold text-gray-900"
-            style={{ fontFamily: "'Playfair Display', serif" }}
-          >
+          <h2 className="mb-6 text-center text-2xl md:text-3xl font-bold text-gray-900">
             You May Also Like
           </h2>
 
@@ -332,6 +337,6 @@ export default function ProductDetail() {
         </div>
 
       </div>
-    </div>
+    </section>
   );
 }

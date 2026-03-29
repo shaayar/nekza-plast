@@ -10,11 +10,14 @@ import Cart from "./pages/Cart.jsx";
 import PopularProducts from "./components/PopularProducts.jsx";
 import NotFound from "./pages/NotFound.jsx";
 import ProductShowcase from "./pages/ProductShowcase.jsx";
-import Testimonials from "./components/Testimonials.jsx";
+import CustomCursor from "./components/UI/CustomCursor.jsx";
+import Preloader from "./components/UI/Pre-Loader.jsx";
 
 function App() {
   return (
     <>
+      <Preloader />
+      <CustomCursor />
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -27,8 +30,10 @@ function App() {
         <Route path="/popular-products" element={<PopularProducts />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="*" element={<NotFound />} />
+
+        {/* Other extra routes for testing purpose */}
         <Route path="/demo" element={<ProductShowcase />} />
-        <Route path="/testimonials" element={<Testimonials />} />
+      
       </Routes>
       <Footer />
     </>

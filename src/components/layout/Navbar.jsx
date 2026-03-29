@@ -30,11 +30,12 @@ function Navbar() {
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
             className="pressable transition-colors"
+            data-cursor="Open"
           >
             {mobileOpen ? <X size={28} /> : <i className="ri-menu-4-fill text-2xl"></i>}
           </button>
 
-          <Link to="/account" className="pressable">
+          <Link to="/account" className="pressable" data-cursor="Open">
             <User size={22} />
           </Link>
         </div>
@@ -44,6 +45,7 @@ function Navbar() {
         <Link
           to="/"
           className="absolute left-1/2 -translate-x-1/2 text-2xl md:text-4xl font-light tracking-[0.2em] whitespace-nowrap lg:static lg:translate-x-0"
+          data-cursor="Open"
         >
           <img src="/images/logo.png" className="h-12 md:h-10" alt="Logo" />
         </Link>
@@ -60,11 +62,11 @@ function Navbar() {
 
         {/* RIGHT */}
         <div className="flex items-center gap-4 md:gap-6">
-          <button className="pressable lg:hidden transition-colors">
+          <button className="pressable lg:hidden transition-colors" data-cursor="Open">
             <Search size={22} />
           </button>
 
-          <Link to="/account" className="pressable hidden lg:block">
+          <Link to="/account" className="pressable hidden lg:block" data-cursor="Open">
             <User size={22} />
           </Link>
 
@@ -85,6 +87,7 @@ function Navbar() {
               to={item.path}
               className={`flex items-center gap-1 text-[15px] transition ${item.featured ? "text-primary" : "text-white hover:text-primary"
                 }`}
+              data-cursor="Open"
             >
               {item.title}
               {item.dropdown && <ChevronDown size={15} />}
@@ -108,6 +111,7 @@ function Navbar() {
                           key={linkIndex}
                           to={link.path}
                           className="flex items-center gap-3 text-[17px] text-white hover:text-primary transition"
+                          data-cursor="Open"
                         >
                           <span>{link.label}</span>
                           {link.tag && (
@@ -123,7 +127,7 @@ function Navbar() {
                   {/* Image Cards */}
                   <div className="grid grid-cols-2 gap-6">
                     {item.dropdown.images.map((img, imgIndex) => (
-                      <Link key={imgIndex} to={img.path}>
+                      <Link key={imgIndex} to={img.path} data-cursor="Open">
                         <img
                           src={img.image}
                           alt={img.title}
@@ -165,12 +169,13 @@ function Navbar() {
                   className={`pressable text-[16px] ${item.featured ? "text-primary" : "text-white hover:text-primary"
                     }`}
                   onClick={() => setMobileOpen(false)}
+                  data-cursor="Open"
                 >
                   {item.title}
                 </Link>
 
                 {item.dropdown && (
-                  <button className="pressable transition-transform" onClick={() => toggleMobileDropdown(index)}>
+                  <button className="pressable transition-transform" onClick={() => toggleMobileDropdown(index)} data-cursor="Open">
                     <ChevronDown
                       size={18}
                       className={`transition-transform ${mobileDropdown === index ? "rotate-180" : ""
@@ -197,6 +202,7 @@ function Navbar() {
                             to={link.path}
                             className="block text-sm text-gray-300 hover:text-primary"
                             onClick={() => setMobileOpen(false)}
+                            data-cursor="Open"
                           >
                             {link.label}
                           </Link>
@@ -214,6 +220,7 @@ function Navbar() {
               to="/about"
               className="pressable block text-white"
               onClick={() => setMobileOpen(false)}
+              data-cursor="Open"
             >
               Learn
             </Link>
@@ -221,6 +228,7 @@ function Navbar() {
               to="/contact"
               className="pressable block text-white"
               onClick={() => setMobileOpen(false)}
+              data-cursor="Open"
             >
               Contact
             </Link>

@@ -35,6 +35,7 @@ export default function AddToCartButton({ product, selectedColor, selectedSize, 
     <button
       onClick={handleAddToCart}
       disabled={isAdding || itemInCart}
+      data-cursor="Shop"
       className={`
         pressable relative overflow-hidden
         ${itemInCart 

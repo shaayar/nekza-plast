@@ -1238,6 +1238,85 @@ export const validateAllTiles = () => {
   return allTiles.every(validateTile);
 };
 
+// Company Information
+export const COMPANY_INFO = {
+  name: "Nekza Plast",
+  contactPerson: "Ketan Desai (CEO)",
+  location: "Survey No. 407, Plot No. 12, Jay Balaji Industrial Area, Sanganva, Tal. Lodhika, Sanganva, Rajkot - 360035, Gujarat, India",
+  phone: "+91 7942836070",
+  gst: "24AARFN6224C1ZE",
+  trustBadge: "TrustSEAL Verified / IndiaMART style badge",
+  established: 2013
+};
+
+// About timeline
+export const COMPANY_TIMELINE = [
+  {
+    year: "2013",
+    title: "Nekza Was Founded",
+    description:
+      "Nekza Plast started with a clear goal: practical, durable home and hydration products families can trust.",
+    type: "milestone",
+  },
+  {
+    year: "2015",
+    title: "Core Hydration Range Expanded",
+    description:
+      "Water bottles and utility hydration products became the foundation of the Nekza catalog.",
+    type: "growth",
+  },
+  {
+    year: "2018",
+    title: "Lunch & Kitchen Categories Added",
+    description:
+      "The portfolio expanded into lunch boxes, casseroles, and daily kitchen-use essentials.",
+    type: "growth",
+  },
+  {
+    year: "2021",
+    title: "Retail Network Strengthened",
+    description:
+      "Nekza widened distribution and deepened retailer partnerships across key markets.",
+    type: "milestone",
+  },
+  {
+    year: "2023",
+    title: "Customer-First Product Focus",
+    description:
+      "Design and quality improvements were aligned with real everyday use cases from families and students.",
+    type: "achievement",
+  },
+  {
+    year: "2025",
+    title: "Modern Catalog, Same Trusted Promise",
+    description:
+      "Nekza continues building utility-led products under the 'Kuch Naya Sochte Hain' mindset.",
+    type: "achievement",
+  },
+];
+
+// Website Information
+export const WEBSITE_INFO = {
+  mainCategory: "Insulated Water Bottles And Lunch Boxes",
+  supportingText: "We are offering Insulated Water Bottles, Lunch Boxes, Insulated Water Jugs, Insulated Casseroles etc."
+};
+
+// Reviews and Ratings
+export const REVIEWS_INFO = {
+  overallRating: 4.2,
+  totalReviews: 72,
+  ratingBreakdown: {
+    fiveStar: 53,
+    fourStar: 5,
+    threeStar: 10,
+    twoStar: 6,
+    oneStar: 26
+  },
+  userSatisfaction: {
+    response: 61
+  }
+};
+
 /*
 ========================================================
 SOURCE NOTES (NON-PRODUCT REFERENCE)

@@ -5,10 +5,10 @@ export default function Contact() {
   const [consent, setConsent] = useState(false);
 
   return (
-    <div className="bg-white text-black mt-8">
+    <section className="section-shell mt-8 bg-white text-black px-4 sm:px-6 md:px-8 lg:px-10">
 
       {/* Main Layout */}
-      <section className="max-w-[1200px] mx-auto px-4 md:px-6 pb-16">
+      <div className="mx-auto max-w-[1200px] pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_380px] gap-12">
             
             {/* Form Section */}
@@ -95,6 +95,7 @@ export default function Contact() {
                       ? "bg-black text-white hover:bg-gray-800"
                       : "bg-gray-200 text-gray-400 cursor-not-allowed"
                   }`}
+                  data-cursor="Open"
                 >
                   Submit now
                 </button>
@@ -124,6 +125,7 @@ export default function Contact() {
                       target="_blank"
                       rel="noreferrer"
                       className="pressable inline-flex items-center gap-2 bg-black text-white px-5 py-3 rounded-lg hover:bg-gray-800 transition-colors duration-200"
+                      data-cursor="Open"
                     >
                       Chat On WhatsApp <ArrowRight />
                     </a>
@@ -178,7 +180,7 @@ export default function Contact() {
             </div>
             {/* End support cards */}
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }

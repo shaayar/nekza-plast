@@ -60,7 +60,8 @@ const FooterLink = ({ href, label, external = false }) => (
         href={href}
         target={external ? "_blank" : "_self"}
         rel={external ? "noopener noreferrer" : undefined}
-        className=" group flex items-center gap-2 py-1 text-sm transition-colors duration-200 hover:text-primary md:text-base font-light"
+        data-cursor="Open"
+        className="group flex items-center gap-2 py-1 text-sm transition-colors duration-200 hover:text-primary hover:underline underline-offset-3 decoration-2 decoration-alt-yellow md:text-base font-light"
     >
         {label}
         {external && <ExternalIcon />}
@@ -79,6 +80,7 @@ const AccordionSection = ({ section }) => {
             <button
                 onClick={() => setOpen((v) => !v)}
                 className="pressable flex w-full items-center justify-between py-3.5 text-left"
+                data-cursor="Open"
             >
                 <span className="text-sm font-bold text-primary">{section.heading}</span>
                 <ChevronIcon open={open} />
@@ -142,14 +144,14 @@ const StaticSection = ({ section }) => (
 export default function Footer() {
     return (
         <footer className="bg-black text-white font-comfortaa">
-            <div className="container-box container-main px-4 py-10 sm:px-6 md:px-8 lg:px-10">
+            <div className="px-4 py-10 sm:px-6 md:px-8 lg:px-10">
 
                 {/* ── Top section ── */}
                 <div className="flex flex-col gap-8 md:flex-row md:gap-6 lg:gap-10">
 
                     {/* Logo + Socials */}
                     <div className="flex items-center justify-between md:w-[200px] md:shrink-0 md:flex-col md:items-start lg:w-[220px]">
-                        <a href="/" className="block w-20 lg:w-28">
+                        <a href="/" className="block w-20 lg:w-28" data-cursor="Open">
                             <img src="/images/logo.png" 
                                 alt="Nekza Plast" height={70}
                                 className="h-auto w-full object-contain"
@@ -164,6 +166,7 @@ export default function Footer() {
                                 rel="noopener noreferrer"
                                 aria-label="Facebook"
                                 className="transition-colors duration-200 hover:text-primary"
+                                data-cursor="Open"
                             >
                                 <FacebookIcon />
                             </a>
@@ -173,6 +176,7 @@ export default function Footer() {
                                 rel="noopener noreferrer"
                                 aria-label="Instagram"
                                 className="transition-colors duration-200 hover:text-primary"
+                                data-cursor="Open"
                             >
                                 <InstagramIcon />
                             </a>
@@ -195,7 +199,7 @@ export default function Footer() {
 
                 {/* ── Divider ── */}
                 <div className="mt-10 border-t border-gray-100 pt-6 lg:mt-14">
-                    <p className="font-aspekta w-full text-center text-sm font-light leading-snug md:text-base">
+                    <p className="w-full text-center text-sm font-light leading-snug md:text-base">
                         Copyright © 2025 Nekza Plast. All Rights Reserved.
                     </p>
                 </div>

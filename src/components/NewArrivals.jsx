@@ -41,17 +41,18 @@ export default function NewArrivals() {
   }, [activeChip]);
 
   return (
-    <section className="py-5">
-      <div className="px-4 md:px-10 mx-auto">
+    <section className="section-shell py-5">
+      <div className="mx-auto px-4 md:px-10">
 
         {/* Header */}
         <div className="flex flex-col items-center gap-2 text-center md:gap-3">
           <h2 className="text-4xl font-bold capitalize leading-snug lg:text-4xl">
-            <span className="outline text-white">New</span> Arrivals
+            <span className="outline text-white">New</span> <span className="underline decoration-4 decoration-alt-yellow">Arrivals</span>
           </h2>
           <a
             href="/collections/new-arrivals"
             className="pressable group flex items-center justify-center rounded text-base text-black hover:underline underline-offset-2 transition-colors duration-200 sm:text-lg lg:text-xl"
+            data-cursor="Shop"
           >
             Explore More
             <ArrowRight />
@@ -77,25 +78,26 @@ export default function NewArrivals() {
 
 
         {/* Product Rail */}
-        <div className="mt-4 overflow-x-auto scrollbar-hide">
-          <div className="flex min-w-max items-stretch gap-4 md:gap-6">
-
-            {/* Product Cards */}
-            {visibleProducts.map((product, i) => (
-              <div
-                key={product.id}
-                className="relative flex h-full shrink-0 animate-slide-up md:w-87.5"
-                style={{ animationDelay: `${i * 80}ms` }}
-              >
-                <Card
-                  product={product}
-                  badges={[
-                    { tone: "light", text: getProductMood(product.title) },
-                    { tone: "dark", text: getSocialProof(i) },
-                  ]}
-                />
-              </div>
-            ))}
+        <div className="mt-4">
+          <div className="flex gap-4 md:gap-6 overflow-x-hidden">
+            <div className="flex gap-4 md:gap-6 min-w-max" data-cursor="Drag">
+              {/* Product Cards */}
+              {visibleProducts.map((product, i) => (
+                <div
+                  key={product.id}
+                  className="relative flex h-full w-[78vw] min-w-[260px] max-w-[360px] shrink-0 animate-slide-up sm:w-[46vw] lg:w-[30vw] xl:w-[23vw]"
+                  style={{ animationDelay: `${i * 80}ms` }}
+                >
+                  <Card
+                    product={product}
+                    badges={[
+                      { tone: "light", text: getProductMood(product.title) },
+                      { tone: "dark", text: getSocialProof(i) },
+                    ]}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>

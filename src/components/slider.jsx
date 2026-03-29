@@ -44,8 +44,8 @@ export default function HeroSlider() {
   };
 
   return (
-    <div
-      className="relative w-full overflow-hidden bg-black h-[40svh] lg:h-[84svh]"
+    <section
+      className="section-shell relative w-full overflow-hidden bg-black h-[40svh] lg:h-[84svh]"
     >
       <Swiper
         modules={[Autoplay, EffectFade]}
@@ -57,6 +57,7 @@ export default function HeroSlider() {
         onSwiper={(s) => (swiperRef.current = s)}
         onSlideChange={handleSlideChange}
         className="w-full! h-full!"
+        data-cursor="Drag"
       >
         {slides.map((slide, i) => (
           <SwiperSlide key={i} className="relative overflow-hidden">
@@ -113,6 +114,7 @@ export default function HeroSlider() {
               <a
                 href="#"
                 className="pressable group mt-8 md:mt-12 inline-flex items-center gap-3 w-fit border border-white/35 text-white text-[11px] md:text-xs font-medium tracking-[0.08em] uppercase px-6 py-3.5 transition-colors duration-200 hover:bg-red-600 hover:border-red-600"
+                data-cursor="Shop"
               >
                 Discover Collection
                 <svg
@@ -141,6 +143,7 @@ export default function HeroSlider() {
         onClick={() => swiperRef.current?.slidePrev()}
         aria-label="Previous slide"
         className="pressable hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center text-white bg-black/30 transition-colors duration-200 hover:bg-red-600/75 hover:border-transparent"
+        data-cursor="Open"
       >
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
           <path d="M11 4L6 9L11 14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
@@ -151,6 +154,7 @@ export default function HeroSlider() {
         onClick={() => swiperRef.current?.slideNext()}
         aria-label="Next slide"
         className="pressable hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center text-white bg-black/30 transition-colors duration-200 hover:bg-red-600/75 hover:border-transparent"
+        data-cursor="Open"
       >
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
           <path d="M7 4L12 9L7 14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
@@ -184,6 +188,6 @@ export default function HeroSlider() {
         <span className="text-white/90 text-2xl font-bold">0{activeIndex + 1}</span>
         {" "}/ 0{slides.length}
       </div>
-    </div>
+    </section>
   );
 }

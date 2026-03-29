@@ -23,6 +23,7 @@ function ProductCard({ product, itemInCart, onAddToCart, onBuyNow, onOpenProduct
     <div
       className="group flex h-auto w-full cursor-pointer flex-col gap-2 overflow-hidden rounded-xl border border-gray-300 bg-white px-2 pb-2 transition-[box-shadow,border-color] duration-200 hover:shadow-md md:gap-3"
       onClick={() => onOpenProduct(productPath)}
+      data-cursor="View"
     >
       <div className="flex flex-col overflow-hidden rounded-md bg-white-off md:rounded-lg">
         <div className="group relative flex aspect-350/400 w-full items-center justify-center overflow-hidden rounded bg-white-off transition-opacity duration-200">
@@ -51,7 +52,7 @@ function ProductCard({ product, itemInCart, onAddToCart, onBuyNow, onOpenProduct
       </div>
 
       <div className="flex items-center justify-start rounded transition-colors duration-200">
-        <h3 className="font-aspekta line-clamp-2 text-wrap text-sm capitalize leading-snug sm:text-base lg:text-lg">
+        <h3 className="line-clamp-2 text-wrap text-sm capitalize leading-snug sm:text-base lg:text-lg">
           {product.title}
         </h3>
       </div>
@@ -66,7 +67,7 @@ function ProductCard({ product, itemInCart, onAddToCart, onBuyNow, onOpenProduct
           </span>
         ) : null}
         {product.off ? (
-          <span className="font-aspekta inline-block rounded bg-white-off px-1 py-0.5 text-[10px] leading-snug md:text-xs">
+          <span className="inline-block rounded bg-white-off px-1 py-0.5 text-[10px] leading-snug md:text-xs">
             {product.off}% off
           </span>
         ) : null}
@@ -87,6 +88,7 @@ function ProductCard({ product, itemInCart, onAddToCart, onBuyNow, onOpenProduct
             }`}
             aria-label="Add to cart"
             title="Add to cart"
+            data-cursor="Shop"
           >
             <ShoppingCart className="h-4 w-4" />
           </button>
@@ -97,6 +99,7 @@ function ProductCard({ product, itemInCart, onAddToCart, onBuyNow, onOpenProduct
               onBuyNow(product);
             }}
             className="pressable h-9 rounded-md bg-primary px-3 text-xs font-semibold text-white transition-opacity duration-200 hover:opacity-90 md:text-sm"
+            data-cursor="Shop"
           >
             Buy Now
           </button>
@@ -171,7 +174,7 @@ export default function ProductShowcase() {
   };
 
   return (
-    <div className="min-h-screen bg-zinc-50 text-zinc-900">
+    <section className="section-shell min-h-screen bg-zinc-50 text-zinc-900">
       
       <div className="border-b border-zinc-200/80 bg-white px-4 py-4 sm:px-6 lg:px-10">
         <div className="flex flex-col gap-4 xl:flex-row xl:items-center xl:justify-between">
@@ -179,6 +182,7 @@ export default function ProductShowcase() {
             <button
               onClick={() => setMobileFiltersOpen(true)}
               className="pressable inline-flex items-center gap-2 rounded-md border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-800 transition-colors duration-200 hover:border-primary/50 hover:bg-primary/5 lg:hidden"
+              data-cursor="Open"
             >
               <SlidersHorizontal className="h-4 w-4" />
               Filters
@@ -218,7 +222,7 @@ export default function ProductShowcase() {
           <div className="sticky top-0 p-5">
             <div className="mb-6 flex items-center justify-between">
               <h2 className="text-sm font-bold tracking-wide">FILTERS</h2>
-              <button onClick={clearFilters} className="pressable text-xs font-semibold text-primary transition-opacity duration-200 hover:opacity-90">
+              <button onClick={clearFilters} className="pressable text-xs font-semibold text-primary transition-opacity duration-200 hover:opacity-90" data-cursor="Open">
                 CLEAR ALL
               </button>
             </div>
@@ -290,7 +294,7 @@ export default function ProductShowcase() {
           <div className="absolute left-0 top-0 h-full w-[85%] max-w-sm overflow-y-auto bg-white shadow-xl">
             <div className="sticky top-0 z-10 flex items-center justify-between border-b border-zinc-200 bg-white px-4 py-4">
               <h2 className="text-base font-semibold">Filters</h2>
-              <button onClick={() => setMobileFiltersOpen(false)} className="pressable rounded-md p-2 transition-colors duration-200 hover:bg-primary/5">
+              <button onClick={() => setMobileFiltersOpen(false)} className="pressable rounded-md p-2 transition-colors duration-200 hover:bg-primary/5" data-cursor="Open">
                 <X className="h-5 w-5" />
               </button>
             </div>
@@ -334,12 +338,14 @@ export default function ProductShowcase() {
                 <button
                   onClick={clearFilters}
                   className="pressable flex-1 rounded-md border border-zinc-300 px-4 py-3 text-sm font-medium transition-colors duration-200 hover:bg-zinc-50"
+                  data-cursor="Open"
                 >
                   Clear All
                 </button>
                 <button
                   onClick={() => setMobileFiltersOpen(false)}
                   className="pressable flex-1 rounded-md bg-primary px-4 py-3 text-sm font-semibold text-white transition-opacity duration-200 hover:opacity-90"
+                  data-cursor="Open"
                 >
                   Apply
                 </button>
@@ -348,6 +354,6 @@ export default function ProductShowcase() {
           </div>
         </div>
       )}
-    </div>
+    </section>
   );
 }

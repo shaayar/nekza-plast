@@ -31,14 +31,13 @@ const lifeCards = [
 
 export default function LifeWithNekza() {
   return (
-    <section className="my-5 py-10 sm:my-7 lg:my-10">
-      <div className="max-w-[1400px] mx-auto px-4 md:px-6 flex flex-col items-center gap-6">
+    <section className="section-shell my-5 py-10 sm:my-7 lg:my-10">
+      <div className="max-w-350 mx-auto px-4 md:px-6 flex flex-col items-center gap-6">
         
         {/* Heading */}
         <div className="flex flex-col gap-2 text-center max-w-3xl">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight">
-            Everyday life with{" "}
-            <span className="text-primary">Nekza</span>
+            Everyday life with <span className="text-primary underline decoration-4 decoration-alt-yellow">Nekza</span>
           </h2>
           <p className="text-sm sm:text-base lg:text-xl text-neutral-600 font-light">
             Be inspired by our recipes, tips, and tricks from culinary experts.
@@ -46,7 +45,7 @@ export default function LifeWithNekza() {
         </div>
 
         {/* Horizontal Scroll Cards */}
-        <div className="flex max-w-full gap-4 overflow-x-auto no-scrollbar md:gap-6 pb-2">
+        <div className="flex max-w-full gap-4 overflow-x-auto no-scrollbar md:gap-6 pb-2" data-cursor="Drag">
           {lifeCards.map((card, index) => (
             <div
               key={index}
@@ -71,6 +70,7 @@ export default function LifeWithNekza() {
               <a
                 href={card.href}
                 className="pressable group flex items-center justify-between bg-red-600 px-4 py-3 text-white text-base md:text-lg font-medium transition-colors duration-200 hover:bg-red-700"
+                data-cursor="Shop"
               >
                 <span>Shop now</span>
                 <svg

@@ -94,6 +94,7 @@ function Tile({ tile, index, hoveredIndex, setHoveredIndex, className = "", dela
         <a
           href={tile.href}
           className="flex size-full items-center justify-center rounded transition-opacity duration-200 md:hidden"
+          data-cursor="Shop"
         >
           <img
             alt={tile.title}
@@ -110,6 +111,7 @@ function Tile({ tile, index, hoveredIndex, setHoveredIndex, className = "", dela
         <a
           href={tile.href}
           className="flex size-full items-center justify-center rounded transition-opacity duration-200"
+          data-cursor="Shop"
         >
           <img
             alt={tile.title}
@@ -145,12 +147,12 @@ export default function CategoryGrid() {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   return (
-    <div className="relative">
+    <section className="section-shell relative">
       {hoveredIndex !== null && (
         <div className="pointer-events-none fixed inset-0 z-10 hidden bg-black/20 backdrop-blur-sm backdrop-saturate-150 transition-opacity duration-300 md:block" />
       )}
 
-      <section className="relative z-20 w-full px-4 py-5 sm:py-7 md:px-9 lg:py-10 container-box container-main">
+      <div className="relative z-20 w-full px-4 py-5 sm:py-7 md:px-9 lg:py-10">
         {/* MOBILE */}
         <div className="grid gap-3 md:hidden">
           <div
@@ -248,7 +250,7 @@ export default function CategoryGrid() {
             ))}
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 }

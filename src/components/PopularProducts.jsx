@@ -26,7 +26,7 @@ const getSocialProof = (index) => {
   return labels[index % labels.length];
 };
 
-// ─── Bestsellers section ──────────────────────────────────────────────────────
+// ─── Popular Products section ──────────────────────────────────────────────────────
 
 export default function PopularProducts() {
   const [activeChip, setActiveChip] = useState("community");
@@ -55,16 +55,17 @@ export default function PopularProducts() {
   }, [activeChip]);
 
   return (
-    <section className="container-box container-main flex flex-col items-center gap-6 py-5 sm:py-7  lg:gap-8 lg:py-10">
+    <section className="section-shell flex flex-col items-center gap-6 py-5 sm:py-7 lg:gap-8 lg:py-10">
 
       {/* Header */}
       <div className="flex flex-col items-center gap-2 text-center md:gap-3">
         <h2 className="font-bold capitalize leading-snug text-3xl lg:text-4xl" >
-          <span className="outline text-white">Our</span> Popular Products
+          <span className="outline text-white">Our</span> <span className="underline decoration-4 decoration-alt-yellow">Popular Products</span>
         </h2>
         <a
           href="/collections/bestseller-nw"
           className="pressable group flex items-center justify-center rounded text-base text-black hover:underline underline-offset-2 transition-colors duration-200 sm:text-lg lg:text-xl"
+          data-cursor="Shop"
         >
           Explore More
           <ArrowRight />
@@ -91,11 +92,12 @@ export default function PopularProducts() {
       <div
         className="mx-auto flex max-w-full items-stretch gap-4 overflow-x-auto md:gap-6 ps-4 md:ps-10"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        data-cursor="Drag"
       >
         {visibleProducts.map((product, i) => (
           <div
             key={product.id || i}
-            className="relative flex h-full shrink-0 animate-slide-up"
+            className="relative flex h-full w-[78vw] min-w-[260px] max-w-[360px] shrink-0 animate-slide-up sm:w-[46vw] lg:w-[30vw] xl:w-[23vw]"
             style={{ animationDelay: `${i * 80}ms` }}
           >
             <Card
