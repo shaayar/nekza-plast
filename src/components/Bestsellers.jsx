@@ -66,11 +66,11 @@ export default function Bestsellers() {
 
       {/* Header */}
       <div className="flex w-full flex-col items-center gap-2 text-center md:gap-3">
-        <h2 className="text-2xl font-bold capitalize leading-snug sm:text-3xl lg:text-4xl">
+        <h2 className="font-bold capitalize leading-snug text-4xl lg:text-5xl">
           <span className="outline text-white">Our</span> <span className="underline decoration-4 decoration-alt-yellow">Bestsellers</span>
         </h2>
         <a
-          href="/collections/bestseller-nw"
+          href="/collections/bestseller"
           className="pressable group flex items-center justify-center rounded text-base text-black hover:underline underline-offset-2 transition-colors duration-200 sm:text-lg lg:text-xl"
           data-cursor="Shop"
         >

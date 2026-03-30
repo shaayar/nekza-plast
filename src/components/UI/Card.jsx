@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useCart } from "../../contexts/CartContext.jsx";
 import { useToast } from "../../contexts/ToastContext.jsx";
 import { ShoppingBag } from "lucide-react";
+import BuyNowButton from "../BuyNowButton.jsx";
 
 export default function Card({ product, slug, badges = [] }) {
   const { addToCart } = useCart();
@@ -28,6 +29,14 @@ export default function Card({ product, slug, badges = [] }) {
   const productPath = slug
     ? `/products/${slug}/${product.slug || product.title.toLowerCase().replace(/\s+/g, "-")}`
     : product.href;
+
+  const productForCart = {
+    id: product.id || product.title,
+    title: product.title,
+    price: product.price,
+    mrp: product.mrp,
+    image: product.img,
+  };
 
   return (
     <div className="group relative flex h-full w-full min-w-0 flex-col gap-3 overflow-hidden rounded-2xl border border-zinc-200 bg-white p-3 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg">
@@ -135,6 +144,14 @@ export default function Card({ product, slug, badges = [] }) {
           </span>
         </button>
       </div>
+      <BuyNowButton
+        product={productForCart}
+        quantity={1}
+        stopPropagation
+        className="pressable relative z-10 mt-1 rounded-lg bg-primary px-3 py-2 text-sm font-semibold text-white transition-opacity duration-200 hover:opacity-90"
+      >
+        Buy Now
+      </BuyNowButton>
     </div>
   );
 }

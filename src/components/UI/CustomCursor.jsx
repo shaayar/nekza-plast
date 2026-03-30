@@ -33,11 +33,14 @@ export default function CustomCursor() {
     let velY = 0;
 
     let isHovering = false;
+    let activeEl = null;
     let isDown = false;
     let rafId;
 
     const root = document.documentElement;
+    const body = document.body;
     root.classList.add("cursor-enabled");
+    body.classList.add("cursor-enabled");
 
     const lerp = (a, b, t) => a + (b - a) * t;
     const clamp = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
@@ -68,28 +71,40 @@ export default function CustomCursor() {
       root.classList.remove("cursor-clicking");
     };
 
+    const getInteractive = (node) =>
+      node instanceof Element ? node.closest(INTERACTIVE_SELECTOR) : null;
+
+    const setActive = (el) => {
+      activeEl = el;
+      isHovering = Boolean(el);
+      if (isHovering) {
+        root.classList.add("cursor-active");
+        body.classList.add("cursor-active");
+        const label =
+          el.getAttribute("data-cursor") ||
+          (el.tagName === "A" ? "Open" : null) ||
+          (el.tagName === "BUTTON" ? "Shop" : null) ||
+          "View";
+        if (labelRef.current) labelRef.current.textContent = label;
+      } else {
+        root.classList.remove("cursor-active");
+        body.classList.remove("cursor-active");
+      }
+    };
+
     const onOver = (e) => {
-      const el = e.target.closest(INTERACTIVE_SELECTOR);
+      const el = getInteractive(e.target);
       if (!el) return;
-
-      isHovering = true;
-      root.classList.add("cursor-active");
-
-      const label =
-        el.getAttribute("data-cursor") ||
-        (el.tagName === "A" ? "Open" : null) ||
-        (el.tagName === "BUTTON" ? "Shop" : null) ||
-        "View";
-
-      if (labelRef.current) labelRef.current.textContent = label;
+      if (activeEl === el) return;
+      setActive(el);
     };
 
     const onOut = (e) => {
-      const el = e.target.closest(INTERACTIVE_SELECTOR);
-      if (!el) return;
-
-      isHovering = false;
-      root.classList.remove("cursor-active");
+      if (!activeEl) return;
+      const related = getInteractive(e.relatedTarget);
+      if (related && activeEl.contains(related)) return;
+      if (related === activeEl) return;
+      setActive(null);
     };
 
     const animate = () => {
@@ -144,25 +159,37 @@ export default function CustomCursor() {
       rafId = requestAnimationFrame(animate);
     };
 
-    document.addEventListener("mousemove", onMove);
-    document.addEventListener("mouseleave", onLeave);
-    document.addEventListener("mouseenter", onEnter);
-    document.addEventListener("mouseover", onOver);
-    document.addEventListener("mouseout", onOut);
-    document.addEventListener("mousedown", onDown);
-    document.addEventListener("mouseup", onUp);
+    document.addEventListener("pointermove", onMove, { passive: true });
+    document.addEventListener("pointerleave", onLeave);
+    document.addEventListener("pointerenter", onEnter);
+    document.addEventListener("pointerover", onOver);
+    document.addEventListener("pointerout", onOut);
+    document.addEventListener("pointerdown", onDown);
+    document.addEventListener("pointerup", onUp);
 
     animate();
 
     return () => {
       cancelAnimationFrame(rafId);
-      document.removeEventListener("mousemove", onMove);
-      document.removeEventListener("mouseleave", onLeave);
-      document.removeEventListener("mouseenter", onEnter);
-      document.removeEventListener("mouseover", onOver);
-      document.removeEventListener("mouseout", onOut);
-      document.removeEventListener("mousedown", onDown);
-      document.removeEventListener("mouseup", onUp);
+      root.classList.remove(
+        "cursor-enabled",
+        "cursor-hidden",
+        "cursor-active",
+        "cursor-clicking"
+      );
+      body.classList.remove(
+        "cursor-enabled",
+        "cursor-hidden",
+        "cursor-active",
+        "cursor-clicking"
+      );
+      document.removeEventListener("pointermove", onMove);
+      document.removeEventListener("pointerleave", onLeave);
+      document.removeEventListener("pointerenter", onEnter);
+      document.removeEventListener("pointerover", onOver);
+      document.removeEventListener("pointerout", onOut);
+      document.removeEventListener("pointerdown", onDown);
+      document.removeEventListener("pointerup", onUp);
     };
   }, [enabled]);
 
@@ -171,8 +198,16 @@ export default function CustomCursor() {
   return (
     <>
       <style>{`
-        html, body {
+        .cursor-enabled,
+        .cursor-enabled body {
           cursor: none;
+        }
+
+        .cursor-wrap {
+          position: fixed;
+          inset: 0;
+          pointer-events: none;
+          z-index: 9999;
         }
 
         .cursor-dot,
@@ -182,7 +217,6 @@ export default function CustomCursor() {
           top: 0;
           left: 0;
           pointer-events: none;
-          z-index: 9999;
           transform: translate(-50%, -50%);
         }
 
@@ -190,7 +224,7 @@ export default function CustomCursor() {
           width: 6px;
           height: 6px;
           border-radius: 9999px;
-          background: white;
+          background: var(--primary-color);
           mix-blend-mode: difference;
         }
 
@@ -198,7 +232,7 @@ export default function CustomCursor() {
           width: 36px;
           height: 36px;
           border-radius: 9999px;
-          border: 1.5px solid var(--color-primary);
+          border: 1.5px solid var(--primary-color);
           background: rgba(255,255,255,0.06);
           transition: border 0.2s ease, background 0.2s ease;
         }
@@ -208,7 +242,7 @@ export default function CustomCursor() {
           font-weight: 600;
           padding: 4px 10px;
           border-radius: 9999px;
-          background: var(--color-primary);
+          background: var(--primary-color);
           color: white;
           opacity: 0;
           transition: opacity 0.2s ease;
@@ -236,7 +270,7 @@ export default function CustomCursor() {
         }
       `}</style>
 
-      <div>
+      <div className="cursor-wrap" aria-hidden="true">
         <div ref={dotRef} className="cursor-dot" />
         <div ref={ringRef} className="cursor-ring" />
         <div ref={labelRef} className="cursor-label">View</div>

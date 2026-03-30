@@ -40,7 +40,7 @@ export default function AddToCartButton({ product, selectedColor, selectedSize, 
         pressable relative overflow-hidden
         ${itemInCart 
           ? 'bg-green-600 text-white cursor-not-allowed' 
-          : 'bg-white text-black hover:bg-gray-200'
+          : 'bg-white text-black border border-gray-600 hover:bg-primary hover:text-white'
         }
         ${isAdding ? 'opacity-75 cursor-wait' : ''}
         px-8 py-4 rounded-full font-medium transition-colors duration-200
@@ -65,8 +65,8 @@ export default function AddToCartButton({ product, selectedColor, selectedSize, 
           </>
         ) : (
           <>
-            <ShoppingCart size={20} />
             Add to Cart
+            <ShoppingCart size={20} />
           </>
         )}
       </span>

@@ -46,8 +46,8 @@ export default function NewArrivals() {
 
         {/* Header */}
         <div className="flex flex-col items-center gap-2 text-center md:gap-3">
-          <h2 className="text-4xl font-bold capitalize leading-snug lg:text-4xl">
-            <span className="outline text-white">New</span> <span className="underline decoration-4 decoration-alt-yellow">Arrivals</span>
+          <h2 className="text-4xl font-bold capitalize leading-snug lg:text-5xl">
+            <span className="outline text-white">New</span> <span className="underline decoration-4 decoration-alt-yellow rounded-xl">Arrivals</span>
           </h2>
           <a
             href="/collections/new-arrivals"

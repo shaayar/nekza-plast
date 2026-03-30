@@ -1,6 +1,8 @@
-import { useState, useRef } from "react";
-import { productDetail as PRODUCT, relatedProducts as RELATED } from "../data/Data";
+import { useMemo, useRef, useState } from "react";
+import { ALL_PRODUCTS, getRelatedProducts } from "../data/Data";
+import { useParams } from "react-router-dom";
 import AddToCartButton from "../components/AddToCartButton.jsx";
+import BuyNowButton from "../components/BuyNowButton.jsx";
 
 // ─── Icons ────────────────────────────────────────────────────────────────────
 
@@ -89,7 +91,7 @@ function SizeSelector({ sizes, selected, onChange }) {
         <button
           key={s}
           onClick={() => onChange(i)}
-          className="pressable inline-block pb-1 text-base font-bold text-gray-900 relative"
+          className="pressable inline-block pb-1 me-2 text-base font-bold text-gray-900 relative"
           data-cursor="Open"
         >
           {s}
@@ -186,7 +188,7 @@ function RelatedCard({ product }) {
       </div>
 
 
-      <div className="px-3 pb-2 flex flex-col justify-between h-[100px]">
+      <div className="px-3 pb-2 flex flex-col justify-between h-25">
         <div>
           {/* Title */}
           <p className="text-xs md:text-sm font-medium text-gray-900 leading-snug line-clamp-2">
@@ -194,16 +196,18 @@ function RelatedCard({ product }) {
           </p>
           {/* Price */}
           <div className="flex items-center gap-2 flex-wrap">
-            {product.price ? (
+            {typeof product.price === "number" ? (
               <>
                 <span className="text-sm font-bold text-gray-900">₹{product.price}/pc</span>
-                <span className="text-xs text-gray-400 line-through">MRP ₹{product.mrp}</span>
+                {typeof product.mrp === "number" && (
+                  <span className="text-xs text-gray-400 line-through">MRP ₹{product.mrp}</span>
+                )}
                 {product.off && (
                   <span className="text-xs font-medium text-green-600">{product.off}% off</span>
                 )}
               </>
             ) : (
-              <span className="text-xs text-gray-500">MRP ₹{product.mrp}</span>
+              <span className="text-xs text-gray-500">Price on request</span>
             )}
           </div>
         </div>
@@ -223,23 +227,123 @@ function RelatedCard({ product }) {
 // ─── Main component ───────────────────────────────────────────────────────────
 
 export default function ProductDetail() {
-  const [size, setSize]         = useState(0);
-  const [qty, setQty]           = useState(1);
-  const [pincode, setPincode]   = useState("");
+  const { productSlug } = useParams();
+  const [size, setSize] = useState(0);
+  const [qty, setQty] = useState(1);
+  const [pincode, setPincode] = useState("");
 
-  // Create product object for cart
+  const activeSlug = productSlug
+    || (typeof window !== "undefined"
+      ? window.location.pathname.split("/").filter(Boolean).pop()
+      : "");
+
+  const activeProduct = useMemo(() => {
+    return (
+      ALL_PRODUCTS.find((item) => item.slug === activeSlug || item.id === activeSlug)
+      || ALL_PRODUCTS[0]
+      || null
+    );
+  }, [activeSlug]);
+
+  if (!activeProduct) {
+    return (
+      <section className="section-shell min-h-screen bg-white px-4 py-10">
+        <div className="mx-auto max-w-450">
+          <p className="text-lg text-zinc-700">Product not found.</p>
+        </div>
+      </section>
+    );
+  }
+
+  const productGalleryImages = useMemo(() => {
+    const extraImages = Array.isArray(activeProduct.images) ? activeProduct.images : [];
+    const merged = [activeProduct.img, activeProduct.hoverImage, ...extraImages].filter(Boolean);
+    return [...new Set(merged)];
+  }, [activeProduct]);
+
+  const sizeMap = {
+    "water-bottle": ["750ml", "900ml", "1200ml", "1500ml"],
+    flask: ["600ml", "800ml", "1700ml"],
+    "water-jug": ["2L", "5L", "10L", "20L"],
+    "lunch-box": ["Small", "Medium", "Large"],
+    casserole: ["1200ml", "2200ml", "3200ml"],
+    "combo-set": ["Standard Set"],
+    "pencil-box": ["Single Size"],
+    "kitchen-product": ["Standard"],
+  };
+
+  const PRODUCT = {
+    title: activeProduct.title,
+    price: activeProduct.price ?? null,
+    mrp: activeProduct.mrp ?? null,
+    sizes: sizeMap[activeProduct.category] || ["Standard"],
+    images: productGalleryImages,
+    tabs: {
+      About: {
+        heading: "About This Product",
+        bullets: [
+          `Designed by ${activeProduct.vendor || "Nekza"} for everyday utility.`,
+          "Built for home, travel, school, and regular use routines.",
+          "Practical design focused on durability and daily convenience.",
+        ],
+      },
+      Specs: {
+        heading: "Specifications",
+        bullets: [
+          `Category: ${activeProduct.category.replace(/-/g, " ")}`,
+          `Brand: ${activeProduct.vendor || "Nekza"}`,
+          `Collections: ${Array.isArray(activeProduct.collections) ? activeProduct.collections.join(", ") : "N/A"}`,
+        ],
+      },
+      "Return Policy": {
+        heading: "Return Policy",
+        bullets: [
+          "Returns accepted within 7 days of delivery.",
+          "Item must be unused and in original packaging.",
+          "Report damaged or defective items at delivery.",
+        ],
+      },
+      Reviews: {
+        heading: "Customer Reviews",
+        bullets: [
+          "★★★★★ — Useful and sturdy for daily use.",
+          "★★★★☆ — Good quality and practical design.",
+          "★★★★☆ — Value for regular family use.",
+        ],
+      },
+      "Additional Info": {
+        heading: "Additional Information",
+        bullets: [
+          "Country of Origin: India",
+          "Manufacturer: Nekza Plast",
+          `Product Slug: ${activeProduct.slug}`,
+        ],
+      },
+    },
+    terms: [
+      "Products are subject to availability",
+      "Color and finish may slightly vary from product images",
+      "Please check product details before placing the order",
+    ],
+  };
+
+  const RELATED = getRelatedProducts(activeProduct.slug, activeProduct.category, 4);
+
   const productForCart = {
-    id: 1,
+    id: activeProduct.id,
     title: PRODUCT.title,
-    price: PRODUCT.price,
-    mrp: PRODUCT.mrp,
+    price: PRODUCT.price ?? 0,
+    mrp: PRODUCT.mrp ?? PRODUCT.price ?? 0,
     image: PRODUCT.images[0],
   };
 
-  const discount = Math.round(((PRODUCT.mrp - PRODUCT.price) / PRODUCT.mrp) * 100);
+  const discount = PRODUCT.price && PRODUCT.mrp
+    ? Math.round(((PRODUCT.mrp - PRODUCT.price) / PRODUCT.mrp) * 100)
+    : null;
+
   return (
     <section className="section-shell min-h-screen bg-white px-4 py-6 sm:px-6 md:px-8 md:py-10 lg:px-10">
-      <div className="mx-auto max-w-[1800px]">
+      <div className="mx-auto max-w-450">
 
         {/* ══ Top Product Section ══════════════════════════════════════════════ */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-14">
@@ -259,9 +363,15 @@ export default function ProductDetail() {
 
             {/* Price */}
             <div className="flex items-center gap-3 flex-wrap">
-              <span className="text-xl md:text-2xl font-bold text-gray-900">₹{PRODUCT.price}</span>
-              <span className="text-sm text-gray-400 line-through">MRP ₹{PRODUCT.mrp}</span>
-              <span className="text-sm font-semibold text-green-600">{discount}% off</span>
+              <span className="text-xl md:text-2xl font-bold text-gray-900">
+                {PRODUCT.price ? `₹${PRODUCT.price}` : "Price on request"}
+              </span>
+              {PRODUCT.mrp && (
+                <span className="text-sm text-gray-400 line-through">MRP ₹{PRODUCT.mrp}</span>
+              )}
+              {discount && (
+                <span className="text-sm font-semibold text-green-600">{discount}% off</span>
+              )}
             </div>
 
 
@@ -274,13 +384,23 @@ export default function ProductDetail() {
               <QuantitySelector qty={qty} onChange={setQty} />
             </div>
 
-            {/* Add to Cart Button */}
-            <AddToCartButton 
-              product={productForCart}
-              selectedSize={PRODUCT.sizes[size]}
-              quantity={qty}
-              className="w-full"
-            />
+            {/* Add to Cart + Buy Now */}
+            <div className="flex flex-col gap-3 sm:flex-row">
+              <AddToCartButton
+                product={productForCart}
+                selectedSize={PRODUCT.sizes[size]}
+                quantity={qty}
+                className="w-full"
+              />
+              <BuyNowButton
+                product={productForCart}
+                selectedSize={PRODUCT.sizes[size]}
+                quantity={qty}
+                className="pressable w-full rounded-full bg-primary px-8 py-4 font-medium text-white transition-opacity duration-200 hover:opacity-90"
+              >
+                Buy Now
+              </BuyNowButton>
+            </div>
 
             {/* Divider */}
             <div className="border-t border-gray-100" />

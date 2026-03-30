@@ -88,9 +88,9 @@ function FilterSidebar({
         <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-zinc-900">
           Price
         </h3>
-        <p className="mb-3 text-xs text-zinc-400">
+        {/* <p className="mb-3 text-xs text-zinc-400">
           Highest priced item: ₹{maxPrice.toLocaleString()}
-        </p>
+        </p> */}
 
         <input
           type="range"
@@ -112,6 +112,8 @@ function FilterSidebar({
           </div>
         </div>
       </div>
+
+      
     </aside>
   );
 }
@@ -120,20 +122,29 @@ function Products() {
   const { collectionSlug, categorySlug, slug } = useParams();
   const requestedSlug = collectionSlug || categorySlug || slug;
 
-  const sampleProducts = useMemo(() => {
+  const { sampleProducts, hasDirectMatch } = useMemo(() => {
     if (collectionSlug) {
       const collectionProducts = getProductsByCollection(collectionSlug);
-      return collectionProducts.length > 0
-        ? collectionProducts
-        : getGeneralProducts();
+      return {
+        sampleProducts:
+          collectionProducts.length > 0 ? collectionProducts : getGeneralProducts(),
+        hasDirectMatch: collectionProducts.length > 0,
+      };
     }
 
     if (categorySlug) {
       const categoryProducts = getProductsByCategory(categorySlug);
-      return categoryProducts.length > 0 ? categoryProducts : getGeneralProducts();
+      return {
+        sampleProducts:
+          categoryProducts.length > 0 ? categoryProducts : getGeneralProducts(),
+        hasDirectMatch: categoryProducts.length > 0,
+      };
     }
 
-    return getGeneralProducts();
+    return {
+      sampleProducts: getGeneralProducts(),
+      hasDirectMatch: true,
+    };
   }, [collectionSlug, categorySlug]);
 
   const maxPrice = useMemo(() => {
@@ -162,15 +173,7 @@ function Products() {
       .sort((a, b) => b.count - a.count);
   }, [sampleProducts]);
 
-  const hasRequestedContext = Boolean(requestedSlug);
-  const hasDirectMatch = hasRequestedContext
-    ? sampleProducts.some(
-        (product) =>
-          product.category === requestedSlug ||
-          (Array.isArray(product.collections) &&
-            product.collections.includes(requestedSlug))
-      )
-    : true;
+  // const hasRequestedContext = Boolean(requestedSlug);
 
   const activeSlug = hasDirectMatch ? requestedSlug : null;
   const headingText = activeSlug ? activeSlug.replace(/-/g, " ") : "All Products";

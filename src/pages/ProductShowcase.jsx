@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { SlidersHorizontal, X, Star, ShoppingCart } from "lucide-react";
 import { ALL_PRODUCTS } from "../data/Data.js";
 import { useCart } from "../contexts/CartContext.jsx";
+import BuyNowButton from "../components/BuyNowButton.jsx";
 
 const SORT_OPTIONS = [
   { label: "Featured", value: "featured" },
@@ -15,7 +16,7 @@ function formatPrice(value) {
   return `₹${value}`;
 }
 
-function ProductCard({ product, itemInCart, onAddToCart, onBuyNow, onOpenProduct }) {
+function ProductCard({ product, itemInCart, onAddToCart, onOpenProduct }) {
   const [img, setImg] = useState(product.img);
   const productPath = product.href;
 
@@ -92,17 +93,20 @@ function ProductCard({ product, itemInCart, onAddToCart, onBuyNow, onOpenProduct
           >
             <ShoppingCart className="h-4 w-4" />
           </button>
-          <button
-            type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              onBuyNow(product);
+          <BuyNowButton
+            product={{
+              id: product.id,
+              title: product.title,
+              price: product.price,
+              mrp: product.mrp,
+              image: product.img,
             }}
+            quantity={1}
+            stopPropagation
             className="pressable h-9 rounded-md bg-primary px-3 text-xs font-semibold text-white transition-opacity duration-200 hover:opacity-90 md:text-sm"
-            data-cursor="Shop"
           >
             Buy Now
-          </button>
+          </BuyNowButton>
         </div>
       </div>
     </div>
@@ -162,11 +166,6 @@ export default function ProductShowcase() {
       },
       { quantity: 1 }
     );
-  };
-
-  const handleBuyNow = (product) => {
-    handleAddToCart(product);
-    navigate("/cart");
   };
 
   const handleOpenProduct = (productPath) => {
@@ -279,7 +278,6 @@ export default function ProductShowcase() {
                 product={product}
                 itemInCart={isInCart(product.id)}
                 onAddToCart={handleAddToCart}
-                onBuyNow={handleBuyNow}
                 onOpenProduct={handleOpenProduct}
               />
             ))}
