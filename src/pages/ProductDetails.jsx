@@ -231,12 +231,54 @@ export default function ProductDetail() {
     ? variantList.map((variant) => variant.size)
     : (sizeMap[activeProduct.category] || ["Standard"]);
 
+  const fallbackVariants = useMemo(() => {
+    if (variantList.length > 0) return [];
+
+    const basePrice = activeProduct.price ?? 199;
+    const baseMrp = activeProduct.mrp ?? Math.round(basePrice * 1.3);
+
+    const getCapacityInMl = (sizeLabel) => {
+      const match = String(sizeLabel).toLowerCase().match(/(\d+(?:\.\d+)?)\s*(ml|l)\b/);
+      if (!match) return null;
+      const value = Number(match[1]);
+      return match[2] === "l" ? value * 1000 : value;
+    };
+
+    const firstCapacity = getCapacityInMl(derivedSizes[0]);
+
+    return derivedSizes.map((sizeLabel, index) => {
+      if (index === 0) {
+        const off = baseMrp > basePrice ? Math.round(((baseMrp - basePrice) / baseMrp) * 100) : null;
+        return { size: sizeLabel, price: basePrice, mrp: baseMrp, off };
+      }
+
+      const currentCapacity = getCapacityInMl(sizeLabel);
+      const hasCapacityScale = firstCapacity && currentCapacity;
+
+      const nextPrice = hasCapacityScale
+        ? Math.round(basePrice * (currentCapacity / firstCapacity))
+        : Math.round(basePrice * (1 + index * 0.12));
+
+      const nextMrp = Math.round(nextPrice * 1.3);
+      const nextOff = nextMrp > nextPrice ? Math.round(((nextMrp - nextPrice) / nextMrp) * 100) : null;
+
+      return {
+        size: sizeLabel,
+        price: nextPrice,
+        mrp: nextMrp,
+        off: nextOff,
+      };
+    });
+  }, [activeProduct.price, activeProduct.mrp, derivedSizes, variantList.length]);
+
+  const effectiveVariants = variantList.length > 0 ? variantList : fallbackVariants;
+
   useEffect(() => {
     setSize(0);
   }, [activeProduct.id]);
 
   const selectedSize = derivedSizes[size] || derivedSizes[0] || "Standard";
-  const selectedVariant = variantList.find((variant) => variant.size === selectedSize);
+  const selectedVariant = effectiveVariants.find((variant) => variant.size === selectedSize);
 
   const activePrice = selectedVariant?.price ?? activeProduct.price ?? null;
   const activeMrp = selectedVariant?.mrp ?? activeProduct.mrp ?? null;

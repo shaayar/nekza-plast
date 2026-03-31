@@ -1,34 +1,39 @@
-import { createContext, useContext, useState, useEffect } from "react";
-
-const CartContext = createContext();
+import { useState, useEffect } from "react";
+import CartContext from "./cartContext.js";
+const normalizeQuantity = (value, fallback = 1) => {
+  const parsed = Number(value);
+  if (!Number.isFinite(parsed) || parsed <= 0) return fallback;
+  return Math.floor(parsed);
+};
 
 export function CartProvider({ children }) {
-  const [cartItems, setCartItems] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Load cart from localStorage on mount
-  useEffect(() => {
+  const [cartItems, setCartItems] = useState(() => {
     const savedCart = localStorage.getItem("nekza-cart");
-    if (savedCart) {
-      try {
-        setCartItems(JSON.parse(savedCart));
-      } catch (error) {
-        console.error("Error loading cart from localStorage:", error);
-        localStorage.removeItem("nekza-cart");
-      }
+    if (!savedCart) return [];
+
+    try {
+      const parsedCart = JSON.parse(savedCart);
+      return Array.isArray(parsedCart)
+        ? parsedCart.map((item) => ({
+            ...item,
+            quantity: normalizeQuantity(item?.quantity),
+          }))
+        : [];
+    } catch (error) {
+      console.error("Error loading cart from localStorage:", error);
+      localStorage.removeItem("nekza-cart");
+      return [];
     }
-    setIsLoading(false);
-  }, []);
+  });
 
   // Save cart to localStorage whenever it changes
   useEffect(() => {
-    if (!isLoading) {
-      localStorage.setItem("nekza-cart", JSON.stringify(cartItems));
-    }
-  }, [cartItems, isLoading]);
+    localStorage.setItem("nekza-cart", JSON.stringify(cartItems));
+  }, [cartItems]);
 
   const addToCart = (product, options = {}) => {
     const { quantity = 1, color, size } = options;
+    const safeQuantity = normalizeQuantity(quantity);
     
     setCartItems(prevItems => {
       // Check if item already exists in cart
@@ -40,10 +45,12 @@ export function CartProvider({ children }) {
       );
 
       if (existingItemIndex >= 0) {
-        // Update quantity of existing item
-        const updatedItems = [...prevItems];
-        updatedItems[existingItemIndex].quantity += quantity;
-        return updatedItems;
+        // Update quantity immutably (avoids StrictMode double-invoke mutation bugs)
+        return prevItems.map((item, index) => {
+          if (index !== existingItemIndex) return item;
+          const currentQty = normalizeQuantity(item.quantity);
+          return { ...item, quantity: currentQty + safeQuantity };
+        });
       } else {
         // Add new item to cart
         const newItem = {
@@ -51,7 +58,7 @@ export function CartProvider({ children }) {
           title: product.title,
           price: product.price,
           mrp: product.mrp || product.price,
-          quantity,
+          quantity: safeQuantity,
           color: color || product.defaultColor || "Default",
           size: size || product.defaultSize || "Standard",
           image: product.image || product.images?.[0] || "/images/placeholder.webp",
@@ -72,14 +79,15 @@ export function CartProvider({ children }) {
   };
 
   const updateQuantity = (itemId, newQuantity, color = null, size = null) => {
-    if (newQuantity < 1) return;
+    const safeQuantity = normalizeQuantity(newQuantity, 0);
+    if (safeQuantity < 1) return;
     
     setCartItems(prevItems =>
       prevItems.map(item =>
         item.id === itemId && 
         (!color || item.color === color) && 
         (!size || item.size === size)
-          ? { ...item, quantity: newQuantity }
+          ? { ...item, quantity: safeQuantity }
           : item
       )
     );
@@ -90,15 +98,23 @@ export function CartProvider({ children }) {
   };
 
   const getCartItemCount = () => {
-    return cartItems.reduce((total, item) => total + item.quantity, 0);
+    return cartItems.reduce((total, item) => total + normalizeQuantity(item?.quantity, 0), 0);
   };
 
   const getCartSubtotal = () => {
-    return cartItems.reduce((total, item) => total + (item.price * item.quantity), 0);
+    return cartItems.reduce((total, item) => {
+      const qty = normalizeQuantity(item?.quantity, 0);
+      const price = Number(item?.price) || 0;
+      return total + (price * qty);
+    }, 0);
   };
 
   const getCartTotalMRP = () => {
-    return cartItems.reduce((total, item) => total + (item.mrp * item.quantity), 0);
+    return cartItems.reduce((total, item) => {
+      const qty = normalizeQuantity(item?.quantity, 0);
+      const mrp = Number(item?.mrp) || 0;
+      return total + (mrp * qty);
+    }, 0);
   };
 
   const isInCart = (productId, color = null, size = null) => {
@@ -111,7 +127,6 @@ export function CartProvider({ children }) {
 
   const value = {
     cartItems,
-    isLoading,
     addToCart,
     removeFromCart,
     updateQuantity,
@@ -123,12 +138,4 @@ export function CartProvider({ children }) {
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
-}
-
-export function useCart() {
-  const context = useContext(CartContext);
-  if (!context) {
-    throw new Error("useCart must be used within a CartProvider");
-  }
-  return context;
 }

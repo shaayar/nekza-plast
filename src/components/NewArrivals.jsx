@@ -74,13 +74,13 @@ export default function NewArrivals() {
 
         {/* Product Rail */}
         <div className="mt-4">
-          <div className="flex gap-4 md:gap-6 overflow-x-hidden">
-            <div className="flex gap-4 md:gap-6 min-w-max" data-cursor="Drag">
+          <div className="snap-x snap-mandatory overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            <div className="flex min-w-max gap-4 md:gap-6" data-cursor="Drag">
               {/* Product Cards */}
               {visibleProducts.map((product, i) => (
                 <div
                   key={product.id}
-                  className="relative flex h-full w-[78vw] min-w-65 max-w-90 md:pt-2 shrink-0 animate-slide-up sm:w-[46vw] lg:w-[30vw] xl:w-[23vw]"
+                  className="relative flex h-full w-[78vw] min-w-65 max-w-90 shrink-0 snap-start animate-slide-up md:pt-2 sm:w-[46vw] lg:w-[30vw] xl:w-[23vw]"
                   style={{ animationDelay: `${i * 80}ms` }}
                 >
                   <Card

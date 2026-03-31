@@ -2,7 +2,7 @@ import React, { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SlidersHorizontal, X, Star, ShoppingCart } from "lucide-react";
 import { ALL_PRODUCTS } from "../data/Data.js";
-import { useCart } from "../contexts/CartContext.jsx";
+import { useCart } from "../hooks/useCart.jsx";
 import BuyNowButton from "../components/BuyNowButton.jsx";
 
 const SORT_OPTIONS = [

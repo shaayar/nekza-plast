@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { ShoppingCart, Check } from "lucide-react";
-import { useCart } from "../contexts/CartContext.jsx";
+import { useCart } from "../hooks/useCart.jsx";
 
 export default function AddToCartButton({ product, selectedColor, selectedSize, quantity = 1, className = "" }) {
   const { addToCart, isInCart } = useCart();

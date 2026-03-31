@@ -1,7 +1,6 @@
-import { createContext, useCallback, useContext, useMemo } from "react";
+import { useCallback, useMemo } from "react";
 import { Toaster, toast } from "sonner";
-
-const ToastContext = createContext();
+import ToastContext from "./toastContext.js";
 
 export function ToastProvider({ children }) {
   const showToast = useCallback((options) => {
@@ -44,12 +43,4 @@ export function ToastProvider({ children }) {
       />
     </ToastContext.Provider>
   );
-}
-
-export function useToast() {
-  const context = useContext(ToastContext);
-  if (!context) {
-    throw new Error("useToast must be used within a ToastProvider");
-  }
-  return context;
 }

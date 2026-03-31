@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import { PRIVACY_POLICY_SECTIONS } from "../data/Data.js";
 
-const sectionIcons = {
+const sectionIcons: Record<string, typeof ShieldCheck> = {
   "shield-check": ShieldCheck,
   database: Database,
   eye: Eye,
@@ -35,7 +35,7 @@ export default function PrivacyPolicy() {
           </div>
 
           <h1 className="text-4xl font-semibold tracking-tight text-zinc-950 md:text-6xl">
-            Privacy, explained <span className="text-primary">like a human</span>.
+            Privacy, explained <span className="text-primary decoration-3 decoration-alt-yellow underline">like a human</span>.
           </h1>
 
           <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-zinc-600 md:text-lg">
@@ -45,7 +45,7 @@ export default function PrivacyPolicy() {
 
           <div className="mt-8 flex flex-wrap items-center justify-center gap-3 text-sm text-zinc-500">
             <span className="rounded-full border border-zinc-200 bg-white px-4 py-2 shadow-sm">
-              Effective Date: [Add Date]
+              Effective Date: 17 March, 2025
             </span>
             <span className="rounded-full border border-zinc-200 bg-white px-4 py-2 shadow-sm">
               Brand: Nekza

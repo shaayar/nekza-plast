@@ -113,10 +113,6 @@ export const navbarItems = [
     title: "Pencil Box",
     path: "/collections/pencil-box",
   },
-  {
-    title: "Accessories",
-    path: "/collections/kitchen",
-  },
 ];
 
 export const footerSections = [
@@ -160,7 +156,7 @@ export const footerSections = [
     heading: "Corporate",
     external: true,
     links: [
-      { label: "Why Nekza", href: "#" },
+      { label: "Why Nekza", href: "/whyus" },
       { label: "Media", href: "https://www.youtube.com/@NEKZANEKZAPLAST" },
     ],
   }
@@ -1322,6 +1318,12 @@ export const getProductsByCollection = (collection) =>
 
     return collections.includes(collection) || p?.category === collection;
   });
+
+export const PRODUCT_LISTING_TITLE_MAP = {
+  kitchen: "Kitchen Essentials",
+  combosets: "Combo Sets",
+  kidzbee: "Kids Section",
+};
 
 // Helper functions for grid tiles
 export const getTileRows = (device) => GRID_TILES[device].rows;

@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Plus, Minus, X, ShoppingBag, ArrowRight } from "lucide-react";
-import { useCart } from "../contexts/CartContext.jsx";
-import { useToast } from "../contexts/ToastContext.jsx";
+import { useCart } from "../hooks/useCart.jsx";
+import { useToast } from "../hooks/useToast.jsx";
 
 function Cart() {
   const navigate = useNavigate();

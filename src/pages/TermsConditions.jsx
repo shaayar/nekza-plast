@@ -28,7 +28,7 @@ export default function TermsConditions() {
           </div>
 
           <h1 className="text-4xl font-semibold tracking-tight text-zinc-950 md:text-6xl">
-            The fine print, <span className="text-primary">without the dust</span>.
+            The fine print, <span className="text-primary underline decoration-3 decoration-alt-yellow offset">without the dust</span>.
           </h1>
 
           <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-zinc-600 md:text-lg">
@@ -97,7 +97,7 @@ export default function TermsConditions() {
                 <article
                   key={section.title}
                   id={id}
-                  className="rounded-[2rem] border border-zinc-200 bg-white/80 p-6 shadow-[0_10px_40px_rgba(0,0,0,0.04)] backdrop-blur md:p-8"
+                  className="rounded-4xl border border-zinc-200 bg-white/80 p-6 shadow-[0_10px_40px_rgba(0,0,0,0.04)] backdrop-blur md:p-8"
                 >
                   <div className="mb-5 flex items-center gap-4">
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">

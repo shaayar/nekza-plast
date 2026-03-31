@@ -1,6 +1,5 @@
 import { useMemo, useState } from "react";
 import Card from "../components/UI/Card.jsx";
-import { useToast } from "../contexts/ToastContext.jsx";
 import { getPopularProducts, DISCOVERY_CHIPS } from "../data/Data.js";
 import { ArrowRight } from "lucide-react";
 
@@ -25,15 +24,6 @@ const getSocialProof = (index) => {
 
 export default function PopularProducts() {
   const [activeChip, setActiveChip] = useState("community");
-  const { showToast } = useToast();
-
-  const handleChipClick = (chip) => {
-    setActiveChip(chip.id);
-    showToast({
-      message: `Showing ${chip.label} in Popular Products.`,
-      type: "info",
-    });
-  };
 
   const visibleProducts = useMemo(() => {
     const list = PRODUCTS.slice();
@@ -71,7 +61,7 @@ export default function PopularProducts() {
             <button
               key={chip.id}
               type="button"
-              onClick={() => handleChipClick(chip)}
+              onClick={() => setActiveChip(chip.id)}
               className={`pressable rounded-full border px-3 py-1 text-xs font-semibold transition sm:text-sm ${activeChip === chip.id
                   ? "border-primary bg-primary text-white"
                   : "border-zinc-300 bg-white text-zinc-700 hover:border-primary/50 hover:text-primary"

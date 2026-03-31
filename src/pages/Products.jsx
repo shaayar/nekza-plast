@@ -5,6 +5,7 @@ import {
   getGeneralProducts,
   getProductsByCategory,
   getProductsByCollection,
+  PRODUCT_LISTING_TITLE_MAP,
 } from "../data/Data.js";
 
 const formatLabel = (value = "") =>
@@ -68,11 +69,10 @@ function FilterSidebar({
                 <div className="flex items-center gap-2">
                   <div
                     onClick={() => toggleTag(tag)}
-                    className={`flex h-4 w-4 items-center justify-center rounded border transition-colors ${
-                      activeTags.includes(tag)
+                    className={`flex h-4 w-4 items-center justify-center rounded border transition-colors ${activeTags.includes(tag)
                         ? "border-zinc-900 bg-zinc-900"
                         : "border-zinc-300 group-hover:border-zinc-500"
-                    }`}
+                      }`}
                   >
                     {activeTags.includes(tag) && (
                       <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
@@ -194,7 +194,11 @@ function Products() {
   // const hasRequestedContext = Boolean(requestedSlug);
 
   const activeSlug = hasDirectMatch ? requestedSlug : null;
-  const headingText = activeSlug ? activeSlug.replace(/-/g, " ") : "All Products";
+  const headingSource = activeSlug || requestedSlug || "";
+  const headingText = PRODUCT_LISTING_TITLE_MAP[headingSource]
+    || (activeSlug ? activeSlug.replace(/-/g, " ") : "All Products");
+  const [firstHeadingWord, ...restHeadingWords] = headingText.trim().split(/\s+/);
+  const remainingHeadingText = restHeadingWords.join(" ");
 
   const filteredProducts = useMemo(() => {
     return sampleProducts.filter((product) => {
@@ -234,109 +238,182 @@ function Products() {
   const clearTags = () => setActiveTags([]);
 
   return (
-    <section className="section-shell container-box container-main min-h-screen bg-white px-4 py-6 sm:px-6 md:px-8 md:py-10 lg:px-10">
-      <div className="mb-8">
-        <p className="mb-2 text-sm uppercase tracking-[0.2em] text-accent">
-          Nekza Collection
-        </p>
-
-        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <div>
-            <h1 className="text-4xl font-semibold capitalize tracking-tight text-primary md:text-5xl underline decoration-2 decoration-alt-yellow">
-              {headingText}
-            </h1>
-            <p className="mt-2 max-w-2xl text-sm text-zinc-600 md:text-base">
-              Explore durable everyday essentials designed for home, school,
-              travel, and utility.
-            </p>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <div className="rounded-full border border-zinc-200 bg-zinc-50 px-4 py-2 text-sm text-zinc-700">
-              {sortedProducts.length} Products
-            </div>
-            <button
-              onClick={() => setSidebarOpen((open) => !open)}
-              className="flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm text-zinc-700 transition-colors hover:bg-zinc-50 md:hidden"
-              data-cursor="Open"
-            >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path
-                  d="M2 4h12M4 8h8M6 12h4"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-              </svg>
-              Filters
-              {activeTags.length > 0 && (
-                <span className="rounded-full bg-zinc-900 px-1.5 py-0.5 text-xs leading-none text-white">
-                  {activeTags.length}
-                </span>
-              )}
-            </button>
-          </div>
-        </div>
+    <section className="section-shell container-box container-main relative min-h-screen overflow-hidden bg-white px-4 py-8 sm:px-6 md:px-8 md:py-12 lg:px-10">
+      {/* Background atmosphere */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute left-1/2 top-24 h-104 w-104 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.035)_1px,transparent_1px)] bg-size-[42px_42px] opacity-[0.16]" />
       </div>
 
-      <div className="flex items-start gap-8">
-        <>
-          {sidebarOpen && (
-            <div
-              className="fixed inset-0 z-30 bg-black/30 md:hidden"
-              onClick={() => setSidebarOpen(false)}
-            />
-          )}
+      <div className="relative z-10">
+        {/* Hero Header */}
+        <div className="mb-10 rounded-4xl border border-zinc-200 bg-white/75 p-6 shadow-[0_18px_60px_rgba(0,0,0,0.04)] backdrop-blur md:p-8">
+          <div className="mb-4 flex flex-wrap items-center gap-3">
+            <span className="rounded-full border border-primary/20 bg-primary/5 px-4 py-2 text-xs font-medium uppercase tracking-[0.24em] text-primary">
+              Nekza Collection
+            </span>
 
-          <div
-            className={`
-              fixed inset-y-0 left-0 z-40 w-72 overflow-y-auto bg-white px-5 py-6 shadow-xl transition-transform duration-300
-              md:static md:z-auto md:w-60 md:shrink-0 md:translate-x-0 md:overflow-visible md:bg-transparent md:px-0 md:py-0 md:shadow-none lg:w-64
-              ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
-            `}
-          >
-            <div className="mb-4 flex items-center justify-between md:hidden">
-              <span className="text-sm font-semibold text-zinc-900">Filters</span>
-              <button
-                onClick={() => setSidebarOpen(false)}
-                className="text-lg leading-none text-zinc-500 hover:text-zinc-800"
-                data-cursor="Open"
-              >
-                ×
-              </button>
-            </div>
-
-            <FilterSidebar
-              tagOptions={tagOptions}
-              activeTags={activeTags}
-              toggleTag={toggleTag}
-              clearTags={clearTags}
-              priceRange={priceRange}
-              setPriceRange={setPriceRange}
-              maxPrice={maxPrice}
-              sortBy={sortBy}
-              setSortBy={setSortBy}
-            />
+            {activeTags.length > 0 && (
+              <span className="rounded-full border border-zinc-200 bg-zinc-50 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-zinc-600">
+                {activeTags.length} Active Filter{activeTags.length > 1 ? "s" : ""}
+              </span>
+            )}
           </div>
-        </>
 
-        <div className="min-w-0 flex-1">
-          {sortedProducts.length > 0 ? (
-            <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4">
-              {sortedProducts.map((product) => (
-                <Card key={product.id} product={product} slug={activeSlug} />
-              ))}
-            </div>
-          ) : (
-            <div className="rounded-3xl border border-dashed border-zinc-300 px-6 py-20 text-center">
-              <h2 className="text-2xl font-semibold text-zinc-900">
-                No products found
-              </h2>
-              <p className="mt-2 text-zinc-600">
-                Try changing tags or price range to see more products.
+          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div>
+              <h1 className="max-w-3xl text-4xl font-bold capitalize tracking-tight text-black lg:text-5xl">
+                <span>{firstHeadingWord}</span>
+                {remainingHeadingText ? " " : ""}
+                {remainingHeadingText ? (
+                  <span className="focus text-primary underline decoration-4 decoration-alt-yellow">
+                    {remainingHeadingText}
+                  </span>
+                ) : null}
+              </h1>
+
+
+              <p className="mt-3 max-w-2xl text-sm leading-7 text-zinc-600 md:text-base">
+                Explore durable everyday essentials designed for home, school,
+                travel, and utility. Built for repeated use, made to feel effortless.
               </p>
             </div>
-          )}
+
+            <div className="flex flex-wrap items-center gap-3">
+              <div className="rounded-full border border-zinc-200 bg-zinc-50 px-4 py-2 text-sm text-zinc-700 shadow-sm">
+                {sortedProducts.length} Products
+              </div>
+
+              <button
+                onClick={() => setSidebarOpen((open) => !open)}
+                className="flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm text-zinc-700 shadow-sm transition-colors hover:bg-zinc-50 md:hidden"
+                data-cursor="Open"
+              >
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path
+                    d="M2 4h12M4 8h8M6 12h4"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                  />
+                </svg>
+                Filters
+                {activeTags.length > 0 && (
+                  <span className="rounded-full bg-zinc-900 px-1.5 py-0.5 text-xs leading-none text-white">
+                    {activeTags.length}
+                  </span>
+                )}
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Main Layout */}
+        <div className="flex items-start gap-8">
+          <>
+            {sidebarOpen && (
+              <div
+                className="fixed inset-0 z-30 bg-black/30 backdrop-blur-[2px] md:hidden"
+                onClick={() => setSidebarOpen(false)}
+              />
+            )}
+
+            <div
+              className={`
+            fixed inset-y-0 left-0 z-40 w-72 overflow-y-auto bg-white px-5 py-6 shadow-xl transition-transform duration-300
+            md:sticky md:top-28 md:z-auto md:h-fit md:w-64 md:shrink-0 md:translate-x-0 md:overflow-visible md:rounded-4xl md:border md:border-zinc-200 md:bg-white/75 md:px-5 md:py-5 md:shadow-[0_18px_60px_rgba(0,0,0,0.04)] md:backdrop-blur
+            lg:w-72
+            ${sidebarOpen ? "translate-x-0" : "-translate-x-full"}
+          `}
+            >
+              <div className="mb-4 flex items-center justify-between md:hidden">
+                <span className="text-sm font-semibold text-zinc-900">Filters</span>
+                <button
+                  onClick={() => setSidebarOpen(false)}
+                  className="text-lg leading-none text-zinc-500 hover:text-zinc-800"
+                  data-cursor="Open"
+                >
+                  ×
+                </button>
+              </div>
+
+              <div className="mb-5 hidden md:block">
+                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-primary">
+                  Refine Selection
+                </p>
+                <p className="mt-2 text-sm text-zinc-500">
+                  Filter by purpose, style and price.
+                </p>
+              </div>
+
+              <FilterSidebar
+                tagOptions={tagOptions}
+                activeTags={activeTags}
+                toggleTag={toggleTag}
+                clearTags={clearTags}
+                priceRange={priceRange}
+                setPriceRange={setPriceRange}
+                maxPrice={maxPrice}
+                sortBy={sortBy}
+                setSortBy={setSortBy}
+              />
+            </div>
+          </>
+
+          {/* Product Gallery */}
+          <div className="min-w-0 flex-1">
+            {sortedProducts.length > 0 ? (
+              <>
+                {/* Active tags row */}
+                {activeTags.length > 0 && (
+                  <div className="mb-5 flex flex-wrap gap-2">
+                    {activeTags.map((tag) => (
+                      <button
+                        key={tag}
+                        onClick={() => toggleTag(tag)}
+                        className="rounded-full border border-primary/20 bg-primary/5 px-3 py-1.5 text-xs font-medium capitalize text-primary transition hover:bg-primary hover:text-white"
+                        data-cursor="Open"
+                      >
+                        {tag.replace(/-/g, " ")} ×
+                      </button>
+                    ))}
+                  </div>
+                )}
+
+                <div className="grid grid-cols-2 items-stretch gap-5 xl:grid-cols-3 2xl:grid-cols-4">
+                  {sortedProducts.map((product, index) => (
+                    <div
+                      key={product.id}
+                      className="h-full transition-transform duration-500"
+                    >
+                      <Card product={product} slug={activeSlug} data-index={index} />
+                    </div>
+                  ))}
+                </div>
+              </>
+            ) : (
+              <div className="rounded-4xl border border-dashed border-zinc-300 bg-white/80 px-6 py-20 text-center shadow-[0_18px_60px_rgba(0,0,0,0.04)] backdrop-blur">
+                <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-primary">
+                  No Match Found
+                </p>
+                <h2 className="text-3xl font-semibold text-zinc-900">
+                  Nothing fits this filter set
+                </h2>
+                <p className="mx-auto mt-3 max-w-md text-zinc-600">
+                  Try changing tags, adjusting price range, or clearing filters to
+                  reveal more products.
+                </p>
+
+                <button
+                  onClick={clearTags}
+                  className="mt-6 rounded-full bg-zinc-900 px-6 py-3 text-sm font-medium text-white transition hover:bg-primary"
+                  data-cursor="Open"
+                >
+                  Reset Filters
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </section>

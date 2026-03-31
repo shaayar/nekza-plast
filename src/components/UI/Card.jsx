@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { useCart } from "../../contexts/CartContext.jsx";
-import { useToast } from "../../contexts/ToastContext.jsx";
+import { useCart } from "../../hooks/useCart.jsx";
+import { useToast } from "../../hooks/useToast.jsx";
 import { ShoppingBag } from "lucide-react";
 import BuyNowButton from "../BuyNowButton.jsx";
 
@@ -97,18 +97,18 @@ export default function Card({ product, slug, badges = [] }) {
         className="relative z-10 rounded transition-colors duration-200"
         data-cursor="View"
       >
-        <h3 className="line-clamp-2 text-sm font-bold leading-snug text-zinc-900 sm:text-base lg:text-lg">
+        <h3 className="line-clamp-2 text-lg font-bold leading-snug text-zinc-900 sm:text-base lg:text-lg">
           {product.title}
         </h3>
       </Link>
 
       {/* Price */}
       <div className="relative z-10 flex flex-wrap items-center gap-2 text-black md:gap-3">
-        <span className="text-sm font-bold leading-snug transition-colors group-hover:text-primary sm:text-base lg:text-xl">
+        <span className="text-lg font-bold leading-snug transition-colors group-hover:text-primary sm:text-base lg:text-xl">
           {product.price ? `₹${product.price}` : "₹"}
         </span>
 
-        <span className="text-xs leading-snug text-zinc-600 sm:text-sm">
+        <span className="text-sm leading-snug text-zinc-600 ">
           MRP{" "}
           <span className="line-through">
             {product.mrp ? `₹${product.mrp}` : "₹"}
