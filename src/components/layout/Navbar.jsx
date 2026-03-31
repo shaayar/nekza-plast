@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { navbarItems } from "../../data/Data";
+import { ALL_PRODUCTS, navbarItems } from "../../data/Data";
 import {
   X,
   Search,
@@ -13,8 +13,22 @@ function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileDropdown, setMobileDropdown] = useState(null);
   const [desktopDropdown, setDesktopDropdown] = useState(null);
+  const [searchQuery, setSearchQuery] = useState("");
 
   const navItems = navbarItems;
+  const searchTerm = searchQuery.trim().toLowerCase();
+
+  const searchSuggestions = useMemo(() => {
+    if (!searchTerm) return [];
+
+    return ALL_PRODUCTS
+      .filter((product) => {
+        const title = (product.title || "").toLowerCase();
+        const category = (product.category || "").toLowerCase();
+        return title.includes(searchTerm) || category.includes(searchTerm);
+      })
+      .slice(0, 6);
+  }, [searchTerm]);
 
   const toggleMobileDropdown = (index) => {
     setMobileDropdown(mobileDropdown === index ? null : index);
@@ -47,17 +61,47 @@ function Navbar() {
           className="absolute left-1/2 -translate-x-1/2 text-2xl md:text-4xl font-light tracking-[0.2em] whitespace-nowrap lg:static lg:translate-x-0"
           data-cursor="Open"
         >
-          <img src="/images/logo.png" className="h-12 md:h-10" alt="Logo" />
+          <img src="/images/logo.webp" className="h-10" alt="Logo" />
         </Link>
 
         {/* DESKTOP SEARCH */}
-        <div className="hidden lg:flex items-center bg-[#111] border border-white/20 rounded-xl px-3 h-9 w-96">
-          <Search size={18} className="text-gray-400" />
-          <input
-            type="text"
-            placeholder="What can we help you find?"
-            className="bg-transparent outline-none w-full ml-3 text-sm text-white placeholder:text-gray-400"
-          />
+        <div className="relative hidden lg:block z-30">
+          <div className="flex items-center bg-[#111] border border-white/20 rounded-xl px-3 h-9 w-96">
+            <Search size={18} className="text-gray-400" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder="What can we help you find?"
+              className="bg-transparent outline-none w-full ml-3 text-sm text-white placeholder:text-gray-400"
+            />
+          </div>
+
+          {searchTerm && (
+            <div className="absolute top-11 left-0 w-full overflow-hidden rounded-xl border border-white/10 bg-black shadow-2xl">
+              {searchSuggestions.length > 0 ? (
+                <ul className="py-2">
+                  {searchSuggestions.map((product) => (
+                    <li key={product.id}>
+                      <Link
+                        to={product.href}
+                        onClick={() => setSearchQuery("")}
+                        data-cursor="Open"
+                        className="block px-3 py-2 text-sm text-white transition-colors hover:bg-white/10"
+                      >
+                        <span className="block">{product.title}</span>
+                        <span className="block text-xs text-gray-400 capitalize">
+                          {product.category?.replace(/-/g, " ")}
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="px-3 py-2 text-sm text-gray-400">No products found.</p>
+              )}
+            </div>
+          )}
         </div>
 
         {/* RIGHT */}
@@ -155,10 +199,41 @@ function Navbar() {
             <Search size={18} className="text-gray-400" />
             <input
               type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search..."
               className="bg-transparent outline-none w-full ml-3 text-sm text-white placeholder:text-gray-400"
             />
           </div>
+
+          {searchTerm && (
+            <div className="overflow-hidden rounded-xl border border-white/10 bg-[#111]">
+              {searchSuggestions.length > 0 ? (
+                <ul className="py-2">
+                  {searchSuggestions.map((product) => (
+                    <li key={product.id}>
+                      <Link
+                        to={product.href}
+                        className="block px-4 py-2 text-sm text-white transition-colors hover:bg-white/10"
+                        onClick={() => {
+                          setSearchQuery("");
+                          setMobileOpen(false);
+                        }}
+                        data-cursor="Open"
+                      >
+                        <span className="block">{product.title}</span>
+                        <span className="block text-xs text-gray-400 capitalize">
+                          {product.category?.replace(/-/g, " ")}
+                        </span>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="px-4 py-2 text-sm text-gray-400">No products found.</p>
+              )}
+            </div>
+          )}
 
           {/* Mobile Links */}
           {navItems.map((item, index) => (
@@ -215,14 +290,16 @@ function Navbar() {
             </div>
           ))}
 
-          <div className="pt-2 space-y-3">
+          <hr />
+
+          <div className="pt-2 space-y-3 flex flex-col gap-3">
             <Link
               to="/about"
               className="pressable block text-white"
               onClick={() => setMobileOpen(false)}
               data-cursor="Open"
             >
-              Learn
+              About Us
             </Link>
             <Link
               to="/contact"
@@ -230,7 +307,7 @@ function Navbar() {
               onClick={() => setMobileOpen(false)}
               data-cursor="Open"
             >
-              Contact
+              Contact Us
             </Link>
           </div>
       </div>

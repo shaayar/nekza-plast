@@ -22,9 +22,28 @@ function FilterSidebar({
   priceRange,
   setPriceRange,
   maxPrice,
+  sortBy,
+  setSortBy,
 }) {
   return (
     <aside className="w-full md:w-60 lg:w-64 shrink-0">
+      <div className="mb-4 border-b border-zinc-100 pb-4">
+        <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-zinc-900">
+          Sort
+        </h3>
+        <select
+          id="sort"
+          value={sortBy}
+          onChange={(e) => setSortBy(e.target.value)}
+          className="w-full rounded-xl border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-800 outline-none focus:ring-2 focus:ring-zinc-300"
+        >
+          <option value="featured">Featured</option>
+          <option value="price-low">Price: Low to High</option>
+          <option value="price-high">Price: High to Low</option>
+          <option value="name">Name: A-Z</option>
+        </select>
+      </div>
+
       <div className="mb-6">
         <div className="mb-3 flex items-center justify-between">
           <h3 className="text-sm font-semibold uppercase tracking-wide text-zinc-900">
@@ -113,7 +132,6 @@ function FilterSidebar({
         </div>
       </div>
 
-      
     </aside>
   );
 }
@@ -233,69 +251,31 @@ function Products() {
             </p>
           </div>
 
-          <div className="rounded-full border border-zinc-200 bg-zinc-50 px-4 py-2 text-sm text-zinc-700">
-            {sortedProducts.length} Products
+          <div className="flex items-center gap-3">
+            <div className="rounded-full border border-zinc-200 bg-zinc-50 px-4 py-2 text-sm text-zinc-700">
+              {sortedProducts.length} Products
+            </div>
+            <button
+              onClick={() => setSidebarOpen((open) => !open)}
+              className="flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm text-zinc-700 transition-colors hover:bg-zinc-50 md:hidden"
+              data-cursor="Open"
+            >
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path
+                  d="M2 4h12M4 8h8M6 12h4"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                />
+              </svg>
+              Filters
+              {activeTags.length > 0 && (
+                <span className="rounded-full bg-zinc-900 px-1.5 py-0.5 text-xs leading-none text-white">
+                  {activeTags.length}
+                </span>
+              )}
+            </button>
           </div>
-        </div>
-      </div>
-
-      <div className="sticky top-20 z-20 mb-6 flex items-center justify-between rounded-2xl border border-zinc-200 bg-white/80 p-3 backdrop-blur md:p-4">
-        <button
-          onClick={() => setSidebarOpen((open) => !open)}
-          className="flex items-center gap-2 rounded-xl border border-zinc-200 px-3 py-2 text-sm text-zinc-700 transition-colors hover:bg-zinc-50 md:hidden"
-          data-cursor="Open"
-        >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <path
-              d="M2 4h12M4 8h8M6 12h4"
-              stroke="currentColor"
-              strokeWidth="1.5"
-              strokeLinecap="round"
-            />
-          </svg>
-          Filters
-          {activeTags.length > 0 && (
-            <span className="rounded-full bg-zinc-900 px-1.5 py-0.5 text-xs leading-none text-white">
-              {activeTags.length}
-            </span>
-          )}
-        </button>
-
-        <div className="hidden flex-wrap gap-2 md:flex">
-          {activeTags.length === 0 ? (
-            <span className="rounded-full border border-zinc-200 px-3 py-1.5 text-sm text-zinc-500">
-              {activeSlug ? activeSlug.replace(/-/g, " ") : "All"}
-            </span>
-          ) : (
-            activeTags.map((tag) => (
-              <button
-                key={tag}
-                onClick={() => toggleTag(tag)}
-                className="flex items-center gap-1.5 rounded-full bg-zinc-900 px-3 py-1.5 text-xs font-medium text-white transition-colors hover:bg-zinc-700"
-                data-cursor="Open"
-              >
-                {formatLabel(tag)}
-                <span className="opacity-70">×</span>
-              </button>
-            ))
-          )}
-        </div>
-
-        <div className="ml-auto flex items-center gap-3">
-          <label htmlFor="sort" className="hidden text-sm text-zinc-600 sm:block">
-            Sort by
-          </label>
-          <select
-            id="sort"
-            value={sortBy}
-            onChange={(e) => setSortBy(e.target.value)}
-            className="rounded-xl border border-zinc-300 bg-white px-3 py-2 text-sm text-zinc-800 outline-none focus:ring-2 focus:ring-zinc-300"
-          >
-            <option value="featured">Featured</option>
-            <option value="price-low">Price: Low to High</option>
-            <option value="price-high">Price: High to Low</option>
-            <option value="name">Name: A-Z</option>
-          </select>
         </div>
       </div>
 
@@ -334,6 +314,8 @@ function Products() {
               priceRange={priceRange}
               setPriceRange={setPriceRange}
               maxPrice={maxPrice}
+              sortBy={sortBy}
+              setSortBy={setSortBy}
             />
           </div>
         </>

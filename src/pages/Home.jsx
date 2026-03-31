@@ -9,7 +9,7 @@ import WhyUs from "../components/WhyUs.jsx";
 
 function Home() {
   return (
-    <section className="section-shell">
+    <section>
       <ImageSwiper />
       <CategoryGrid />
       <Bestsellers />

@@ -1,4 +1,5 @@
-import { Routes, Route, Navigate } from "react-router-dom";
+import { useEffect } from "react";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Navbar from "./components/layout/Navbar.jsx";
 import Footer from "./components/layout/Footer.jsx";
 import Home from "./pages/Home.jsx";
@@ -11,12 +12,26 @@ import NotFound from "./pages/NotFound.jsx";
 import ProductShowcase from "./pages/ProductShowcase.jsx";
 import CustomCursor from "./components/UI/CustomCursor.jsx";
 import StaticPage from "./pages/StaticPage.jsx";
-// import Preloader from "./components/UI/Pre-Loader.jsx";
+import TermsConditions from "./pages/TermsConditions.jsx";
+import PrivacyPolicy from "./pages/PrivacyPolicy.jsx";
+import FAQ from "./pages/FAQ.jsx";
+import MyAccount from "./pages/MyAccount.jsx";
+
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, [pathname]);
+
+  return null;
+}
 
 function App() {
   return (
     <>
       {/* <Preloader /> */}
+      <ScrollToTop />
       <CustomCursor />
       <Navbar />
       <Routes>
@@ -30,11 +45,11 @@ function App() {
         <Route path="/popular-products" element={<Navigate to="/collections/popular" replace />} />
         <Route path="/bestsellers" element={<Navigate to="/collections/bestseller" replace />} />
         <Route path="/new-arrivals" element={<Navigate to="/collections/new-arrivals" replace />} />
-        <Route path="/account" element={<StaticPage title="My Account" description="Account features are being set up. You can continue browsing and shopping." />} />
-        <Route path="/pages/faqs" element={<StaticPage title="FAQs" description="Frequently asked questions will be published here shortly." />} />
-        <Route path="/pages/terms-and-conditions" element={<StaticPage title="Terms & Conditions" description="Our terms and conditions page is being prepared." />} />
-        <Route path="/pages/privacy-policy" element={<StaticPage title="Privacy Policy" description="Our privacy policy page is being prepared." />} />
+        <Route path="/pages/terms-and-conditions" element={ <TermsConditions /> } />
+        <Route path="/pages/privacy-policy" element={ <PrivacyPolicy /> } />
+        <Route path="/pages/faq" element={ <FAQ /> } />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/account" element={<MyAccount />} />
         <Route path="*" element={<NotFound />} />
 
         {/* Other extra routes for testing purpose */}

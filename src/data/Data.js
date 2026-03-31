@@ -15,7 +15,7 @@ export const navbarItems = [
             { label: "Shop All Water Bottles", path: "/collections/water-bottle" },
             { label: "Insulated Water Bottle", path: "/collections/insulated-water-bottle" },
             { label: "Kids Water Bottle", path: "/collections/kidzbee" },
-            { label: "Steel Bottle", path: "/collections/insulated-water-bottle" },
+            { label: "Steel Bottle", path: "/collections/steel-bottle" },
           ],
         },
         {
@@ -24,8 +24,8 @@ export const navbarItems = [
             { label: "Plastic Water Bottle", path: "/collections/water-bottle" },
             { label: "Insulated Water Bottle", path: "/collections/insulated-water-bottle" },
             { label: "Kids Bottle", path: "/collections/kidzbee" },
-            { label: "Steel Bottle", path: "/collections/insulated-water-bottle" },
-            { label: "UBN Flask", path: "/collections/insulated-water-bottle" },
+            { label: "Steel Bottle", path: "/collections/steel-bottle" },
+            { label: "UBN Flask", path: "/collections/ubn-flask" },
           ],
         },
         {
@@ -42,12 +42,12 @@ export const navbarItems = [
         {
           title: "Insulated Water Bottle",
           path: "/collections/insulated-water-bottle",
-          image: "https://images.unsplash.com/photo-1556911220-bff31c812dba?q=80&w=1200&auto=format&fit=crop",
+          image: "/images/products/bullet-water-bottle.webp",
         },
         {
           title: "Kids Water Bottle",
           path: "/collections/kidzbee",
-          image: "https://images.unsplash.com/photo-1584990347449-a1b0b6c1f2b7?q=80&w=1200&auto=format&fit=crop",
+          image: "/images/products/kids-water-bottle-banner.webp",
         },
       ],
     },
@@ -90,12 +90,12 @@ export const navbarItems = [
         {
           title: "Insulated Tiffin Box",
           path: "/collections/insulated-tiffin-boxes",
-          image: "https://images.unsplash.com/photo-1601050690597-df0568f70950?q=80&w=1200&auto=format&fit=crop",
+          image: "/images/products/p-tiffin-4.webp",
         },
         {
           title: "Kids Lunch Box",
           path: "/collections/kidzbee",
-          image: "https://images.unsplash.com/photo-1583778176476-4a8b02a64c54?q=80&w=1200&auto=format&fit=crop",
+          image: "/images/p-tiffin-3.webp",
         },
       ],
     },
@@ -103,6 +103,7 @@ export const navbarItems = [
   {
     title: "Kitchen",
     path: "/collections/kitchen",
+    
   },
   {
     title: "Combosets",
@@ -124,7 +125,7 @@ export const footerSections = [
     links: [
       { label: "About Us", href: "/about", external: true },
       { label: "Get In Touch", href: "/contact", external: true },
-      { label: "FAQs", href: "/pages/faqs" },
+      { label: "FAQs", href: "/pages/faq", external: true },
     ],
   },
   {
@@ -143,7 +144,7 @@ export const footerSections = [
       { label: "Cleaning Essential", href: "/collections/kitchen" },
       { label: "Kidzbee", href: "/collections/kidzbee" },
       { label: "Combosets", href: "/collections/combosets" },
-      { label: "UBN Flask", href: "/collections/insulated-water-bottle" },
+      { label: "UBN Flask", href: "/collections/ubn-flask" },
       { label: "Combos", href: "/collections/combosets" },
       { label: "Pencil Box", href: "/collections/pencil-box" },
     ],
@@ -159,11 +160,10 @@ export const footerSections = [
     heading: "Corporate",
     external: true,
     links: [
-      { label: "Corporate", href: "#" },
       { label: "Why Nekza", href: "#" },
-      { label: "Media", href: "#" },
+      { label: "Media", href: "https://www.youtube.com/@NEKZANEKZAPLAST" },
     ],
-  },
+  }
 ];
 
 export const productDetail = {
@@ -251,6 +251,12 @@ export const ALL_PRODUCTS = [
     vendor: "Nekza",
     tags: ["bestseller", "popular", "general"],
     collections: ["water-bottle", "insulated-water-bottle"],
+    variants: [
+      { size: "750ml", price: 799, mrp: 999, off: 20 },
+      { size: "900ml", price: 899, mrp: 1149, off: 22 },
+      { size: "1200ml", price: 999, mrp: 1299, off: 23 },
+      { size: "1500ml", price: 1099, mrp: 1399, off: 21 },
+    ],
   },
   {
     id: "bullet-water-bottle",
@@ -264,7 +270,7 @@ export const ALL_PRODUCTS = [
     images: [
       // "/images/p-kids-bottle-2.webp",
     ],
-    
+
     href: "/products/bullet-water-bottle",
     category: "water-bottle",
     vendor: "Nekza",
@@ -278,8 +284,8 @@ export const ALL_PRODUCTS = [
     price: 599,
     mrp: 799,
     off: 25,
-    img: "/images/products/stainless-steel-bottle-2.webp",
-    hoverImage: "/images/products/stainless-steel-bottle.webp",
+    img: "/images/products/stainless-steel-bottle.webp",
+    hoverImage: "/images/products/stainless-steel-bottle-2.webp",
     images: [],
     href: "/products/stainless-steel-bottle",
     category: "water-bottle",
@@ -294,8 +300,8 @@ export const ALL_PRODUCTS = [
     price: 329,
     mrp: 479,
     off: 31,
-    img: "/images/products/kids-water-bottle-banner.webp",
-    hoverImage: "/images/products/kids-water-bottle-2.webp",
+    img: "/images/products/kids-water-bottle-2.webp",
+    hoverImage: "/images/products/kids-water-bottle-banner.webp",
     images: [
       "/images/p-kids-bottle-1.webp",
       "/images/p-kids-bottle-2.webp",
@@ -358,9 +364,9 @@ export const ALL_PRODUCTS = [
     id: "straw-with-belt-water-bottle",
     title: "Straw With Belt Water Bottle",
     slug: "straw-with-belt-water-bottle",
-    price: null,
-    mrp: null,
-    off: null,
+    price: 149,
+    mrp: 210,
+    off: 29,
     img: "/images/p2-bottle-3.webp",
     hoverImage: "/images/p2-bottle-2.webp",
     images: [],
@@ -374,9 +380,9 @@ export const ALL_PRODUCTS = [
     id: "slim-water-bottle",
     title: "Slim Water Bottle",
     slug: "slim-water-bottle",
-    price: null,
-    mrp: null,
-    off: null,
+    price: 179,
+    mrp: 250,
+    off: 28,
     img: "/images/p2-bottle-3.webp",
     hoverImage: "/images/p2-bottle-1.webp",
     images: [],
@@ -390,11 +396,11 @@ export const ALL_PRODUCTS = [
     id: "slim-belt-and-straw-bottle",
     title: "Slim Belt And Straw Bottle",
     slug: "slim-belt-and-straw-bottle",
-    price: null,
-    mrp: null,
-    off: null,
-    img: "/images/p-bottle-2.webp",
-    hoverImage: "/images/p-bottle-1.webp",
+    price: 199,
+    mrp: 270,
+    off: 26,
+    img: "/images/p-bottle-1.webp",
+    hoverImage: "/images/p-bottle-2.webp",
     images: [],
     href: "/products/slim-belt-and-straw-bottle",
     category: "water-bottle",
@@ -406,11 +412,11 @@ export const ALL_PRODUCTS = [
     id: "baby-doll-water-bottle",
     title: "Baby Doll Water Bottle",
     slug: "baby-doll-water-bottle",
-    price: null,
-    mrp: null,
-    off: null,
-    img: "/images/p-kids-bottle-1.webp",
-    hoverImage: "/images/p-kids-bottle-2.webp",
+    price: 229,
+    mrp: 310,
+    off: 26,
+    img: "/images/p-kids-bottle-2.webp",
+    hoverImage: "/images/p-kids-bottle-1.webp",
     images: [],
     href: "/products/baby-doll-water-bottle",
     category: "water-bottle",
@@ -422,9 +428,9 @@ export const ALL_PRODUCTS = [
     id: "premium-steel-bottle",
     title: "Premium Steel Bottle",
     slug: "premium-steel-bottle",
-    price: null,
-    mrp: null,
-    off: null,
+    price: 249,
+    mrp: 340,
+    off: 27,
     img: "/images/p2-bottle-3.webp",
     hoverImage: "/images/p2-bottle-1.webp",
     images: [],
@@ -438,9 +444,9 @@ export const ALL_PRODUCTS = [
     id: "premium-steel-bottles",
     title: "Premium Steel Bottles",
     slug: "premium-steel-bottles",
-    price: null,
-    mrp: null,
-    off: null,
+    price: 279,
+    mrp: 380,
+    off: 27,
     img: "/images/p2-bottle-1.webp",
     hoverImage: "/images/p2-bottle-3.webp",
     images: [],
@@ -457,24 +463,29 @@ export const ALL_PRODUCTS = [
     price: 765,
     mrp: 949,
     off: 19,
-    img: "/images/p-bottle-1.webp",
-    hoverImage: "/images/p-bottle-2.webp",
+    img: "/images/products/flask.webp",
+    hoverImage: "/images/products/flask.webp",
     images: [],
     href: "/products/plastic-ubn-flask-600ml",
     category: "flask",
     vendor: "Nekza",
     tags: ["bestseller", "popular", "general"],
     collections: ["insulated-water-bottle"],
+    variants: [
+      { size: "600ml", price: 765, mrp: 949, off: 19 },
+      { size: "800ml", price: 899, mrp: 1129, off: 20 },
+      { size: "1700ml", price: 1299, mrp: 1649, off: 21 },
+    ],
   },
   {
     id: "plastic-ubn-flask-800ml",
     title: "Plastic UBN Flask - 800ml",
     slug: "plastic-ubn-flask-800ml",
-    price: null,
-    mrp: null,
-    off: null,
-    img: "/images/p-bottle-2.webp",
-    hoverImage: "/images/p-bottle-1.webp",
+    price: 349,
+    mrp: 480,
+    off: 27,
+    img: "/images/products/flask.webp",
+    hoverImage: "/images/products/flask.webp",
     images: [],
     href: "/products/plastic-ubn-flask-800ml",
     category: "flask",
@@ -486,11 +497,11 @@ export const ALL_PRODUCTS = [
     id: "plastic-ubn-flask-1700ml",
     title: "Plastic UBN Flask - 1700ml",
     slug: "plastic-ubn-flask-1700ml",
-    price: null,
-    mrp: null,
-    off: null,
-    img: "/images/p2-bottle-1.webp",
-    hoverImage: "/images/p2-bottle-2.webp",
+    price: 399,
+    mrp: 540,
+    off: 26,
+    img: "/images/products/flask.webp",
+    hoverImage: "/images/products/flask.webp",
     images: [],
     href: "/products/plastic-ubn-flask-1700ml",
     category: "flask",
@@ -502,11 +513,11 @@ export const ALL_PRODUCTS = [
     id: "nekza-unbreakable-flask-600ml",
     title: "NEKZA Unbreakable Flask 600ml",
     slug: "nekza-unbreakable-flask-600ml",
-    price: null,
-    mrp: null,
-    off: null,
-    img: "/images/p2-bottle-2.webp",
-    hoverImage: "/images/p2-bottle-3.webp",
+    price: 449,
+    mrp: 610,
+    off: 26,
+    img: "/images/products/flask.webp",
+    hoverImage: "/images/products/flask.webp",
     images: [],
     href: "/products/nekza-unbreakable-flask-600ml",
     category: "flask",
@@ -518,11 +529,11 @@ export const ALL_PRODUCTS = [
     id: "nekza-unbreakable-flask-800ml",
     title: "NEKZA Unbreakable Flask 800ml",
     slug: "nekza-unbreakable-flask-800ml",
-    price: null,
-    mrp: null,
-    off: null,
-    img: "/images/p-bottle-1.webp",
-    hoverImage: "/images/p2-bottle-1.webp",
+    price: 499,
+    mrp: 680,
+    off: 27,
+    img: "/images/products/flask.webp",
+    hoverImage: "/images/products/flask.webp",
     images: [],
     href: "/products/nekza-unbreakable-flask-800ml",
     category: "flask",
@@ -534,11 +545,11 @@ export const ALL_PRODUCTS = [
     id: "nekza-unbreakable-flask-1700ml",
     title: "NEKZA Unbreakable Flask 1700ml",
     slug: "nekza-unbreakable-flask-1700ml",
-    price: null,
-    mrp: null,
-    off: null,
-    img: "/images/p2-bottle-3.webp",
-    hoverImage: "/images/p2-bottle-1.webp",
+    price: 549,
+    mrp: 750,
+    off: 27,
+    img: "/images/products/flask.webp",
+    hoverImage: "/images/products/flask.webp",
     images: [],
     href: "/products/nekza-unbreakable-flask-1700ml",
     category: "flask",
@@ -553,8 +564,8 @@ export const ALL_PRODUCTS = [
     price: 799,
     mrp: 999,
     off: 20,
-    img: "/images/p-jug-1.webp",
-    hoverImage: "/images/p-jug-2.webp",
+    img: "/images/products/p-jug-2.webp",
+    hoverImage: "/images/p-jug-1.webp",
     images: [],
     href: "/products/plastic-water-jug",
     category: "water-jug",
@@ -566,10 +577,10 @@ export const ALL_PRODUCTS = [
     id: "water-jug-with-glass",
     title: "Water Jug With Glass",
     slug: "water-jug-with-glass",
-    price: null,
-    mrp: null,
-    off: null,
-    img: "/images/p-jug-2.webp",
+    price: 299,
+    mrp: 410,
+    off: 27,
+    img: "/images/products/p-jug-2.webp",
     hoverImage: "/images/p-jug-1.webp",
     images: [],
     href: "/products/water-jug-with-glass",
@@ -582,10 +593,10 @@ export const ALL_PRODUCTS = [
     id: "nekza-insulated-water-jug",
     title: "NEKZA Insulated Water Jug",
     slug: "nekza-insulated-water-jug",
-    price: null,
-    mrp: null,
-    off: null,
-    img: "/images/p-jug-1.webp",
+    price: 349,
+    mrp: 480,
+    off: 27,
+    img: "/images/products/p-jug-2.webp",
     hoverImage: "/images/p-jug-2.webp",
     images: [],
     href: "/products/nekza-insulated-water-jug",
@@ -598,10 +609,10 @@ export const ALL_PRODUCTS = [
     id: "nekza-insulated-plastic-water-jug-5-ltr",
     title: "NEKZA Insulated Plastic Water Jug 5 ltr",
     slug: "nekza-insulated-plastic-water-jug-5-ltr",
-    price: null,
-    mrp: null,
-    off: null,
-    img: "/images/p-jug-2.webp",
+    price: 399,
+    mrp: 540,
+    off: 26,
+    img: "/images/products/p-jug-2.webp",
     hoverImage: "/images/p-jug-1.webp",
     images: [],
     href: "/products/nekza-insulated-plastic-water-jug-5-ltr",
@@ -614,11 +625,11 @@ export const ALL_PRODUCTS = [
     id: "fridge-jug",
     title: "Fridge Jug",
     slug: "fridge-jug",
-    price: null,
-    mrp: null,
-    off: null,
-    img: "/images/p-jug-1.webp",
-    hoverImage: "/images/p-jug-2.webp",
+    price: 449,
+    mrp: 610,
+    off: 26,
+    img: "/images/products/p-jug-2.webp",
+    hoverImage: "/images/p-jug-1.webp",
     images: [],
     href: "/products/fridge-jug",
     category: "water-jug",
@@ -630,10 +641,10 @@ export const ALL_PRODUCTS = [
     id: "falcon-fridge-jug",
     title: "Falcon Fridge Jug",
     slug: "falcon-fridge-jug",
-    price: null,
-    mrp: null,
-    off: null,
-    img: "/images/p-jug-2.webp",
+    price: 499,
+    mrp: 680,
+    off: 27,
+    img: "/images/products/p-jug-2.webp",
     hoverImage: "/images/p-jug-1.webp",
     images: [],
     href: "/products/falcon-fridge-jug",
@@ -646,11 +657,11 @@ export const ALL_PRODUCTS = [
     id: "20-liters-water-camper",
     title: "20 Liters Water Camper",
     slug: "20-liters-water-camper",
-    price: null,
-    mrp: null,
-    off: null,
-    img: "/images/p-jug-1.webp",
-    hoverImage: "/images/p-jug-2.webp",
+    price: 299,
+    mrp: 410,
+    off: 27,
+    img: "/images/products/p-jug-2.webp",
+    hoverImage: "/images/p-jug-1.webp",
     images: [],
     href: "/products/20-liters-water-camper",
     category: "water-jug",
@@ -662,10 +673,10 @@ export const ALL_PRODUCTS = [
     id: "plastic-jug-and-6pcs-glass-set",
     title: "Plastic Jug & 6pcs Glass Set",
     slug: "plastic-jug-and-6pcs-glass-set",
-    price: null,
-    mrp: null,
-    off: null,
-    img: "/images/p-jug-2.webp",
+    price: 349,
+    mrp: 480,
+    off: 27,
+    img: "/images/products/p-jug-2.webp",
     hoverImage: "/images/p-jug-1.webp",
     images: [],
     href: "/products/plastic-jug-and-6pcs-glass-set",
@@ -694,11 +705,11 @@ export const ALL_PRODUCTS = [
     id: "kids-school-lunch-box",
     title: "Kids School Lunch Box",
     slug: "kids-school-lunch-box",
-    price: null,
-    mrp: null,
-    off: null,
-    img: "/images/p-tiffin-2.webp",
-    hoverImage: "/images/p-tiffin-1.webp",
+    price: 169,
+    mrp: 230,
+    off: 27,
+    img: "/images/p-tiffin-1.webp",
+    hoverImage: "/images/p-tiffin-2.webp",
     images: [],
     href: "/products/kids-school-lunch-box",
     category: "lunch-box",
@@ -710,9 +721,9 @@ export const ALL_PRODUCTS = [
     id: "kids-plastic-lunch-box",
     title: "Kids Plastic Lunch Box",
     slug: "kids-plastic-lunch-box",
-    price: null,
-    mrp: null,
-    off: null,
+    price: 199,
+    mrp: 270,
+    off: 26,
     img: "/images/p-tiffin-1.webp",
     hoverImage: "/images/p-tiffin-2.webp",
     images: [],
@@ -729,8 +740,8 @@ export const ALL_PRODUCTS = [
     price: 699,
     mrp: 899,
     off: 22,
-    img: "/images/p-tiffin-2.webp",
-    hoverImage: "/images/p-tiffin-1.webp",
+    img: "/images/p-tiffin-1.webp",
+    hoverImage: "/images/p-tiffin-2.webp",
     images: [],
     href: "/products/square-tiffin-box",
     category: "lunch-box",
@@ -742,9 +753,9 @@ export const ALL_PRODUCTS = [
     id: "square-lunch-box",
     title: "Square Lunch Box",
     slug: "square-lunch-box",
-    price: null,
-    mrp: null,
-    off: null,
+    price: 229,
+    mrp: 310,
+    off: 26,
     img: "/images/p-tiffin-1.webp",
     hoverImage: "/images/p-tiffin-2.webp",
     images: [],
@@ -758,11 +769,11 @@ export const ALL_PRODUCTS = [
     id: "3-compartment-lunch-box",
     title: "3 Compartment Lunch Box",
     slug: "3-compartment-lunch-box",
-    price: null,
-    mrp: null,
-    off: null,
-    img: "/images/p-tiffin-2.webp",
-    hoverImage: "/images/p-tiffin-1.webp",
+    price: 259,
+    mrp: 350,
+    off: 26,
+    img: "/images/p-tiffin-1.webp",
+    hoverImage: "/images/p-tiffin-2.webp",
     images: [],
     href: "/products/3-compartment-lunch-box",
     category: "lunch-box",
@@ -774,9 +785,9 @@ export const ALL_PRODUCTS = [
     id: "stainless-steel-lunch-box",
     title: "Stainless Steel Lunch Box",
     slug: "stainless-steel-lunch-box",
-    price: null,
-    mrp: null,
-    off: null,
+    price: 299,
+    mrp: 410,
+    off: 27,
     img: "/images/p-tiffin-1.webp",
     hoverImage: "/images/p-tiffin-2.webp",
     images: [],
@@ -790,11 +801,11 @@ export const ALL_PRODUCTS = [
     id: "stainless-steel-lunchboxes-for-kids",
     title: "Stainless Steel Lunchboxes For Kids",
     slug: "stainless-steel-lunchboxes-for-kids",
-    price: null,
-    mrp: null,
-    off: null,
-    img: "/images/p-tiffin-2.webp",
-    hoverImage: "/images/p-tiffin-1.webp",
+    price: 329,
+    mrp: 450,
+    off: 27,
+    img: "/images/p-tiffin-1.webp",
+    hoverImage: "/images/p-tiffin-2.webp",
     images: [],
     href: "/products/stainless-steel-lunchboxes-for-kids",
     category: "lunch-box",
@@ -806,9 +817,9 @@ export const ALL_PRODUCTS = [
     id: "stainless-steel-bento-lunch-box",
     title: "Stainless Steel Bento Lunch Box",
     slug: "stainless-steel-bento-lunch-box",
-    price: null,
-    mrp: null,
-    off: null,
+    price: 169,
+    mrp: 230,
+    off: 27,
     img: "/images/p-tiffin-1.webp",
     hoverImage: "/images/p-tiffin-2.webp",
     images: [],
@@ -826,8 +837,8 @@ export const ALL_PRODUCTS = [
     price: 1635,
     mrp: 1990,
     off: 18,
-    img: "/images/p-tiffin-2.webp",
-    hoverImage: "/images/p-tiffin-1.webp",
+    img: "/images/p-tiffin-1.webp",
+    hoverImage: "/images/p-tiffin-2.webp",
     images: [],
     href: "/products/insulated-steel-lunchbox",
     category: "lunch-box",
@@ -838,9 +849,9 @@ export const ALL_PRODUCTS = [
     id: "plastic-lunchbox",
     title: "Plastic Lunchbox",
     slug: "plastic-lunchbox",
-    price: null,
-    mrp: null,
-    off: null,
+    price: 199,
+    mrp: 270,
+    off: 26,
     img: "/images/p-tiffin-1.webp",
     hoverImage: "/images/p-tiffin-2.webp",
     images: [],
@@ -854,11 +865,11 @@ export const ALL_PRODUCTS = [
     id: "nekza-insulated-hot-pot-3200-ml",
     title: "NEKZA Insulated Hot Pot 3200 ml",
     slug: "nekza-insulated-hot-pot-3200-ml",
-    price: null,
-    mrp: null,
-    off: null,
-    img: "/images/p-casserol-1.webp",
-    hoverImage: "/images/p-casserol-2.webp",
+    price: 429,
+    mrp: 580,
+    off: 26,
+    img: "/images/p-casserol-2.webp",
+    hoverImage: "/images/p-casserol-1.webp",
     images: [],
     href: "/products/nekza-insulated-hot-pot-3200-ml",
     category: "casserole",
@@ -870,9 +881,9 @@ export const ALL_PRODUCTS = [
     id: "nekza-insulated-hot-pot-2200-ml",
     title: "NEKZA Insulated Hot Pot 2200 ml",
     slug: "nekza-insulated-hot-pot-2200-ml",
-    price: null,
-    mrp: null,
-    off: null,
+    price: 499,
+    mrp: 680,
+    off: 27,
     img: "/images/p-casserol-2.webp",
     hoverImage: "/images/p-casserol-1.webp",
     images: [],
@@ -886,11 +897,11 @@ export const ALL_PRODUCTS = [
     id: "plastic-insulated-casserole",
     title: "Plastic Insulated Casserole",
     slug: "plastic-insulated-casserole",
-    price: null,
-    mrp: null,
-    off: null,
-    img: "/images/p-casserol-1.webp",
-    hoverImage: "/images/p-casserol-2.webp",
+    price: 569,
+    mrp: 770,
+    off: 26,
+    img: "/images/p-casserol-2.webp",
+    hoverImage: "/images/p-casserol-1.webp",
     images: [],
     href: "/products/plastic-insulated-casserole",
     category: "casserole",
@@ -919,11 +930,11 @@ export const ALL_PRODUCTS = [
     title: "Tiffin And Jug Combo",
     slug: "tiffin-and-jug-combo",
     vendor: "Nekza",
-    price: null,
-    mrp: null,
-    off: null,
-    img: "/images/p-combo-2.webp",
-    hoverImage: "/images/p-combo-1.webp",
+    price: 499,
+    mrp: 680,
+    off: 27,
+    img: "/images/p-combo-1.webp",
+    hoverImage: "/images/p-combo-2.webp",
     images: [],
     href: "/products/tiffin-and-jug-combo",
     category: "combo-set",
@@ -935,9 +946,9 @@ export const ALL_PRODUCTS = [
     title: "Apple Box (3 Piece)",
     slug: "apple-box-3-piece",
     vendor: "Nekza",
-    price: null,
-    mrp: null,
-    off: null,
+    price: 599,
+    mrp: 810,
+    off: 26,
     img: "/images/p-combo-1.webp",
     hoverImage: "/images/p-combo-2.webp",
     images: [],
@@ -950,9 +961,9 @@ export const ALL_PRODUCTS = [
     id: "nekza-kids-pencil-box",
     title: "NEKZA Kids Pencil Box",
     slug: "nekza-kids-pencil-box",
-    price: null,
-    mrp: null,
-    off: null,
+    price: 99,
+    mrp: 140,
+    off: 29,
     img: "/images/products/NEKZA-Kids-Pencil-Box.webp",
     hoverImage: "/images/p-pbox-2.webp",
     images: [],
@@ -966,9 +977,9 @@ export const ALL_PRODUCTS = [
     id: "smart-pencil-box",
     title: "Smart Pencil Box",
     slug: "smart-pencil-box",
-    price: null,
-    mrp: null,
-    off: null,
+    price: 119,
+    mrp: 170,
+    off: 30,
     img: "/images/products/smart-pencil-box.webp",
     hoverImage: "/images/products/smart-pencil-box-2.webp",
     images: [],
@@ -982,9 +993,9 @@ export const ALL_PRODUCTS = [
     id: "plastic-pencil-box",
     title: "Plastic Pencil Box",
     slug: "plastic-pencil-box",
-    price: null,
-    mrp: null,
-    off: null,
+    price: 149,
+    mrp: 210,
+    off: 29,
     img: "/images/products/plastic-pencil-box.webp",
     hoverImage: "/images/products/plastic-pencil-box-2.webp",
     images: [],
@@ -1001,8 +1012,8 @@ export const ALL_PRODUCTS = [
     price: 499,
     mrp: 649,
     off: 23,
-    img: "/images/p2-bottle-1.webp",
-    hoverImage: "/images/p2-bottle-2.webp",
+    img: "/images/products/kitchen-products-salt-and-pepper-set.webp",
+    hoverImage: "/images/products/kitchen-products-salt-and-pepper-set-2.webp",
     images: [],
     href: "/products/kitchen-products-salt-and-pepper-set",
     category: "kitchen-product",
@@ -1014,9 +1025,9 @@ export const ALL_PRODUCTS = [
     id: "quick-glass-6-pcs-set",
     title: "Quick Glass 6 Pcs Set",
     slug: "quick-glass-6-pcs-set",
-    price: null,
-    mrp: null,
-    off: null,
+    price: 199,
+    mrp: 270,
+    off: 26,
     img: "/images/p2-bottle-2.webp",
     hoverImage: "/images/p2-bottle-1.webp",
     images: [],
@@ -1030,11 +1041,11 @@ export const ALL_PRODUCTS = [
     id: "insulated-kids-water-bottle",
     title: "Insulated Kids Water Bottle",
     slug: "insulated-kids-water-bottle",
-    price: null,
-    mrp: null,
-    off: null,
-    img: "/images/p-kids-bottle-1.webp",
-    hoverImage: "/images/p-kids-bottle-2.webp",
+    price: 299,
+    mrp: 410,
+    off: 27,
+    img: "/images/p-kids-bottle-2.webp",
+    hoverImage: "/images/p-kids-bottle-1.webp",
     images: [],
     href: "/products/insulated-kids-water-bottle",
     category: "water-bottle",
@@ -1046,11 +1057,11 @@ export const ALL_PRODUCTS = [
     id: "stainless-steel-lunch-box-for-kids",
     title: "Stainless Steel Lunch Box For Kids",
     slug: "stainless-steel-lunch-box-for-kids",
-    price: null,
-    mrp: null,
-    off: null,
-    img: "/images/p-tiffin-2.webp",
-    hoverImage: "/images/p-tiffin-1.webp",
+    price: 229,
+    mrp: 310,
+    off: 26,
+    img: "/images/p-tiffin-1.webp",
+    hoverImage: "/images/p-tiffin-2.webp",
     images: [],
     href: "/products/stainless-steel-lunch-box-for-kids",
     category: "lunch-box",
@@ -1062,9 +1073,9 @@ export const ALL_PRODUCTS = [
     id: "plastic-insulated-water-bottle",
     title: "Plastic Insulated Water Bottle",
     slug: "plastic-insulated-water-bottle",
-    price: null,
-    mrp: null,
-    off: null,
+    price: 149,
+    mrp: 210,
+    off: 29,
     img: "/images/p-bottle-1.webp",
     hoverImage: "/images/p-bottle-2.webp",
     images: [],
@@ -1107,7 +1118,7 @@ export const GRID_TILES = {
           title: "Hydration",
           animate: "slideLeft",
           images: {
-            mobile: ["/images/c-bottle-mobile.webp", "/images/c-bottle-mobile.webp"],
+            mobile: ["/images/p2-bottle-1.webp", "/images/p2-bottle-1.webp"],
             desktop: ["/images/p2-bottle-1.webp", "/images/p2-bottle-1.webp"]
           }
         },
@@ -1117,7 +1128,7 @@ export const GRID_TILES = {
           title: "Combos",
           animate: "slideRight",
           images: {
-            mobile: ["/images/c-cookware-mobile.webp", "/images/c-cookware-mobile.webp"],
+            mobile: ["/images/products/tiffin-jug-combo-green-2.webp", "/images/products/tiffin-jug-combo-green-2.webp"],
             desktop: ["/images/p-combo-2.webp", "/images/p-combo-2.webp"]
           }
         }
@@ -1129,7 +1140,7 @@ export const GRID_TILES = {
           title: "Pencil Boxes",
           animate: "slideLeft",
           images: {
-            mobile: ["/images/c-tableware-mobile.webp", "/images/c-tableware-mobile.webp"],
+            mobile: ["/images/products/NEKZA-Kids-Pencil-Box.webp", "/images/products/NEKZA-Kids-Pencil-Box.webp"],
             desktop: ["/images/p-pbox-2.webp", "/images/p-pbox-2.webp"]
           }
         },
@@ -1139,7 +1150,7 @@ export const GRID_TILES = {
           title: "Tiffin Boxes",
           animate: "slideRight",
           images: {
-            mobile: ["/images/c-cookware-mobile-1.webp", "/images/c-cookware-mobile-1.webp"],
+            mobile: ["/images/p-tiffin-1.webp", "/images/p-tiffin-1.webp"],
             desktop: ["/images/p-tiffin-1.webp", "/images/p-tiffin-1.webp"]
           }
         }
@@ -1152,7 +1163,7 @@ export const GRID_TILES = {
           animate: "slideRight",
           tall: true,
           images: {
-            mobile: ["/images/c-kids-mobile.webp", "/images/c-kids-mobile.webp"],
+            mobile: ["/images/p-casserol-1.webp ", "/images/p-casserol-2.webp"],
             desktop: ["/images/p-casserol-1.webp", "/images/p-casserol-1.webp"]
           }
         },
@@ -1162,17 +1173,17 @@ export const GRID_TILES = {
           title: "Water Jugs",
           animate: "slideUp",
           images: {
-            mobile: ["/images/c-tiffin-mobile.webp", "/images/c-tiffin-mobile.webp"],
+            mobile: ["/images/p-jug-1.webp", "/images/p-jug-1.webp"],
             desktop: ["/images/p-jug-1.webp", "/images/p-jug-1.webp"]
           }
         },
         {
           href: "/collections/kidzbee",
           label: "For Kids",
-          title: "Kidzbee",
+          title: "Kidz",
           animate: "slideLeft",
           images: {
-            mobile: ["/images/c-apps-mobile.webp", "/images/c-apps-mobile.webp"],
+            mobile: ["/images/products/kids-school-water-bottle.webp", "/images/products/kids-school-water-bottle.webp"],
             desktop: ["/images/p-kids-bottle-2.webp", "/images/p-kids-bottle-2.webp"]
           }
         }
@@ -1290,8 +1301,24 @@ export const getProductsByCollection = (collection) =>
       bestsellers: "bestseller",
     };
 
+    const collectionPredicates = {
+      "steel-bottle": (product) => {
+        const title = (product?.title || "").toLowerCase();
+        const slug = (product?.slug || "").toLowerCase();
+        return title.includes("steel") || slug.includes("steel");
+      },
+      "ubn-flask": (product) => {
+        const title = (product?.title || "").toLowerCase();
+        const slug = (product?.slug || "").toLowerCase();
+        return title.includes("ubn flask") || slug.includes("ubn-flask");
+      },
+    };
+
     const mappedTag = labelToTag[collection];
     if (mappedTag) return tags.includes(mappedTag);
+
+    const mappedCollectionPredicate = collectionPredicates[collection];
+    if (mappedCollectionPredicate) return mappedCollectionPredicate(p);
 
     return collections.includes(collection) || p?.category === collection;
   });
@@ -1391,6 +1418,335 @@ export const REVIEWS_INFO = {
     response: 61
   }
 };
+
+export const FAQ_DATA = [
+  {
+    category: "Products",
+    items: [
+      {
+        q: "What kind of products does Nekza offer?",
+        a: "Nekza focuses on everyday utility products like water bottles, lunch boxes, casseroles, flasks, and kitchen essentials designed for durability, convenience, and daily use.",
+      },
+      {
+        q: "Are your products safe for daily use?",
+        a: "Yes. Our products are designed keeping everyday usability and safety in mind. Always refer to product-specific details for materials and usage instructions.",
+      },
+      {
+        q: "Do product colors or designs vary?",
+        a: "Slight variations may occur due to display settings or manufacturing updates, but overall functionality and quality remain consistent.",
+      },
+    ],
+  },
+  {
+    category: "Orders & Availability",
+    items: [
+      {
+        q: "How do I place an order?",
+        a: "You can explore products on the website and follow the available purchase or inquiry flow depending on the product and availability.",
+      },
+      {
+        q: "Are all products always in stock?",
+        a: "Availability may vary. Some products may be temporarily out of stock or available only in specific regions.",
+      },
+      {
+        q: "Can I track my order?",
+        a: "If tracking is applicable, relevant updates will be shared after confirmation or dispatch.",
+      },
+    ],
+  },
+  {
+    category: "Shipping & Delivery",
+    items: [
+      {
+        q: "How long does delivery take?",
+        a: "Delivery timelines depend on your location, product availability, and logistics. Estimated timelines are usually shared during confirmation.",
+      },
+      {
+        q: "Do you deliver everywhere?",
+        a: "Delivery coverage may vary. Please check availability for your location during the order or inquiry process.",
+      },
+    ],
+  },
+  {
+    category: "Returns & Support",
+    items: [
+      {
+        q: "What if I receive a damaged product?",
+        a: "Please report the issue within the support window with proper details. Our team will assist you with resolution steps.",
+      },
+      {
+        q: "Do you offer returns or replacements?",
+        a: "Returns or replacements depend on product condition, eligibility, and policy guidelines. Please refer to our support process.",
+      },
+      {
+        q: "How can I contact support?",
+        a: "You can reach out through the contact details provided on the website. Our team will assist you with queries or issues.",
+      },
+    ],
+  },
+];
+
+// Discovery chips for product filtering
+export const DISCOVERY_CHIPS = {
+  bestsellers: [
+    { id: "for-you", label: "For You" },
+    { id: "trending", label: "Trending" },
+    { id: "under-500", label: "Under ₹500" },
+  ],
+  newArrivals: [
+    { id: "fresh", label: "Just Dropped" },
+    { id: "deals", label: "Top Deals" },
+    { id: "premium", label: "Premium New" },
+  ],
+  popular: [
+    { id: "community", label: "Community Picks" },
+    { id: "value", label: "Best Value" },
+    { id: "premium", label: "Premium Picks" },
+  ],
+};
+
+// Testimonials data
+export const TESTIMONIALS = [
+  {
+    text: "The bottle quality is premium and keeps water cool for hours. Exactly what I needed for office and travel.",
+    name: "Priya Sharma",
+    role: "Verified Buyer",
+    img: "https://i.pravatar.cc/120?img=20",
+  },
+  {
+    text: "Loved finish and durability. Nekza products feel sturdy and designs are very practical for daily use.",
+    name: "Raveena Verma",
+    role: "Verified Buyer",
+    img: "https://i.pravatar.cc/120?img=32",
+  },
+  {
+    text: "My kids use lunch box every day. Great build quality and easy to clean.",
+    name: "Ananya Patel",
+    role: "Verified Buyer",
+    img: "https://i.pravatar.cc/120?img=44",
+  },
+  {
+    text: "Delivery was quick and packaging was neat. Product looked exactly like the photos.",
+    name: "Karan Mehta",
+    role: "Verified Buyer",
+    img: "https://i.pravatar.cc/120?img=56",
+  },
+  {
+    text: "Best value for money in this range. The insulation works really well.",
+    name: "Sneha Iyer",
+    role: "Verified Buyer",
+    img: "https://i.pravatar.cc/120?img=47",
+  },
+  {
+    text: "The design is sleek and modern. It fits perfectly in my car cup holder too.",
+    name: "Arjun Nair",
+    role: "Verified Buyer",
+    img: "https://i.pravatar.cc/120?img=15",
+  },
+  {
+    text: "Keeps my drinks hot for hours! The build quality feels premium and durable.",
+    name: "Ritika Sharma",
+    role: "Verified Buyer",
+    img: "https://i.pravatar.cc/120?img=32",
+  },
+  {
+    text: "Lightweight, easy to carry, and completely leak-proof. Perfect for daily use.",
+    name: "Karan Bhatra",
+    role: "Verified Buyer",
+    img: "https://i.pravatar.cc/120?img=68",
+  }
+];
+
+// Why Us reasons
+export const WHY_US_REASONS = [
+  {
+    title: "Built For Everyday Use",
+    description:
+      "From office commutes to travel days, our products are made to stay durable, practical, and easy to carry.",
+    icon: (`
+      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M7 5h10M8 5v14a2 2 0 0 0 2 2h4a2 2 0 0 0 2-2V5" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M10 10h4M10 14h4" />
+      </svg>`
+    ),
+  },
+  {
+    title: "Modern + Functional Design",
+    description:
+      "We combine clean aesthetics with thoughtful details so every item looks premium and works better in daily life.",
+    icon: (`
+      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4 13 12 4l8 9-8 7-8-7Z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 12h6" />
+      </svg>`
+    ),
+  },
+  {
+    title: "Trusted By Real Customers",
+    description:
+      "Thousands of buyers choose Nekza for reliable quality, value-for-money products, and consistent experiences.",
+    icon: (`
+      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <path strokeLinecap="round" strokeLinejoin="round" d="m12 17 5.2 3-1.4-5.8L20 9.8l-5.9-.5L12 4 9.9 9.3 4 9.8l4.2 4.4L6.8 20z" />
+      </svg>`
+    ),
+  },
+  {
+    title: "Fast Support & Delivery",
+    description:
+      "Quick order processing, neat packaging, and responsive help whenever you need assistance with your purchase.",
+    icon: (`
+      <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" stroke="currentColor" strokeWidth="1.8">
+        <path strokeLinecap="round" strokeLinejoin="round" d="M4 12h11m0 0-3-3m3 3-3 3" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M20 6v12" />
+      </svg>`
+    ),
+  },
+];
+
+// Life with Nekza video cards
+export const LIFE_WITH_NEKZA_CARDS = [
+  {
+    video: "/images/p-bottle-1.mp4",
+    href: "/products/insulated-water-bottle/nekza-insulated-plastic-water-bottle",
+  },
+  {
+    video: "/images/p-jug.mp4",
+    href: "/products/nekza-insulated-plastic-water-jug-5-ltr",
+  },
+  {
+    video: "/images/p-combo.mp4",
+    href: "/products/combosets/gift-and-combo-set",
+  },
+  {
+    video: "/images/p-jug-2.mp4",
+    href: "/products/plastic-water-jug",
+  },
+];
+
+// Home hero slides
+export const HERO_SLIDES = [
+  {
+    tag: "Smart Kitchen Organization",
+    title: "Discover Premium Water Companions",
+    titleItalic: [],
+    bg: "/images/slide-1.webp",
+  },
+  {
+    tag: "Hydration Essentials",
+    title: "Elegant Storage Solutions for Contemporary Living",
+    titleItalic: [],
+    bg: "/images/slide-2.webp",
+  },
+  {
+    tag: "Fresh Food Preservation",
+    title: "Modern Serving Solutions",
+    titleItalic: [],
+    bg: "/images/slide-3.webp",
+  },
+  {
+    tag: "Meal Prep Solutions",
+    title: "Innovative Food Storage for Today's Households",
+    titleItalic: [],
+    bg: "/images/slide-4.webp",
+  },
+];
+
+// About page values
+export const ABOUT_VALUES = [
+  {
+    title: "Innovation",
+    iconKey: "lightbulb",
+    description:
+      "At the heart of Nekza lies a relentless drive to innovate. Our philosophy 'Kuch Naya Sochte Hai' pushes us to reimagine everyday solutions that make life simpler and more enjoyable.",
+  },
+  {
+    title: "Quality",
+    iconKey: "hand-heart",
+    description:
+      "Excellence is non-negotiable at Nekza. We uphold the highest standards of craftsmanship and consistency, continuously raising the bar for quality in the homeware industry.",
+  },
+  {
+    title: "Durability",
+    iconKey: "shield",
+    description:
+      "Every Nekza product is engineered to last. From busy morning routines to daily adventures, our products are designed to withstand the rigors of real-world use.",
+  },
+  {
+    title: "Customer Service",
+    iconKey: "users",
+    description:
+      "Our commitment to customers extends beyond purchase. We provide responsive support and assistance, ensuring every Nekza owner enjoys a seamless experience.",
+  },
+];
+
+// Terms page sections
+export const TERMS_SECTIONS = [
+  {
+    iconKey: "file-text",
+    title: "1. Introduction",
+    content: `Welcome to Nekza. By accessing or using this website, you agree to be bound by these Terms and Conditions. These terms govern your use of our website, product browsing, inquiries, and any interaction you make with our platform.`,
+  },
+  {
+    iconKey: "shield-check",
+    title: "2. Product Information",
+    content: `We aim to ensure that all product descriptions, visuals, and details displayed on the website are accurate and up to date. However, slight variations in color, finish, size, packaging, or product appearance may occur depending on display settings or manufacturing updates.`,
+  },
+  {
+    iconKey: "scale",
+    title: "3. Intellectual Property",
+    content: `All content on this website, including text, product descriptions, branding elements, graphics, icons, and layout design, is the property of Nekza unless otherwise stated. Unauthorized use, reproduction, or redistribution of any website material is prohibited without prior written consent.`,
+  },
+  {
+    iconKey: "truck",
+    title: "4. Orders, Availability & Delivery",
+    content: `Product availability may vary and is subject to stock status. Submission of an inquiry, order request, or purchase intent does not guarantee availability until confirmed. Delivery timelines, dispatch information, and fulfillment details may vary based on region, logistics, and product category.`,
+  },
+  {
+    iconKey: "rotate-ccw",
+    title: "5. Returns & Replacements",
+    content: `Any return, replacement, or product concern will be handled in accordance with our return and support policy. Customers are encouraged to inspect products upon delivery and report issues within the applicable support window. Eligibility may depend on product condition and proof of purchase.`,
+  },
+  {
+    iconKey: "alert-triangle",
+    title: "6. Limitation of Liability",
+    content: `Nekza shall not be held liable for any indirect, incidental, or consequential damages arising from the use of this website, product misuse, delayed availability, third-party logistics issues, or technical interruptions. Users are expected to use the website and products responsibly.`,
+  },
+];
+
+// Privacy policy sections
+export const PRIVACY_POLICY_SECTIONS = [
+  {
+    iconKey: "shield-check",
+    title: "1. Introduction",
+    content: `At Nekza, we value your privacy and are committed to handling your information responsibly. This Privacy Policy explains how we collect, use, store, and protect any information you share while interacting with our website, product pages, contact forms, or inquiries.`,
+  },
+  {
+    iconKey: "database",
+    title: "2. Information We Collect",
+    content: `We may collect personal details such as your name, email address, phone number, delivery details, or inquiry information when you contact us, submit a form, or interact with our services. We may also collect limited non-personal information such as browser type, device data, and website usage behavior for analytics and performance purposes.`,
+  },
+  {
+    iconKey: "eye",
+    title: "3. How We Use Your Information",
+    content: `The information collected may be used to respond to inquiries, process requests, improve website performance, communicate product or service information, enhance customer experience, and maintain the security and reliability of our website.`,
+  },
+  {
+    iconKey: "lock-keyhole",
+    title: "4. Data Protection & Security",
+    content: `We take reasonable technical and organizational measures to protect your personal information from unauthorized access, misuse, disclosure, or loss. While no digital platform can guarantee absolute security, we make every reasonable effort to safeguard the information shared with us.`,
+  },
+  {
+    iconKey: "cookie",
+    title: "5. Cookies & Website Analytics",
+    content: `Our website may use cookies or similar technologies to improve browsing experience, understand user behavior, and optimize site performance. These tools help us understand which pages are useful, how users interact with content, and how we can improve the overall website experience.`,
+  },
+  {
+    iconKey: "mail",
+    title: "6. Third-Party Sharing",
+    content: `We do not sell your personal information. Information may only be shared with trusted service providers, technical partners, logistics support, or operational tools when reasonably required to run our website, fulfill requests, or support legitimate business operations.`,
+  },
+];
 
 /*
 ========================================================

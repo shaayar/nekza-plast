@@ -60,7 +60,7 @@ export default function Card({ product, slug, badges = [] }) {
       )}
 
       {/* Glow */}
-      <div className="pointer-events-none absolute -bottom-10 -right-10 h-28 w-28 rounded-full bg-primary/10 opacity-60 blur-xl transition-opacity duration-300 group-hover:opacity-80" />
+      <div className="pointer-events-none absolute -bottom-10 -right-10 h-38 w-38 rounded-full group-hover:bg-primary/20 blur-xl transition-opacity duration-300 group-hover:opacity-80" />
 
       {/* Image */}
       <div className="relative z-10 overflow-hidden rounded-xl bg-zinc-50">
@@ -123,14 +123,15 @@ export default function Card({ product, slug, badges = [] }) {
       </div>
 
       {/* Footer */}
-      <div className="relative z-10 mt-auto flex items-center justify-between pt-1">
-        <Link
-          to={productPath}
-          className="text-sm font-medium text-gray-800 transition-colors group-hover:text-primary sm:text-base"
-          data-cursor="View"
-        >
-          View Details
-        </Link>
+      <div className="relative z-10 mt-auto flex items-center justify-between pt-1 gap-2">
+        <BuyNowButton
+        product={productForCart}
+        quantity={1}
+        stopPropagation
+        className="pressable relative z-10 w-full rounded-lg bg-primary px-3 py-2 text-sm font-semibold text-white transition-opacity duration-200 hover:opacity-90"
+      >
+        Buy Now
+      </BuyNowButton>
 
         <button
           type="button"
@@ -140,18 +141,11 @@ export default function Card({ product, slug, badges = [] }) {
           data-cursor="Shop"
         >
           <span className="relative flex size-7 items-center justify-center">
-            <ShoppingBag size={20} />
+            <ShoppingBag size={24} />
           </span>
         </button>
       </div>
-      <BuyNowButton
-        product={productForCart}
-        quantity={1}
-        stopPropagation
-        className="pressable relative z-10 mt-1 rounded-lg bg-primary px-3 py-2 text-sm font-semibold text-white transition-opacity duration-200 hover:opacity-90"
-      >
-        Buy Now
-      </BuyNowButton>
+      
     </div>
   );
 }

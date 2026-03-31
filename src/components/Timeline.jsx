@@ -47,8 +47,8 @@ export default function Timeline() {
                 }`}
               >
                 {/* Content Card */}
-                <div className={`flex-1 ${index % 2 === 0 ? 'md:pr-12 md:text-right' : 'md:pl-12'}`}>
-                  <div className={`inline-block w-full max-w-[280px] rounded-xl border p-5 sm:max-w-[340px] sm:p-6 md:max-w-md ${styles.card}`}>
+                <div className={`flex-1 ${index % 2 === 0 ? 'pl-8 md:pr-12 md:text-right' : 'pl-8 md:pl-12'}`}>
+                  <div className={`inline-block w-full rounded-xl border p-5 max-w-85 sm:p-6 md:max-w-md ${styles.card}`}>
                     {/* Year Badge */}
                     <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-sm font-semibold mb-3 ${styles.badge}`}>
                       <Calendar size={14} />

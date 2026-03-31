@@ -1,15 +1,10 @@
 import { useMemo, useState } from "react";
 import Card from "./UI/Card.jsx";
-import { getNewArrivals } from "../data/Data.js";
+import { getNewArrivals, DISCOVERY_CHIPS } from "../data/Data.js";
           import { ArrowRight } from "lucide-react";
 
 
 const PRODUCTS = getNewArrivals();
-const DISCOVERY_CHIPS = [
-  { id: "fresh", label: "Just Dropped" },
-  { id: "deals", label: "Top Deals" },
-  { id: "premium", label: "Premium New" },
-];
 
 const getProductMood = (title = "") => {
   const lowered = title.toLowerCase();
@@ -41,14 +36,14 @@ export default function NewArrivals() {
   }, [activeChip]);
 
   return (
-    <section className="section-shell py-5">
+    <section className="section-shell py-5 sm:py-7 lg:py-10">
       <div className="mx-auto px-4 md:px-10">
 
         {/* Header */}
         <div className="flex flex-col items-center gap-2 text-center md:gap-3">
-          <h2 className="text-4xl font-bold capitalize leading-snug lg:text-5xl">
-            <span className="outline text-white">New</span> <span className="underline decoration-4 decoration-alt-yellow rounded-xl">Arrivals</span>
-          </h2>
+          <h2 className="font-bold text-black text-3xl lg:text-5xl">
+          New <span className="focus text-primary underline decoration-4 decoration-alt-yellow">Arrivals</span>
+        </h2>
           <a
             href="/collections/new-arrivals"
             className="pressable group flex items-center justify-center rounded text-base text-black hover:underline underline-offset-2 transition-colors duration-200 sm:text-lg lg:text-xl"
@@ -59,7 +54,7 @@ export default function NewArrivals() {
           </a>
 
           <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
-            {DISCOVERY_CHIPS.map((chip) => (
+            {DISCOVERY_CHIPS.newArrivals.map((chip) => (
               <button
                 key={chip.id}
                 type="button"
@@ -85,7 +80,7 @@ export default function NewArrivals() {
               {visibleProducts.map((product, i) => (
                 <div
                   key={product.id}
-                  className="relative flex h-full w-[78vw] min-w-[260px] max-w-[360px] shrink-0 animate-slide-up sm:w-[46vw] lg:w-[30vw] xl:w-[23vw]"
+                  className="relative flex h-full w-[78vw] min-w-65 max-w-90 md:pt-2 shrink-0 animate-slide-up sm:w-[46vw] lg:w-[30vw] xl:w-[23vw]"
                   style={{ animationDelay: `${i * 80}ms` }}
                 >
                   <Card

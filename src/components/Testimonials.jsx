@@ -1,60 +1,11 @@
-const testimonials = [
-  {
-    text: "The bottle quality is premium and keeps water cool for hours. Exactly what I needed for office and travel.",
-    name: "Priya Sharma",
-    role: "Verified Buyer",
-    img: "https://i.pravatar.cc/120?img=20",
-  },
-  {
-    text: "Loved the finish and durability. Nekza products feel sturdy and the designs are very practical for daily use.",
-    name: "Rahul Verma",
-    role: "Verified Buyer",
-    img: "https://i.pravatar.cc/120?img=32",
-  },
-  {
-    text: "My kids use the lunch box every day. Great build quality and easy to clean.",
-    name: "Ananya Patel",
-    role: "Verified Buyer",
-    img: "https://i.pravatar.cc/120?img=44",
-  },
-  {
-    text: "Delivery was quick and packaging was neat. Product looked exactly like the photos.",
-    name: "Karan Mehta",
-    role: "Verified Buyer",
-    img: "https://i.pravatar.cc/120?img=56",
-  },
-  {
-    text: "Best value for money in this range. The insulation works really well.",
-    name: "Sneha Iyer",
-    role: "Verified Buyer",
-    img: "https://i.pravatar.cc/120?img=68",
-  },
-  {
-    text: "The design is sleek and modern. It fits perfectly in my car cup holder too.",
-    name: "Arjun Nair",
-    role: "Verified Buyer",
-    img: "https://i.pravatar.cc/120?img=15",
-  },
-  {
-    text: "Best value for money in this range. The insulation works really well.",
-    name: "Sneha Iyer",
-    role: "Verified Buyer",
-    img: "https://i.pravatar.cc/120?img=68",
-  },
-  {
-    text: "The design is sleek and modern. It fits perfectly in my car cup holder too.",
-    name: "Arjun Nair",
-    role: "Verified Buyer",
-    img: "https://i.pravatar.cc/120?img=15",
-  },
-];
+import { TESTIMONIALS } from "../data/Data.js";
 
 export default function Testimonials() {
   return (
     <section className="section-shell py-8 sm:py-10 lg:py-12">
       <div className="rounded-2xl bg-zinc-50 p-5 sm:p-7 lg:p-10">
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-2xl font-bold text-black sm:text-3xl lg:text-4xl">
+          <h2 className="font-bold text-black text-3xl lg:text-5xl">
             Loved by <span className="focus text-primary underline decoration-4 decoration-alt-yellow">Nekza Customers</span>
           </h2>
           <p className="mt-2 text-sm text-zinc-600 sm:text-base">
@@ -63,7 +14,7 @@ export default function Testimonials() {
         </div>
 
         <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {testimonials.map((item, idx) => (
+          {TESTIMONIALS.map((item, idx) => (
             <article
               key={idx}
               className="group relative overflow-hidden rounded-xl border border-zinc-200 bg-white p-5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-md"

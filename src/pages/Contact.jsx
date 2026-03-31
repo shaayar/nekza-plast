@@ -1,186 +1,91 @@
-import { useState } from "react";
-import { MapPinHouse, Mail, Headset, MessageCircleCheck, ArrowRight } from "lucide-react";
+import { Mail, Phone, MapPin, Send } from "lucide-react";
 
 export default function Contact() {
-  const [consent, setConsent] = useState(false);
-
   return (
-    <section className="section-shell mt-8 bg-white text-black px-4 sm:px-6 md:px-8 lg:px-10">
-
-      {/* Main Layout */}
-      <div className="mx-auto max-w-[1200px] pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_380px] gap-12">
-            
-            {/* Form Section */}
-            <div>
-              <div className="mb-8">
-                <h1 className="text-3xl md:text-4xl text-primary font-bold mb-3">
-                  Contact us
-                </h1>
-                <p className="text-gray-600 text-base md:text-lg">
-                  We're here to help. Fill out the form below or reach us
-                  instantly via WhatsApp.
-                </p>
-              </div>
-
-              <form className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      FULL NAME
-                    </label>
-                    <input
-                      type="text"
-                      placeholder="Enter your name"
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium mb-2">
-                      EMAIL ADDRESS <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="email"
-                      placeholder="EMAIL ADDRESS"
-                      required
-                      className="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-2">
-                    Phone Number <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="tel"
-                    placeholder="Phone Number"
-                    maxLength={10}
-                    required
-                    className="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium mb-2">
-                    MESSAGE
-                  </label>
-                  <textarea
-                    rows="5"
-                    placeholder="MESSAGE"
-                    className="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-black resize-none"
-                  />
-                </div>
-
-                <div className="flex items-start gap-3">
-                  <input
-                    id="consent"
-                    type="checkbox"
-                    checked={consent}
-                    onChange={() => setConsent(!consent)}
-                    className="mt-1 h-4 w-4"
-                  />
-                  <label htmlFor="consent" className="text-sm text-gray-600">
-                    I hereby authorize to send notifications on SMS / Messages /
-                    Promotional / Informational messages
-                  </label>
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={!consent}
-                  className={`pressable px-6 py-3 rounded-lg font-medium transition-colors duration-200 ${
-                    consent
-                      ? "bg-black text-white hover:bg-gray-800"
-                      : "bg-gray-200 text-gray-400 cursor-not-allowed"
-                  }`}
-                  data-cursor="Open"
-                >
-                  Submit now
-                </button>
-              </form>
-            </div>
-
-            {/* Support Cards */}
-            <div className="space-y-6">
-              
-              {/* WhatsApp Card */}
-              <div className="relative overflow-hidden rounded-2xl bg-green-50 border border-green-100 p-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 rounded-full bg-green-500 text-white flex items-center justify-center text-2xl shrink-0">
-                    <MessageCircleCheck />
-                  </div>
-
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2">
-                      Chat with us on WhatsApp for instant support
-                    </h3>
-                    <p className="text-gray-700 mb-5">
-                      Get real-time answers for orders, warranty, and products.
-                    </p>
-
-                    <a
-                      href="https://api.whatsapp.com/send?phone=917045552112&text=Hi"
-                      target="_blank"
-                      rel="noreferrer"
-                      className="pressable inline-flex items-center gap-2 bg-black text-white px-5 py-3 rounded-lg hover:bg-gray-800 transition-colors duration-200"
-                      data-cursor="Open"
-                    >
-                      Chat On WhatsApp <ArrowRight />
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              {/* Direct Contact Card */}
-              <div className="rounded-2xl border border-gray-200 p-6 shadow-sm">
-                <h4 className="text-xl font-semibold mb-6">Direct Contact</h4>
-
-                <div className="space-y-6">
-                  <div className="flex items-start gap-4">
-                    <div className="text-2xl"><Headset /></div>
-                    <div>
-                      <small className="block text-xs tracking-wide text-gray-500 mb-1">
-                        SUPPORT PHONE
-                      </small>
-                      <p className="font-semibold">1800-209-2151</p>
-                      <p className="text-sm text-gray-600">
-                        Mon–Fri, 9am–6pm EST
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="text-2xl"><Mail /></div>
-                    <div>
-                      <small className="block text-xs tracking-wide text-gray-500 mb-1">
-                        EMAIL SUPPORT
-                      </small>
-                      <p className="font-semibold">support@nekza.in</p>
-                      <p className="text-sm text-gray-600">
-                        Responds within 24h
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-4">
-                    <div className="text-2xl"><MapPinHouse /></div>
-                    <div>
-                      <small className="block text-xs tracking-wide text-gray-500 mb-1">
-                        MAIN OFFICE
-                      </small>
-                      <p className="font-semibold leading-7 text-sm">
-                        Survey no. 407, Plot no. 1,2, Jay Balaji Industrial Area, Sanganva, Tal. Lodhika, Rajkot, Gujarat, India - 360035
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            {/* End support cards */}
-        </div>
+    <main className="relative overflow-hidden bg-white text-zinc-900">
+      {/* Background */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute left-1/2 top-24 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.035)_1px,transparent_1px)] bg-[size:42px_42px] opacity-[0.18]" />
       </div>
-    </section>
+
+      {/* Hero */}
+      <section className="relative px-4 pb-10 pt-24 text-center md:px-8 lg:px-12 lg:pt-32">
+        <h1 className="text-4xl font-semibold md:text-6xl">
+          Let’s talk, <span className="text-primary">we’re listening</span>.
+        </h1>
+        <p className="mx-auto mt-5 max-w-2xl text-zinc-600">
+          Questions, feedback, product queries or anything else. We’ll get back to you.
+        </p>
+      </section>
+
+      {/* Content */}
+      <section className="relative px-4 pb-24 md:px-8 lg:px-12">
+        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[1fr_0.9fr]">
+          
+          {/* Form */}
+          <div className="rounded-[2rem] border border-zinc-200 bg-white/80 p-6 shadow-lg backdrop-blur md:p-8">
+            <h2 className="text-2xl font-semibold">Send a message</h2>
+
+            <form className="mt-6 space-y-5">
+              <input
+                type="text"
+                placeholder="Your name"
+                className="w-full rounded-xl border border-zinc-200 px-4 py-3 outline-none focus:border-primary"
+              />
+              <input
+                type="email"
+                placeholder="Your email"
+                className="w-full rounded-xl border border-zinc-200 px-4 py-3 outline-none focus:border-primary"
+              />
+              <textarea
+                rows="4"
+                placeholder="Your message"
+                className="w-full rounded-xl border border-zinc-200 px-4 py-3 outline-none focus:border-primary"
+              />
+
+              <button
+                data-cursor="Send"
+                className="inline-flex items-center gap-2 rounded-full bg-primary px-6 py-3 text-white hover:opacity-90"
+              >
+                <Send size={16} />
+                Send Message
+              </button>
+            </form>
+          </div>
+
+          {/* Info */}
+          <div className="space-y-6">
+            <div className="rounded-[2rem] border border-zinc-200 bg-white/80 p-6 backdrop-blur">
+              <div className="flex items-center gap-3">
+                <Mail className="text-primary" />
+                <span>info@nekza.com</span>
+              </div>
+            </div>
+
+            <div className="rounded-[2rem] border border-zinc-200 bg-white/80 p-6 backdrop-blur">
+              <div className="flex items-center gap-3">
+                <Phone className="text-primary" />
+                <span>+91 7045552112</span>
+              </div>
+            </div>
+
+            <div className="rounded-[2rem] border border-zinc-200 bg-white/80 p-6 backdrop-blur">
+              <div className="flex items-center gap-3">
+                <MapPin className="text-primary" size={50} />
+                <span>Survey no. 407, Plot no. 1,2, Jay Balaji Industrial Area, Sanganva, Tal. Lodhika, Rajkot, Gujarat, India - 360035</span>
+              </div>
+            </div>
+
+            <div className="rounded-[2rem] bg-zinc-950 p-6 text-white">
+              <h3 className="text-xl font-semibold">Response time</h3>
+              <p className="mt-2 text-zinc-300 text-sm">
+                Usually within 24 – 48 hours.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
   );
 }

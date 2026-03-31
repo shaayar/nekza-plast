@@ -10,7 +10,7 @@ const ExternalIcon = () => (
         viewBox="0 0 13 13"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="size-[11px] shrink-0 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+        className="size-2.75 shrink-0 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
     >
         <path
             d="M2.08064 11.7301L11.4802 2.33049L11.4802 12.9371L12.4801 12.9371L12.4801 0.623532L0.166506 0.623533L0.166507 1.62338L10.7731 1.62338L1.37354 11.023L2.08064 11.7301Z"
@@ -87,7 +87,7 @@ const AccordionSection = ({ section }) => {
             </button>
 
             <div
-                className={`overflow-hidden transition-all duration-300 ${open ? "max-h-[500px] pb-4" : "max-h-0"
+                className={`overflow-hidden transition-all duration-300 ${open ? "max-h-125 pb-4" : "max-h-0"
                     }`}
             >
                 <div className="grid grid-cols-2 gap-x-4">
@@ -150,9 +150,9 @@ export default function Footer() {
                 <div className="flex flex-col gap-8 md:flex-row md:gap-6 lg:gap-10">
 
                     {/* Logo + Socials */}
-                    <div className="flex items-center justify-between md:w-[200px] md:shrink-0 md:flex-col md:items-start lg:w-[220px]">
+                    <div className="flex items-center justify-between md:w-50 md:shrink-0 md:flex-col md:items-start lg:w-55">
                         <a href="/" className="block w-20 lg:w-28" data-cursor="Open">
-                            <img src="/images/logo.png" 
+                            <img src="/images/logo.webp" 
                                 alt="Nekza Plast" height={70}
                                 className="h-auto w-full object-contain"
                             />
@@ -161,7 +161,7 @@ export default function Footer() {
                         {/* Socials — inline on mobile, pushed to bottom on md */}
                         <div className="flex items-center gap-4 md:mt-auto md:pt-16">
                             <a
-                                href="#"
+                                href="https://www.facebook.com/share/1Yhpp7osHb/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label="Facebook"
@@ -171,7 +171,7 @@ export default function Footer() {
                                 <FacebookIcon />
                             </a>
                             <a
-                                href="#"
+                                href="https://www.instagram.com/nekzaplast"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label="Instagram"
@@ -190,7 +190,7 @@ export default function Footer() {
                         ))}
                     </div>
 
-                    <div className="hidden flex-1 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10 lg:grid-cols-[1fr_auto_1fr_1fr] lg:gap-x-10 xl:gap-x-[60px]">
+                    <div className="hidden flex-1 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10 lg:grid-cols-[1fr_auto_1fr_1fr] lg:gap-x-10 xl:gap-x-15">
                         {NAV_SECTIONS.map((section) => (
                             <StaticSection key={section.heading} section={section} />
                         ))}
@@ -198,7 +198,7 @@ export default function Footer() {
                 </div>
 
                 {/* ── Divider ── */}
-                <div className="mt-10 border-t border-gray-100 pt-6 lg:mt-14">
+                <div className="mt-10 md:border-t border-gray-100 pt-6 lg:mt-14">
                     <p className="w-full text-center text-sm font-light leading-snug md:text-base">
                         Copyright © 2025 Nekza Plast. All Rights Reserved.
                     </p>

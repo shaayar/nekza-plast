@@ -1,8 +1,9 @@
-import { useMemo, useRef, useState } from "react";
-import { ALL_PRODUCTS, getRelatedProducts } from "../data/Data";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { ALL_PRODUCTS } from "../data/Data";
 import { useParams } from "react-router-dom";
 import AddToCartButton from "../components/AddToCartButton.jsx";
 import BuyNowButton from "../components/BuyNowButton.jsx";
+import Card from "../components/UI/Card.jsx";
 
 // ─── Icons ────────────────────────────────────────────────────────────────────
 
@@ -14,12 +15,6 @@ const ChevronLeft = ({ cls = "" }) => (
 const ChevronRight = ({ cls = "" }) => (
   <svg className={cls} width="18" height="18" viewBox="0 0 18 18" fill="none">
     <path d="M7 4L12 9L7 14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
-const CartIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="9" cy="21" r="1" /><circle cx="20" cy="21" r="1" />
-    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
   </svg>
 );
 const CheckIcon = () => (
@@ -71,7 +66,7 @@ function ImageGallery({ images }) {
           <button
             key={i}
             onClick={() => setActive(i)}
-            className={`pressable shrink-0 size-16 md:size-[72px] rounded-lg overflow-hidden border-2 transition-colors duration-200
+            className={`pressable shrink-0 size-16 md:size-18 rounded-lg overflow-hidden border-2 transition-colors duration-200
                         ${active === i ? "border-red-600" : "border-gray-200 hover:border-gray-400"}`}
             data-cursor="View"
           >
@@ -147,13 +142,13 @@ function TabSection({ tabs }) {
           <button
             key={tab}
             onClick={() => setActive(tab)}
-            className={`pressable shrink-0 px-4 py-3 text-sm font-medium whitespace-nowrap transition-colors duration-150 relative
+            className={`pressable shrink-0 px-4 py-3 text-lg font-medium whitespace-nowrap transition-colors duration-150 relative
                         ${active === tab ? "text-gray-900" : "text-gray-500 hover:text-gray-700"}`}
             data-cursor="Open"
           >
             {tab}
             {active === tab && (
-              <span className="absolute bottom-0 left-0 w-full h-[2px] bg-red-600 rounded-full" />
+              <span className="absolute bottom-0 left-0 w-full h-0.5 bg-red-600 rounded-full" />
             )}
           </button>
         ))}
@@ -161,7 +156,7 @@ function TabSection({ tabs }) {
 
       {/* Tab content */}
       <div className="pt-5 space-y-3">
-        <p className="text-sm font-bold text-gray-900">{tabs[active].heading}</p>
+        <p className="text-lg font-bold text-gray-900">{tabs[active].heading}</p>
         <ul className="space-y-1.5">
           {tabs[active].bullets.map((b, i) => (
             <li key={i} className="flex gap-2 text-sm text-gray-600 leading-relaxed">
@@ -170,55 +165,6 @@ function TabSection({ tabs }) {
             </li>
           ))}
         </ul>
-      </div>
-    </div>
-  );
-}
-
-function RelatedCard({ product }) {
-  return (
-    <div className="flex flex-col gap-2 group shadow-2xl rounded-xl">
-      {/* Image */}
-      <div className="relative overflow-hidden bg-gray-50 aspect-square">
-        <img
-          src={product.img}
-          alt={product.title}
-          className="h-full w-full object-contain p-4 transition-transform duration-300 group-hover:scale-105"
-        />
-      </div>
-
-
-      <div className="px-3 pb-2 flex flex-col justify-between h-25">
-        <div>
-          {/* Title */}
-          <p className="text-xs md:text-sm font-medium text-gray-900 leading-snug line-clamp-2">
-            {product.title}
-          </p>
-          {/* Price */}
-          <div className="flex items-center gap-2 flex-wrap">
-            {typeof product.price === "number" ? (
-              <>
-                <span className="text-sm font-bold text-gray-900">₹{product.price}/pc</span>
-                {typeof product.mrp === "number" && (
-                  <span className="text-xs text-gray-400 line-through">MRP ₹{product.mrp}</span>
-                )}
-                {product.off && (
-                  <span className="text-xs font-medium text-green-600">{product.off}% off</span>
-                )}
-              </>
-            ) : (
-              <span className="text-xs text-gray-500">Price on request</span>
-            )}
-          </div>
-        </div>
-        {/* CTA */}
-        <button className="pressable flex items-center justify-between w-full mt-auto pt-2 text-sm font-medium text-gray-800 hover:text-red-600 transition-colors border-t border-gray-100" data-cursor="View">
-          <span>View Details</span>
-          <span className="flex size-7 items-center justify-center rounded-full border border-current relative">
-            <CartIcon />
-            <span className="absolute -top-1 -right-1 size-3.5 flex items-center justify-center rounded-full bg-red-600 text-[8px] text-white font-bold">0</span>
-          </span>
-        </button>
       </div>
     </div>
   );
@@ -245,6 +191,20 @@ export default function ProductDetail() {
     );
   }, [activeSlug]);
 
+  const productGalleryImages = useMemo(() => {
+    if (!activeProduct) return [];
+    const extraImages = Array.isArray(activeProduct.images) ? activeProduct.images : [];
+    const merged = [activeProduct.img, activeProduct.hoverImage, ...extraImages].filter(Boolean);
+    return [...new Set(merged)];
+  }, [activeProduct]);
+
+  const RELATED = useMemo(() => {
+    if (!activeProduct) return [];
+    return ALL_PRODUCTS
+      .filter((p) => p.slug !== activeProduct.slug && p.category === activeProduct.category)
+      .slice(0, 4);
+  }, [activeProduct]);
+
   if (!activeProduct) {
     return (
       <section className="section-shell min-h-screen bg-white px-4 py-10">
@@ -254,12 +214,6 @@ export default function ProductDetail() {
       </section>
     );
   }
-
-  const productGalleryImages = useMemo(() => {
-    const extraImages = Array.isArray(activeProduct.images) ? activeProduct.images : [];
-    const merged = [activeProduct.img, activeProduct.hoverImage, ...extraImages].filter(Boolean);
-    return [...new Set(merged)];
-  }, [activeProduct]);
 
   const sizeMap = {
     "water-bottle": ["750ml", "900ml", "1200ml", "1500ml"],
@@ -272,11 +226,29 @@ export default function ProductDetail() {
     "kitchen-product": ["Standard"],
   };
 
+  const variantList = Array.isArray(activeProduct.variants) ? activeProduct.variants : [];
+  const derivedSizes = variantList.length > 0
+    ? variantList.map((variant) => variant.size)
+    : (sizeMap[activeProduct.category] || ["Standard"]);
+
+  useEffect(() => {
+    setSize(0);
+  }, [activeProduct.id]);
+
+  const selectedSize = derivedSizes[size] || derivedSizes[0] || "Standard";
+  const selectedVariant = variantList.find((variant) => variant.size === selectedSize);
+
+  const activePrice = selectedVariant?.price ?? activeProduct.price ?? null;
+  const activeMrp = selectedVariant?.mrp ?? activeProduct.mrp ?? null;
+  const activeOff = selectedVariant?.off
+    ?? (activePrice && activeMrp ? Math.round(((activeMrp - activePrice) / activeMrp) * 100) : null);
+
   const PRODUCT = {
     title: activeProduct.title,
-    price: activeProduct.price ?? null,
-    mrp: activeProduct.mrp ?? null,
-    sizes: sizeMap[activeProduct.category] || ["Standard"],
+    price: activePrice,
+    mrp: activeMrp,
+    off: activeOff,
+    sizes: derivedSizes,
     images: productGalleryImages,
     tabs: {
       About: {
@@ -327,19 +299,15 @@ export default function ProductDetail() {
     ],
   };
 
-  const RELATED = getRelatedProducts(activeProduct.slug, activeProduct.category, 4);
-
   const productForCart = {
     id: activeProduct.id,
     title: PRODUCT.title,
-    price: PRODUCT.price ?? 0,
-    mrp: PRODUCT.mrp ?? PRODUCT.price ?? 0,
+    price: PRODUCT.price ?? activeProduct.price ?? 0,
+    mrp: PRODUCT.mrp ?? PRODUCT.price ?? activeProduct.mrp ?? activeProduct.price ?? 0,
     image: PRODUCT.images[0],
   };
 
-  const discount = PRODUCT.price && PRODUCT.mrp
-    ? Math.round(((PRODUCT.mrp - PRODUCT.price) / PRODUCT.mrp) * 100)
-    : null;
+  const discount = PRODUCT.off;
 
   return (
     <section className="section-shell min-h-screen bg-white px-4 py-6 sm:px-6 md:px-8 md:py-10 lg:px-10">
@@ -357,20 +325,24 @@ export default function ProductDetail() {
           <div className="flex flex-col gap-5">
 
             {/* Title */}
-            <h1 className="text-xl md:text-2xl font-bold text-gray-900 leading-snug">
+            <h1 className="text-2xl md:text-4xl font-bold leading-snug text-primary">
               {PRODUCT.title}
             </h1>
 
             {/* Price */}
             <div className="flex items-center gap-3 flex-wrap">
-              <span className="text-xl md:text-2xl font-bold text-gray-900">
-                {PRODUCT.price ? `₹${PRODUCT.price}` : "Price on request"}
+              <span className="text-xl md:text-3xl font-bold text-gray-900">
+                {PRODUCT.price ? (
+                  <>
+                    ₹{PRODUCT.price} <span className="text-gray-500">/ piece</span>
+                  </>
+                ) : ( "Price on request" )}
               </span>
               {PRODUCT.mrp && (
-                <span className="text-sm text-gray-400 line-through">MRP ₹{PRODUCT.mrp}</span>
+                <span className="text-md text-gray-400 line-through">MRP ₹{PRODUCT.mrp}</span>
               )}
               {discount && (
-                <span className="text-sm font-semibold text-green-600">{discount}% off</span>
+                <span className="text-md font-semibold text-white bg-primary rounded p-1">{discount}% off</span>
               )}
             </div>
 
@@ -388,15 +360,15 @@ export default function ProductDetail() {
             <div className="flex flex-col gap-3 sm:flex-row">
               <AddToCartButton
                 product={productForCart}
-                selectedSize={PRODUCT.sizes[size]}
+                selectedSize={selectedSize}
                 quantity={qty}
                 className="w-full"
               />
               <BuyNowButton
                 product={productForCart}
-                selectedSize={PRODUCT.sizes[size]}
+                selectedSize={selectedSize}
                 quantity={qty}
-                className="pressable w-full rounded-full bg-primary px-8 py-4 font-medium text-white transition-opacity duration-200 hover:opacity-90"
+                className="pressable w-full rounded-full bg-primary px-8 py-4 font-medium text-white "
               >
                 Buy Now
               </BuyNowButton>
@@ -450,8 +422,8 @@ export default function ProductDetail() {
 
           {/* Mobile: 2-col grid  |  Desktop: 4-col grid */}
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">
-            {RELATED.map((p, i) => (
-              <RelatedCard key={i} product={p} />
+            {RELATED.map((p) => (
+              <Card key={p.id} product={p} />
             ))}
           </div>
         </div>

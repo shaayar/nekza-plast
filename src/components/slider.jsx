@@ -1,37 +1,9 @@
 import { useState, useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade } from "swiper/modules";
+import { HERO_SLIDES } from "../data/Data.js";
 import "swiper/css";
 import "swiper/css/effect-fade";
-
-const slides = [
-  {
-    tag: "Smart Kitchen Organization",
-    // title: "",
-    title: "Discover Premium Water Companions",
-    titleItalic: [],
-    bg: "/images/slide-1.webp",
-  },
-  {
-    tag: "Hydration Essentials",
-    title: "Elegant Storage Solutions for Contemporary Living",
-    titleItalic: [],
-    bg: "/images/slide-2.webp",
-  },
-  {
-    tag: "Fresh Food Preservation",
-    title: "Modern Serving Solutions",
-    titleItalic: [],
-    bg: "/images/slide-3.webp",
-  },
-  {
-    tag: "Meal Prep Solutions",
-    // title: "Smart Lunch Containers for Work & Study",
-    title: "Innovative Food Storage for Today's Households",
-    titleItalic: [],
-    bg: "/images/slide-4.webp",
-  },
-];
 
 export default function HeroSlider() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -45,7 +17,7 @@ export default function HeroSlider() {
 
   return (
     <section
-      className="section-shell relative w-full overflow-hidden bg-black h-[40svh] lg:h-[84svh]"
+      className="relative w-full overflow-hidden bg-black h-[40svh] lg:h-[84svh]"
     >
       <Swiper
         modules={[Autoplay, EffectFade]}
@@ -59,7 +31,7 @@ export default function HeroSlider() {
         className="w-full! h-full!"
         data-cursor="Drag"
       >
-        {slides.map((slide, i) => (
+        {HERO_SLIDES.map((slide, i) => (
           <SwiperSlide key={i} className="relative overflow-hidden">
 
             {/* ── Background image with Ken Burns on active ── */}
@@ -163,7 +135,7 @@ export default function HeroSlider() {
 
       {/* ── Progress-bar pagination ── */}
       <div className="absolute bottom-5 md:bottom-10 left-[5vw] lg:left-[45vw] z-20 flex items-center gap-2.5">
-        {slides.map((_, i) => (
+        {HERO_SLIDES.map((_, i) => (
           <button
             key={i}
             onClick={() => swiperRef.current?.slideToLoop(i)}
@@ -186,7 +158,7 @@ export default function HeroSlider() {
         className="hidden md:block absolute bottom-6 right-[3vw] z-20 text-white/60 text-lg tracking-widest font-comfortaa"
       >
         <span className="text-white/90 text-2xl font-bold">0{activeIndex + 1}</span>
-        {" "}/ 0{slides.length}
+        {" "}/ 0{HERO_SLIDES.length}
       </div>
     </section>
   );

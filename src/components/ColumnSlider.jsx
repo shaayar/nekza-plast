@@ -12,35 +12,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/pagination";
-
-// ─── Data ────────────────────────────────────────────────────────────────────
-
-const SLIDES = [
-  {
-    title: "Cast Iron\nSeries",
-    desc: "India's first lightweight cast iron",
-    href: "/collections/cast-iron-cookware",
-    bg: "https://stahlkitchens.com/cdn/shop/files/Cast_Iron_Series-_image_background.progressive.jpg?v=1708407815",
-  },
-  {
-    title: "Cooker\nSeries",
-    desc: "India's first ISI Mark triply stainless-steel pressure cooker",
-    href: "/collections/cookers",
-    bg: "https://stahlkitchens.com/cdn/shop/files/Cooker_Banner_Image.progressive.jpg?v=1622462008",
-  },
-  {
-    title: "Artisan Classic\nSeries",
-    desc: "Signature Stahl Cookware designed for Pure Cooking Joy",
-    href: "/collections/artisan",
-    bg: "https://stahlkitchens.com/cdn/shop/files/Artisan_Classic_Series_-_background_image.progressive.jpg?v=1708407925",
-  },
-  {
-    title: "Artisan Hybrid\nSeries",
-    desc: "Stick Resistant triply cookware with world's best coating",
-    href: "/collections/artisan-hybrid-series",
-    bg: "https://stahlkitchens.com/cdn/shop/files/Artisan_Hybrid_Series_-_background_image.progressive.jpg?v=1708408023",
-  },
-];
+import { COLUMN_SLIDER_SLIDES } from "../data/Data.js";
 
 // ─── Shared caption ──────────────────────────────────────────────────────────
 
@@ -108,7 +80,7 @@ export default function ColumnSlider() {
 
       {/* ── Desktop: 4 columns ── */}
       <div className="hidden md:flex">
-        {SLIDES.map((slide, i) => (
+        {COLUMN_SLIDER_SLIDES.map((slide, i) => (
           <DesktopColumn
             key={i}
             slide={slide}
@@ -130,7 +102,7 @@ export default function ColumnSlider() {
           style={{ height: "63vh" }}
           data-cursor="Drag"
         >
-          {SLIDES.map((slide, i) => (
+          {COLUMN_SLIDER_SLIDES.map((slide, i) => (
             <SwiperSlide key={i} className="relative overflow-hidden">
               {/* Background */}
               <div

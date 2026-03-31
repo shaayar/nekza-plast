@@ -1,33 +1,5 @@
 import React from "react";
-
-const lifeCards = [
-  {
-    video:
-      "/images/p-bottle-1.mp4",
-    href: "#",
-  },
-  {
-    video:
-      "/images/p-jug.mp4",
-    href: "#",
-  },
-  {
-    video:
-      "/images/p-combo.mp4",
-    href: "#",
-  },
-  {
-    video:
-      "/images/p-jug-2.mp4",
-    href: "#",
-  },
-  // {
-  //   video:
-  //     "/images/p-jug-3.mp4",
-  //   href: "#",
-  // },
-
-];
+import { LIFE_WITH_NEKZA_CARDS } from "../data/Data.js";
 
 export default function LifeWithNekza() {
   return (
@@ -36,7 +8,7 @@ export default function LifeWithNekza() {
         
         {/* Heading */}
         <div className="flex flex-col gap-2 text-center max-w-3xl">
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight">
+          <h2 className=" text-3xl lg:text-4xl font-bold leading-tight">
             Everyday life with <span className="text-primary underline decoration-4 decoration-alt-yellow">Nekza</span>
           </h2>
           <p className="text-sm sm:text-base lg:text-xl text-neutral-600 font-light">
@@ -46,10 +18,10 @@ export default function LifeWithNekza() {
 
         {/* Horizontal Scroll Cards */}
         <div className="flex max-w-full gap-4 overflow-x-auto no-scrollbar md:gap-6 pb-2" data-cursor="Drag">
-          {lifeCards.map((card, index) => (
+          {LIFE_WITH_NEKZA_CARDS.map((card, index) => (
             <div
               key={index}
-              className="flex aspect-9/16 w-[58vw] max-w-[360px] min-w-[260px] shrink-0 flex-col overflow-hidden rounded-xl bg-white shadow-sm md:w-[36vw] lg:w-[25vw] xl:w-[calc((100vw-296px)/4)]"
+              className="flex aspect-9/16 w-[58vw] max-w-90 min-w-65 shrink-0 flex-col overflow-hidden rounded-xl bg-white shadow-sm md:w-[36vw] lg:w-[25vw] xl:w-[calc((100vw-296px)/4)]"
             >
               {/* Video */}
               <div className="relative w-full h-full overflow-hidden">

@@ -1,18 +1,13 @@
 
 import { useMemo, useState } from "react";
 import Card from "./UI/Card.jsx";
-import { getBestsellers } from "../data/Data.js";
+import { getBestsellers, DISCOVERY_CHIPS } from "../data/Data.js";
 import { ArrowRight } from "lucide-react";
 
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
 const PRODUCTS = getBestsellers();
-const DISCOVERY_CHIPS = [
-  { id: "for-you", label: "For You" },
-  { id: "trending", label: "Trending" },
-  { id: "under-500", label: "Under ₹500" },
-];
 
 const getProductMood = (title = "") => {
   const lowered = title.toLowerCase();
@@ -62,12 +57,12 @@ export default function Bestsellers() {
   }, [activeChip]);
 
   return (
-    <section className="section-shell flex flex-col items-center gap-6 py-5 sm:py-7  lg:gap-8 lg:py-10">
+    <section className="section-shell flex flex-col items-center gap-6 py-5 sm:py-7 lg:py-10 lg:gap-8">
 
       {/* Header */}
       <div className="flex w-full flex-col items-center gap-2 text-center md:gap-3">
-        <h2 className="font-bold capitalize leading-snug text-4xl lg:text-5xl">
-          <span className="outline text-white">Our</span> <span className="underline decoration-4 decoration-alt-yellow">Bestsellers</span>
+        <h2 className="font-bold text-black text-3xl lg:text-5xl">
+          Our <span className="focus text-primary underline decoration-4 decoration-alt-yellow">Bestseller Products</span>
         </h2>
         <a
           href="/collections/bestseller"
@@ -79,16 +74,15 @@ export default function Bestsellers() {
         </a>
 
         <div className="mt-2 flex flex-wrap items-center justify-center gap-2">
-          {DISCOVERY_CHIPS.map((chip) => (
+          {DISCOVERY_CHIPS.bestsellers.map((chip) => (
             <button
               key={chip.id}
               type="button"
               onClick={() => setActiveChip(chip.id)}
-              className={`pressable rounded-full border px-3 py-1 text-xs font-semibold transition sm:text-sm ${
-                activeChip === chip.id
+              className={`pressable rounded-full border px-3 py-1 text-xs font-semibold transition sm:text-sm ${activeChip === chip.id
                   ? "border-primary bg-primary text-white"
                   : "border-zinc-300 bg-white text-zinc-700 hover:border-primary/50 hover:text-primary"
-              }`}
+                }`}
             >
               {chip.label}
             </button>
@@ -98,14 +92,14 @@ export default function Bestsellers() {
 
       {/* Horizontal scroll row — hides scrollbar */}
       <div
-        className="mx-auto flex max-w-full items-stretch gap-4 overflow-x-auto md:gap-6 ps-4 md:ps-10"
+        className="mx-auto flex max-w-full items-stretch gap-4 overflow-x-auto md:gap-6 ps-4 md:ps-10 md:pt-2"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         data-cursor="Drag"
       >
         {visibleProducts.map((product, i) => (
           <div
             key={product.id || i}
-            className="relative flex h-full w-[78vw] min-w-[260px] max-w-[360px] shrink-0 animate-slide-up sm:w-[46vw] lg:w-[30vw] xl:w-[23vw]"
+            className="relative flex h-full w-[78vw] min-w-65 max-w-90 shrink-0 animate-slide-up sm:w-[46vw] lg:w-[30vw] xl:w-[23vw]"
             style={{ animationDelay: `${i * 80}ms` }}
           >
             <ProductCard

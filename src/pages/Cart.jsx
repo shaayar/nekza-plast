@@ -23,18 +23,18 @@ function Cart() {
   };
 
   const handleRemoveItem = (item) => {
-    removeFromCart(item.id);
+    removeFromCart(item.id, item.color, item.size);
     notify(`${item.title} removed from your cart.`, "warning");
   };
 
   const handleDecreaseQty = (item) => {
     if (item.quantity <= 1) return;
-    updateQuantity(item.id, item.quantity - 1);
+    updateQuantity(item.id, item.quantity - 1, item.color, item.size);
     notify(`Reduced quantity for ${item.title} to ${item.quantity - 1}.`, "info");
   };
 
   const handleIncreaseQty = (item) => {
-    updateQuantity(item.id, item.quantity + 1);
+    updateQuantity(item.id, item.quantity + 1, item.color, item.size);
     notify(`Increased quantity for ${item.title} to ${item.quantity + 1}.`, "success");
   };
 
