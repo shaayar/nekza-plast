@@ -45,8 +45,8 @@ export default function WhyUsPage() {
     <main className="relative overflow-hidden bg-white text-zinc-900">
       {/* Background */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute left-1/2 top-24 h-[30rem] w-[30rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.035)_1px,transparent_1px)] bg-[size:42px_42px] opacity-[0.16]" />
+        <div className="absolute left-1/2 top-24 h-120 w-120 -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.035)_1px,transparent_1px)] bg-size-[42px_42px] opacity-[0.16]" />
       </div>
 
       {/* Hero */}
@@ -58,7 +58,7 @@ export default function WhyUsPage() {
           </div>
 
           <h1 className="text-4xl font-semibold tracking-tight text-zinc-950 md:text-6xl">
-            Because utility should still feel <span className="text-primary">well designed</span>.
+            Because utility should still feel <span className="text-primary underline decoration-3 decoration-alt-yellow">well designed</span>.
           </h1>
 
           <p className="mx-auto mt-6 max-w-2xl text-base leading-7 text-zinc-600 md:text-lg">
@@ -83,7 +83,7 @@ export default function WhyUsPage() {
 
       {/* Statement Block */}
       <section className="relative px-4 pb-20 md:px-8 lg:px-12">
-        <div className="mx-auto max-w-6xl rounded-[2rem] border border-zinc-200 bg-zinc-950 px-6 py-10 text-white shadow-[0_20px_80px_rgba(0,0,0,0.18)] md:px-10 md:py-14">
+        <div className="mx-auto max-w-6xl rounded-4xl border border-zinc-200 bg-zinc-950 px-6 py-10 text-white shadow-[0_20px_80px_rgba(0,0,0,0.18)] md:px-10 md:py-14">
           <p className="text-sm uppercase tracking-[0.3em] text-white/60">
             Our Point of View
           </p>
@@ -121,9 +121,7 @@ export default function WhyUsPage() {
               return (
                 <div
                   key={item.title}
-                  className={`group rounded-[2rem] border border-zinc-200 bg-white/80 p-6 shadow-[0_18px_60px_rgba(0,0,0,0.04)] backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg ${
-                    index % 4 === 0 ? "xl:translate-y-4" : ""
-                  }`}
+                  className={`group rounded-4xl border border-zinc-200 bg-white/80 p-6 shadow-[0_18px_60px_rgba(0,0,0,0.04)] backdrop-blur transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg`}
                 >
                   <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-colors duration-300 group-hover:bg-primary group-hover:text-white">
                     <Icon size={24} />
@@ -145,7 +143,7 @@ export default function WhyUsPage() {
 
       {/* Closing CTA */}
       <section className="px-4 pb-24 md:px-8 lg:px-12">
-        <div className="mx-auto max-w-5xl rounded-[2rem] border border-zinc-200 bg-white/80 px-6 py-10 text-center shadow-[0_18px_60px_rgba(0,0,0,0.04)] backdrop-blur md:px-10">
+        <div className="mx-auto max-w-5xl rounded-4xl border border-primary bg-white/80 px-6 py-10 text-center shadow-[0_18px_60px_rgba(0,0,0,0.04)] backdrop-blur md:px-10">
           <p className="text-sm uppercase tracking-[0.3em] text-primary">
             Built for Real Life
           </p>
@@ -153,7 +151,7 @@ export default function WhyUsPage() {
           <h2 className="mt-4 text-3xl font-semibold tracking-tight text-zinc-950 md:text-4xl">
             The goal is simple:
             <br className="hidden md:block" />
-            make everyday products feel more worth keeping.
+            <span className="text-primary">Make everyday products feel more worth keeping.</span>
           </h2>
 
           <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-zinc-600">

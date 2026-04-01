@@ -28,8 +28,8 @@ export default function AboutPage() {
       {/* INTRO */}
       <section className="px-4 md:px-8 lg:px-16 py-10 md:py-16">
         <div className="max-w-5xl mx-auto text-center">
-          <h1 className="text-3xl md:text-5xl font-semibold mb-6 text-primary">
-            Empowering Everyday Living Through Innovation
+          <h1 className="text-3xl md:text-5xl font-semibold mb-6">
+            Empowering Everyday Living <span className="text-primary underline decoration-3 decoration-alt-yellow">Through Innovation</span>
           </h1>
           <div className="space-y-5 text-base md:text-lg leading-8 text-gray-700">
             <p>
@@ -46,9 +46,9 @@ export default function AboutPage() {
       </section>
 
       {/* MISSION + VISION */}
-      <section className="px-4 md:px-8 lg:px-16 py-6 md:py-12">
-        <h1 className="text-3xl md:text-5xl font-semibold mb-6 text-primary text-center">
-          Our Mission & Vision
+      <section className="px-4 md:px-8 lg:px-16 py-6 md:py-12 text-center">
+        <h1 className="text-3xl md:text-5xl font-semibold mb-6">
+          Our <span className="text-primary underline decoration-3 decoration-alt-yellow">Mission & Vision</span>
         </h1>
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10">
           <div className="text-center md:text-left relative border border-gray-200 rounded-2xl p-6 md:p-9 overflow-hidden">
@@ -75,9 +75,9 @@ export default function AboutPage() {
 
       {/* VALUES */}
       <section className="px-4 md:px-8 lg:px-16 py-12 md:py-20">
-        <h1 className="text-3xl md:text-5xl font-semibold mb-6 text-primary text-center">
-          Our Values
-        </h1>
+        <h1 className="text-3xl md:text-5xl font-semibold mb-6 text-center">
+            Our <span className="text-primary underline decoration-3 decoration-alt-yellow">Values</span>
+          </h1>
         <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {ABOUT_VALUES.map((item, index) => (
             <div key={index} className="text-center shadow-xl px-2 py-4 md:px-4 md:py-2 rounded-2xl">
@@ -155,11 +155,11 @@ export default function AboutPage() {
       {/* KUCH NAYA */}
       <section className="px-4 md:px-8 lg:px-16 py-12 md:py-20">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-5xl font-semibold text-primary mb-4">
-            Kuch Naya Sochte Hain
+          <h2 className="text-3xl md:text-5xl font-semibold mb-4">
+            Beyond <span className="text-primary underline decoration-3 decoration-alt-yellow">the Ordinary</span>
           </h2>
           <h3 className="text-xl md:text-3xl font-medium mb-6 text-gray-800">
-            Where Progress Meets Possibility
+            Where Vision Meets Innovation
           </h3>
           <div className="space-y-4 text-gray-700 text-base md:text-lg leading-8">
             <p>

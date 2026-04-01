@@ -65,7 +65,7 @@ export default function MyAccount() {
               </div>
 
               <h1 className="max-w-2xl text-4xl font-semibold tracking-tight text-zinc-950 md:text-6xl">
-                Your Nekza space, <span className="text-primary">all in one place</span>.
+                Your Nekza space, <span className="text-primary underline decoration-3 decoration-alt-yellow">all in one place</span>.
               </h1>
 
               <p className="mt-6 max-w-2xl text-base leading-7 text-zinc-600 md:text-lg">

@@ -56,7 +56,7 @@ export default function FAQ() {
           </div>
 
           <h1 className="text-4xl font-semibold tracking-tight md:text-6xl">
-            Questions, <span className="text-primary">answered clearly</span>.
+            Questions, <span className="text-primary underline decoration-3 decoration-alt-yellow">answered clearly</span>.
           </h1>
 
           <p className="mt-6 text-base text-zinc-600 md:text-lg">

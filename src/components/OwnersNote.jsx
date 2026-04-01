@@ -13,13 +13,13 @@ export default function OwnersNote() {
           {/* Content */}
           <div className="relative z-10">
             <h2 className="text-2xl md:text-3xl font-semibold text-primary mb-6">
-              A Message From Our Founder
+              A Message From Founder
             </h2>
             
             <blockquote className="space-y-4 text-gray-700 text-base md:text-lg leading-8 italic">
               <p>
                 "When I started Nekza in 2013, I had a simple vision: to create homeware that families could trust for generations. 
-                Our philosophy 'Kuch Naya Sochte Hai' isn't just about making new products—it's about reimagining how everyday essentials can make life better.
+                Our philosophy 'Beyond the Ordinary' isn't just about making new products—it's about reimagining how everyday essentials can make life better.
               </p>
               <p>
                 Today, as we serve millions of homes across the country, that vision remains unchanged. Every bottle, every container, every kitchen product carries our promise of quality, innovation, and care.
@@ -33,8 +33,8 @@ export default function OwnersNote() {
             <div className="mt-8 pt-6 border-t border-primary/20">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="font-semibold text-primary text-lg">Ketan Desai</p>
-                  <p className="font-semibold text-primary text-lg">Founder & CEO</p>
+                  <p className="font-semibold text-primary text-lg">Ketan Desai,</p>
+                  <p className="font-semibold text-primary text-lg">Founder & CEO,</p>
                   <p className="text-gray-600">Nekza Plast Manufacturing</p>
                 </div>
                 <div className="text-right">

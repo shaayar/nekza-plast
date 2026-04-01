@@ -44,8 +44,8 @@ export default function PopularProducts() {
 
       {/* Header */}
       <div className="flex flex-col items-center gap-2 text-center md:gap-3">
-        <h2 className="font-bold text-black text-3xl lg:text-5xl">
-          Most <span className="focus text-primary underline decoration-4 decoration-alt-yellow">Popular Products</span>
+        <h2 className="font-bold capitalize leading-snug text-4xl lg:text-5xl" >
+          <span className="outline text-white">Our</span> <span className="underline decoration-4 decoration-alt-yellow">Popular Products</span>
         </h2>
         <a
           href="/collections/popular"

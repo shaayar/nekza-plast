@@ -20,7 +20,7 @@ function ReasonIcon({ icon }) {
   return icon ?? null;
 }
 
-export default function WhyUs() {
+export default function WhyNekza() {
   return (
     <section className="section-shell px-4 py-8 sm:px-6 sm:py-10 lg:px-10 lg:py-12">
       <div className="relative overflow-hidden rounded-4xl border border-zinc-200 bg-white p-5 sm:p-8 lg:p-10">

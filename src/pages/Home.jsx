@@ -5,20 +5,20 @@ import NewArrivals from "../components/NewArrivals";
 import LifeWithNekza from "../components/LifeWithNekza";
 import PopularProducts from "../components/PopularProducts.jsx";
 import Testimonials from "../components/Testimonials.jsx";
-import WhyUs from "../components/WhyUs.jsx";
+import WhyNekza from "../components/WhyNekza.jsx";
 
 function Home() {
   return (
-    <section>
+    <>
       <ImageSwiper />
       <CategoryGrid />
       <Bestsellers />
       <NewArrivals />
       <PopularProducts />
-      <WhyUs />
+      <WhyNekza />
       <Testimonials />
       <LifeWithNekza />
-    </section>
+    </>
   );
 }
 
