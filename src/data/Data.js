@@ -1103,8 +1103,9 @@ export const relatedProducts = getRelatedProducts(
   "water-bottle"
 );
 
-// ProductGrid Tiles Data
+// Category Grid Tiles Data
 export const GRID_TILES = {
+    // Mobile Fields
   mobile: {
     rows: [
       [
@@ -1113,21 +1114,18 @@ export const GRID_TILES = {
           label: "Shop Now",
           title: "Hydration",
           animate: "slideLeft",
-          images: {
-            mobile: ["/images/p2-bottle-1.webp", "/images/p2-bottle-1.webp"],
-            desktop: ["/images/p2-bottle-1.webp", "/images/p2-bottle-1.webp"]
-          }
+          images: ["/images/p2-bottle-1.webp", "/images/p2-bottle-1.webp"],
         },
         {
           href: "/collections/combosets",
           label: "Explore",
           title: "Combos",
           animate: "slideRight",
-          images: {
-            mobile: ["/images/products/tiffin-jug-combo-green-2.webp", "/images/products/tiffin-jug-combo-green-2.webp"],
-            desktop: ["/images/p-combo-2.webp", "/images/p-combo-2.webp"]
-          }
-        }
+          images: [
+            "/images/products/tiffin-jug-combo-green-2.webp",
+            "/images/products/tiffin-jug-combo-green-2.webp",
+          ],
+        },
       ],
       [
         {
@@ -1135,21 +1133,18 @@ export const GRID_TILES = {
           label: "Browse",
           title: "Pencil Boxes",
           animate: "slideLeft",
-          images: {
-            mobile: ["/images/products/NEKZA-Kids-Pencil-Box.webp", "/images/products/NEKZA-Kids-Pencil-Box.webp"],
-            desktop: ["/images/p-pbox-2.webp", "/images/p-pbox-2.webp"]
-          }
+          images: [
+            "/images/products/NEKZA-Kids-Pencil-Box.webp",
+            "/images/products/NEKZA-Kids-Pencil-Box.webp",
+          ],
         },
         {
           href: "/collections/tiffin-boxes",
           label: "Discover",
           title: "Tiffin Boxes",
           animate: "slideRight",
-          images: {
-            mobile: ["/images/p-tiffin-1.webp", "/images/p-tiffin-1.webp"],
-            desktop: ["/images/p-tiffin-1.webp", "/images/p-tiffin-1.webp"]
-          }
-        }
+          images: ["/images/p-tiffin-1.webp", "/images/p-tiffin-1.webp"],
+        },
       ],
       [
         {
@@ -1158,34 +1153,29 @@ export const GRID_TILES = {
           title: "Kitchen",
           animate: "slideRight",
           tall: true,
-          images: {
-            mobile: ["/images/p-casserol-1.webp ", "/images/p-casserol-2.webp"],
-            desktop: ["/images/p-casserol-1.webp", "/images/p-casserol-1.webp"]
-          }
+          images: ["/images/p-casserol-1.webp", "/images/p-casserol-2.webp"],
         },
         {
           href: "/collections/water-jug",
           label: "Essentials",
           title: "Water Jugs",
           animate: "slideUp",
-          images: {
-            mobile: ["/images/p-jug-1.webp", "/images/p-jug-1.webp"],
-            desktop: ["/images/p-jug-1.webp", "/images/p-jug-1.webp"]
-          }
+          images: ["/images/products/p-jug-2.webp", "/images/products/p-jug-2.webp"],
         },
         {
           href: "/collections/kidzbee",
           label: "For Kids",
           title: "Kidz",
           animate: "slideLeft",
-          images: {
-            mobile: ["/images/products/kids-school-water-bottle.webp", "/images/products/kids-school-water-bottle.webp"],
-            desktop: ["/images/p-kids-bottle-2.webp", "/images/p-kids-bottle-2.webp"]
-          }
-        }
-      ]
-    ]
+          images: [
+            "/images/products/kids-school-water-bottle.webp",
+            "/images/products/kids-school-water-bottle.webp",
+          ],
+        },
+      ],
+    ],
   },
+  // Desktop Fields
   desktop: {
     rows: [
       [
@@ -1194,41 +1184,29 @@ export const GRID_TILES = {
           label: "Shop Now",
           title: "Hydration",
           animate: "slideLeft",
-          images: {
-            mobile: ["/images/c-bottle-mobile.webp", "/images/c-bottle-mobile.webp"],
-            desktop: ["/images/p2-bottle-1.webp", "/images/p2-bottle-1.webp"]
-          }
+          images: ["/images/p2-bottle-2.webp", "/images/p2-bottle-2.webp"],
         },
         {
           href: "/collections/combosets",
           label: "Explore",
           title: "Combos",
           animate: "slideRight",
-          images: {
-            mobile: ["/images/c-cookware-mobile.webp", "/images/c-cookware-mobile.webp"],
-            desktop: ["/images/p-combo-2.webp", "/images/p-combo-2.webp"]
-          }
+          images: ["/images/products/tiffin-jug-combo-green-2.webp", "/images/products/tiffin-jug-combo-green-2.webp"],
         },
         {
           href: "/collections/pencil-box",
           label: "Browse",
           title: "Pencil Boxes",
           animate: "slideLeft",
-          images: {
-            mobile: ["/images/c-tableware-mobile.webp", "/images/c-tableware-mobile.webp"],
-            desktop: ["/images/p-pbox-2.webp", "/images/p-pbox-2.webp"]
-          }
+          images: ["/images/products/NEKZA-Kids-Pencil-Box-6.webp", "/images/products/NEKZA-Kids-Pencil-Box-6.webp"],
         },
         {
           href: "/collections/tiffin-boxes",
           label: "Discover",
           title: "Tiffin Boxes",
           animate: "slideRight",
-          images: {
-            mobile: ["/images/c-cookware-mobile-1.webp", "/images/c-cookware-mobile-1.webp"],
-            desktop: ["/images/p-tiffin-1.webp", "/images/p-tiffin-1.webp"]
-          }
-        }
+          images: ["/images/p-tiffin-1.webp", "/images/p-tiffin-1.webp"],
+        },
       ],
       [
         {
@@ -1237,34 +1215,25 @@ export const GRID_TILES = {
           title: "Kitchen",
           animate: "slideRight",
           tall: true,
-          images: {
-            mobile: ["/images/c-kids-mobile.webp", "/images/c-kids-mobile.webp"],
-            desktop: ["/images/p-casserol-1.webp", "/images/p-casserol-1.webp"]
-          }
+          images: ["/images/p-casserol-1.webp", "/images/p-casserol-1.webp"],
         },
         {
           href: "/collections/water-jug",
           label: "Essentials",
           title: "Water Jugs",
           animate: "slideUp",
-          images: {
-            mobile: ["/images/c-tiffin-mobile.webp", "/images/c-tiffin-mobile.webp"],
-            desktop: ["/images/p-jug-1.webp", "/images/p-jug-1.webp"]
-          }
+          images: ["/images/products/p-jug-2.webp", "/images/products/p-jug-2.webp"],
         },
         {
           href: "/collections/kidzbee",
           label: "For Kids",
           title: "Kidzbee",
           animate: "slideLeft",
-          images: {
-            mobile: ["/images/c-apps-mobile.webp", "/images/c-apps-mobile.webp"],
-            desktop: ["/images/p-kids-bottle-2.webp", "/images/p-kids-bottle-2.webp"]
-          }
-        }
-      ]
-    ]
-  }
+          images: ["/images/p-kids-bottle-2.webp", "/images/p-kids-bottle-2.webp"],
+        },
+      ],
+    ],
+  },
 };
 
 // Product helpers for schema migration support

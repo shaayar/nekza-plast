@@ -90,24 +90,7 @@ function Tile({ tile, index, hoveredIndex, setHoveredIndex, className = "", dela
         }}
         className="relative"
       >
-        {/* Mobile image */}
-        <a
-          href={tile.href}
-          className="flex size-full items-center justify-center rounded transition-opacity duration-200 md:hidden"
-          data-cursor="Shop"
-        >
-          <img
-            alt={tile.title}
-            loading="lazy"
-            width={180}
-            height={200}
-            className="h-full w-full object-cover opacity-100 transition-transform duration-500 ease-out group-hover:scale-110 md:hidden"
-            srcSet={`${tile.images.mobile[0]} 1x, ${tile.images.mobile[1]} 2x`}
-            src={tile.images.mobile[1]}
-          />
-        </a>
-
-        {/* Desktop image */}
+        {/* Tile image */}
         <a
           href={tile.href}
           className="flex size-full items-center justify-center rounded transition-opacity duration-200"
@@ -119,8 +102,8 @@ function Tile({ tile, index, hoveredIndex, setHoveredIndex, className = "", dela
             width={300}
             height={300}
             className="h-full w-full object-cover opacity-100 transition-transform duration-500 ease-out group-hover:scale-110"
-            srcSet={`${tile.images.desktop[0]} 1x, ${tile.images.desktop[1]} 2x`}
-            src={tile.images.desktop[1]}
+            srcSet={`${tile.images[0]} 1x, ${tile.images[1]} 2x`}
+            src={tile.images[1]}
           />
         </a>
 
