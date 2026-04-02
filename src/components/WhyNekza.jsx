@@ -33,7 +33,7 @@ export default function WhyNekza() {
               Why Choose Nekza
             </p>
 
-            <h2 className="text-3xl font-bold leading-tight text-zinc-900 sm:text-4xl">
+            <h2 className="text-4xl font-bold leading-tight text-zinc-900 sm:text-5xl">
               A brand designed with{" "}
               <span className="relative inline-block text-primary">
                 intention

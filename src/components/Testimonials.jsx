@@ -5,7 +5,7 @@ export default function Testimonials() {
     <section className="section-shell py-8 sm:py-10 lg:py-12">
       <div className="rounded-2xl bg-zinc-50 p-5 sm:p-7 lg:p-10">
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="font-bold text-black text-3xl lg:text-5xl">
+          <h2 className="font-bold text-black text-4xl lg:text-5xl">
             Loved by <span className="focus text-primary underline decoration-4 decoration-alt-yellow">Nekza Customers</span>
           </h2>
           <p className="mt-2 text-sm text-zinc-600 sm:text-base">

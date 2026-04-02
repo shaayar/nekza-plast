@@ -8,7 +8,7 @@ export default function LifeWithNekza() {
         
         {/* Heading */}
         <div className="flex flex-col gap-2 text-center max-w-3xl">
-          <h2 className=" text-3xl lg:text-4xl font-bold leading-tight">
+          <h2 className=" text-4xl lg:text-5xl font-bold leading-tight">
             Everyday life with <span className="text-primary underline decoration-4 decoration-alt-yellow">Nekza</span>
           </h2>
           <p className="text-sm sm:text-base lg:text-xl text-neutral-600 font-light">
