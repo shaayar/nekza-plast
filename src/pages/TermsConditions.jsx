@@ -12,7 +12,7 @@ const sectionIcons = {
 
 export default function TermsConditions() {
   return (
-    <main className="relative overflow-hidden bg-white text-zinc-900">
+    <main className="relative bg-white text-zinc-900">
       {/* Background */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute left-1/2 top-28 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
@@ -49,9 +49,9 @@ export default function TermsConditions() {
 
       {/* Terms body */}
       <section className="relative px-4 pb-24 md:px-8 lg:px-12">
-        <div className="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[280px_1fr]">
+        <div className="mx-auto grid max-w-7xl gap-8 md:grid-cols-[260px_1fr] lg:grid-cols-[280px_1fr]">
           {/* Sticky sidebar */}
-          <aside className="h-fit rounded-[2rem] border border-zinc-200 bg-white/80 p-5 shadow-[0_10px_40px_rgba(0,0,0,0.04)] backdrop-blur lg:sticky lg:top-28">
+          <aside className="h-fit rounded-4xl border border-zinc-200 bg-white/80 p-5 shadow-[0_10px_40px_rgba(0,0,0,0.04)] backdrop-blur md:sticky md:top-30 md:self-start">
             <p className="mb-4 text-xs font-semibold uppercase tracking-[0.3em] text-primary">
               On This Page
             </p>

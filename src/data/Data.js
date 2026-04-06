@@ -103,7 +103,7 @@ export const navbarItems = [
   {
     title: "Kitchen",
     path: "/collections/kitchen",
-    
+
   },
   {
     title: "Combosets",
@@ -245,7 +245,7 @@ export const ALL_PRODUCTS = [
     href: "/products/nekza-insulated-plastic-water-bottle",
     category: "water-bottle",
     vendor: "Nekza",
-    tags: ["bestseller", "popular", "general"],
+    tags: ["bestseller", "popular"],
     collections: ["water-bottle", "insulated-water-bottle"],
     variants: [
       { size: "750ml", price: 799, mrp: 999, off: 20 },
@@ -270,7 +270,7 @@ export const ALL_PRODUCTS = [
     href: "/products/bullet-water-bottle",
     category: "water-bottle",
     vendor: "Nekza",
-    tags: ["bestseller", "popular", "general"],
+    tags: ["bestseller", "popular"],
     collections: ["water-bottle", "insulated-water-bottle"],
   },
   {
@@ -286,7 +286,7 @@ export const ALL_PRODUCTS = [
     href: "/products/stainless-steel-bottle",
     category: "water-bottle",
     vendor: "Nekza",
-    tags: ["bestseller", "popular", "general"],
+    tags: ["bestseller", "popular"],
     collections: ["water-bottle", "insulated-water-bottle"],
   },
   {
@@ -305,7 +305,7 @@ export const ALL_PRODUCTS = [
     href: "/products/kids-water-bottle",
     category: "water-bottle",
     vendor: "Nekza",
-    tags: ["bestseller", "popular", "general"],
+    tags: ["bestseller", "popular"],
     collections: ["water-bottle", "kidzbee"],
   },
   {
@@ -321,7 +321,7 @@ export const ALL_PRODUCTS = [
     href: "/products/kids-school-water-bottle",
     category: "water-bottle",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["water-bottle", "kidzbee"],
   },
   {
@@ -337,7 +337,7 @@ export const ALL_PRODUCTS = [
     href: "/products/paris-water-bottle",
     category: "water-bottle",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["water-bottle", "insulated-water-bottle"],
   },
   {
@@ -353,7 +353,7 @@ export const ALL_PRODUCTS = [
     href: "/products/cool-campash-water-bottle",
     category: "water-bottle",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["water-bottle", "insulated-water-bottle"],
   },
   {
@@ -369,7 +369,7 @@ export const ALL_PRODUCTS = [
     href: "/products/straw-with-belt-water-bottle",
     category: "water-bottle",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["water-bottle", "kidzbee"],
   },
   {
@@ -385,7 +385,7 @@ export const ALL_PRODUCTS = [
     href: "/products/slim-water-bottle",
     category: "water-bottle",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["water-bottle"],
   },
   {
@@ -401,7 +401,7 @@ export const ALL_PRODUCTS = [
     href: "/products/slim-belt-and-straw-bottle",
     category: "water-bottle",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["water-bottle", "kidzbee"],
   },
   {
@@ -417,7 +417,7 @@ export const ALL_PRODUCTS = [
     href: "/products/baby-doll-water-bottle",
     category: "water-bottle",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["water-bottle", "kidzbee"],
   },
   {
@@ -433,7 +433,7 @@ export const ALL_PRODUCTS = [
     href: "/products/premium-steel-bottle",
     category: "water-bottle",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["water-bottle", "insulated-water-bottle"],
   },
   {
@@ -449,7 +449,7 @@ export const ALL_PRODUCTS = [
     href: "/products/premium-steel-bottles",
     category: "water-bottle",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["water-bottle", "insulated-water-bottle"],
   },
   {
@@ -465,7 +465,7 @@ export const ALL_PRODUCTS = [
     href: "/products/plastic-ubn-flask-600ml",
     category: "flask",
     vendor: "Nekza",
-    tags: ["bestseller", "popular", "general"],
+    tags: ["bestseller", "popular"],
     collections: ["insulated-water-bottle"],
     variants: [
       { size: "600ml", price: 765, mrp: 949, off: 19 },
@@ -486,7 +486,7 @@ export const ALL_PRODUCTS = [
     href: "/products/plastic-ubn-flask-800ml",
     category: "flask",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["insulated-water-bottle"],
   },
   {
@@ -502,7 +502,7 @@ export const ALL_PRODUCTS = [
     href: "/products/plastic-ubn-flask-1700ml",
     category: "flask",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["insulated-water-bottle"],
   },
   {
@@ -518,7 +518,7 @@ export const ALL_PRODUCTS = [
     href: "/products/nekza-unbreakable-flask-600ml",
     category: "flask",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["insulated-water-bottle"],
   },
   {
@@ -534,7 +534,7 @@ export const ALL_PRODUCTS = [
     href: "/products/nekza-unbreakable-flask-800ml",
     category: "flask",
     vendor: "Nekza",
-    tags: ["popular", "general"],
+    tags: ["popular"],
     collections: ["insulated-water-bottle"],
   },
   {
@@ -550,7 +550,7 @@ export const ALL_PRODUCTS = [
     href: "/products/nekza-unbreakable-flask-1700ml",
     category: "flask",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["insulated-water-bottle"],
   },
   {
@@ -566,7 +566,7 @@ export const ALL_PRODUCTS = [
     href: "/products/plastic-water-jug",
     category: "water-jug",
     vendor: "Nekza",
-    tags: ["bestseller", "popular", "general"],
+    tags: ["bestseller", "popular"],
     collections: ["water-jug"],
   },
   {
@@ -582,7 +582,7 @@ export const ALL_PRODUCTS = [
     href: "/products/water-jug-with-glass",
     category: "water-jug",
     vendor: "Nekza",
-    tags: ["popular", "general"],
+    tags: ["popular"],
     collections: ["water-jug"],
   },
   {
@@ -598,7 +598,7 @@ export const ALL_PRODUCTS = [
     href: "/products/nekza-insulated-water-jug",
     category: "water-jug",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["water-jug"],
   },
   {
@@ -614,7 +614,7 @@ export const ALL_PRODUCTS = [
     href: "/products/nekza-insulated-plastic-water-jug-5-ltr",
     category: "water-jug",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["water-jug"],
   },
   {
@@ -630,7 +630,7 @@ export const ALL_PRODUCTS = [
     href: "/products/fridge-jug",
     category: "water-jug",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["water-jug"],
   },
   {
@@ -646,7 +646,7 @@ export const ALL_PRODUCTS = [
     href: "/products/falcon-fridge-jug",
     category: "water-jug",
     vendor: "Nekza",
-    tags: ["new-arrival", "general"],
+    tags: ["new-arrival"],
     collections: ["water-jug"],
   },
   {
@@ -662,7 +662,7 @@ export const ALL_PRODUCTS = [
     href: "/products/20-liters-water-camper",
     category: "water-jug",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["water-jug"],
   },
   {
@@ -678,7 +678,7 @@ export const ALL_PRODUCTS = [
     href: "/products/plastic-jug-and-6pcs-glass-set",
     category: "water-jug",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["water-jug"],
   },
   {
@@ -694,7 +694,7 @@ export const ALL_PRODUCTS = [
     href: "/products/kids-lunch-box",
     category: "lunch-box",
     vendor: "Nekza",
-    tags: ["bestseller", "popular", "general"],
+    tags: ["bestseller", "popular"],
     collections: ["tiffin-boxes", "kidzbee"],
   },
   {
@@ -710,7 +710,7 @@ export const ALL_PRODUCTS = [
     href: "/products/kids-school-lunch-box",
     category: "lunch-box",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["tiffin-boxes", "kidzbee"],
   },
   {
@@ -726,7 +726,7 @@ export const ALL_PRODUCTS = [
     href: "/products/kids-plastic-lunch-box",
     category: "lunch-box",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["tiffin-boxes", "kidzbee"],
   },
   {
@@ -742,7 +742,7 @@ export const ALL_PRODUCTS = [
     href: "/products/square-tiffin-box",
     category: "lunch-box",
     vendor: "Nekza",
-    tags: ["bestseller", "general"],
+    tags: ["bestseller"],
     collections: ["tiffin-boxes", "insulated-tiffin-boxes"],
   },
   {
@@ -758,7 +758,7 @@ export const ALL_PRODUCTS = [
     href: "/products/square-lunch-box",
     category: "lunch-box",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["tiffin-boxes", "insulated-tiffin-boxes"],
   },
   {
@@ -774,7 +774,7 @@ export const ALL_PRODUCTS = [
     href: "/products/3-compartment-lunch-box",
     category: "lunch-box",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["tiffin-boxes", "insulated-tiffin-boxes"],
   },
   {
@@ -790,7 +790,7 @@ export const ALL_PRODUCTS = [
     href: "/products/stainless-steel-lunch-box",
     category: "lunch-box",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["tiffin-boxes", "insulated-tiffin-boxes"],
   },
   {
@@ -806,7 +806,7 @@ export const ALL_PRODUCTS = [
     href: "/products/stainless-steel-lunchboxes-for-kids",
     category: "lunch-box",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["tiffin-boxes", "kidzbee"],
   },
   {
@@ -822,7 +822,7 @@ export const ALL_PRODUCTS = [
     href: "/products/stainless-steel-bento-lunch-box",
     category: "lunch-box",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["tiffin-boxes", "insulated-tiffin-boxes"],
   },
   {
@@ -838,7 +838,7 @@ export const ALL_PRODUCTS = [
     images: [],
     href: "/products/insulated-steel-lunchbox",
     category: "lunch-box",
-    tags: ["new-arrival", "general"],
+    tags: ["new-arrival"],
     collections: ["insulated-tiffin-boxes", "tiffin-boxes"],
   },
   {
@@ -854,7 +854,7 @@ export const ALL_PRODUCTS = [
     href: "/products/plastic-lunchbox",
     category: "lunch-box",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["tiffin-boxes"],
   },
   {
@@ -870,7 +870,7 @@ export const ALL_PRODUCTS = [
     href: "/products/nekza-insulated-hot-pot-3200-ml",
     category: "casserole",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["casseroles"],
   },
   {
@@ -886,7 +886,7 @@ export const ALL_PRODUCTS = [
     href: "/products/nekza-insulated-hot-pot-2200-ml",
     category: "casserole",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["casseroles"],
   },
   {
@@ -902,7 +902,7 @@ export const ALL_PRODUCTS = [
     href: "/products/plastic-insulated-casserole",
     category: "casserole",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["casseroles"],
   },
   {
@@ -918,7 +918,7 @@ export const ALL_PRODUCTS = [
     images: [],
     href: "/products/gift-and-combo-set",
     category: "combo-set",
-    tags: ["new-arrival", "general"],
+    tags: ["new-arrival"],
     collections: ["combosets"],
   },
   {
@@ -934,7 +934,7 @@ export const ALL_PRODUCTS = [
     images: [],
     href: "/products/tiffin-and-jug-combo",
     category: "combo-set",
-    tags: ["general"],
+    tags: [],
     collections: ["combosets", "tiffin-boxes", "water-jug"],
   },
   {
@@ -950,7 +950,7 @@ export const ALL_PRODUCTS = [
     images: [],
     href: "/products/apple-box-3-piece",
     category: "combo-set",
-    tags: ["general"],
+    tags: [],
     collections: ["combosets"],
   },
   {
@@ -966,7 +966,7 @@ export const ALL_PRODUCTS = [
     href: "/products/nekza-kids-pencil-box",
     category: "pencil-box",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["pencil-box", "kidzbee"],
   },
   {
@@ -982,7 +982,7 @@ export const ALL_PRODUCTS = [
     href: "/products/smart-pencil-box",
     category: "pencil-box",
     vendor: "Nekza",
-    tags: ["new-arrival", "general"],
+    tags: ["new-arrival"],
     collections: ["pencil-box", "kidzbee"],
   },
   {
@@ -998,7 +998,7 @@ export const ALL_PRODUCTS = [
     href: "/products/plastic-pencil-box",
     category: "pencil-box",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["pencil-box"],
   },
   {
@@ -1014,7 +1014,7 @@ export const ALL_PRODUCTS = [
     href: "/products/kitchen-products-salt-and-pepper-set",
     category: "kitchen-product",
     vendor: "Nekza",
-    tags: ["bestseller", "popular", "general"],
+    tags: ["bestseller", "popular"],
     collections: ["kitchen"],
   },
   {
@@ -1030,7 +1030,7 @@ export const ALL_PRODUCTS = [
     href: "/products/quick-glass-6-pcs-set",
     category: "kitchen-product",
     vendor: "Nekza",
-    tags: ["new-arrival", "general"],
+    tags: ["new-arrival"],
     collections: ["kitchen"],
   },
   {
@@ -1046,7 +1046,7 @@ export const ALL_PRODUCTS = [
     href: "/products/insulated-kids-water-bottle",
     category: "water-bottle",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["kidzbee", "insulated-water-bottle"],
   },
   {
@@ -1062,7 +1062,7 @@ export const ALL_PRODUCTS = [
     href: "/products/stainless-steel-lunch-box-for-kids",
     category: "lunch-box",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["kidzbee", "tiffin-boxes"],
   },
   {
@@ -1078,7 +1078,7 @@ export const ALL_PRODUCTS = [
     href: "/products/plastic-insulated-water-bottle",
     category: "water-bottle",
     vendor: "Nekza",
-    tags: ["general"],
+    tags: [],
     collections: ["insulated-water-bottle", "water-bottle"],
   },
 ];
@@ -1105,7 +1105,7 @@ export const relatedProducts = getRelatedProducts(
 
 // Category Grid Tiles Data
 export const GRID_TILES = {
-    // Mobile Fields
+  // Mobile Fields
   mobile: {
     rows: [
       [
@@ -1245,7 +1245,6 @@ const hasTag = (product, tag) => {
 export const getBestsellers = () => ALL_PRODUCTS.filter((p) => hasTag(p, "bestseller"));
 export const getPopularProducts = () => ALL_PRODUCTS.filter((p) => hasTag(p, "popular"));
 export const getNewArrivals = () => ALL_PRODUCTS.filter((p) => hasTag(p, "new-arrival"));
-export const getGeneralProducts = () => ALL_PRODUCTS.filter((p) => hasTag(p, "general"));
 
 export const getProductsByCategory = (category) =>
   ALL_PRODUCTS.filter((p) => p?.category === category);
@@ -1598,13 +1597,13 @@ export const LIFE_WITH_NEKZA_CARDS = [
 // Home hero slides
 export const HERO_SLIDES = [
   {
-    tag: "Smart Kitchen Organization",
+    tag: "Hydration Essentials",
     title: "Discover Premium Water Companions",
-    titleItalic: [],
-    bg: "/images/slide-1.webp",
+    titleItalic: ["Companions"],
+    bg: "/images/slide-n1.png",
   },
   {
-    tag: "Hydration Essentials",
+    tag: "Smart Kitchen Organization",
     title: "Elegant Storage Solutions for Contemporary Living",
     titleItalic: [],
     bg: "/images/slide-2.webp",
@@ -1716,6 +1715,21 @@ export const PRIVACY_POLICY_SECTIONS = [
     iconKey: "mail",
     title: "6. Third-Party Sharing",
     content: `We do not sell your personal information. Information may only be shared with trusted service providers, technical partners, logistics support, or operational tools when reasonably required to run our website, fulfill requests, or support legitimate business operations.`,
+  },
+  {
+    iconKey: "handshake",
+    title: "7. Your Rights",
+    content: `You may request access to, correction of, or deletion of your personal information where applicable. If you have questions about the data you’ve shared with us or how it is being used, you may contact us through the details provided below.`,
+  },
+  {
+    iconKey: "refresh-ccw",
+    title: "8. Policy Updates",
+    content: `We may update this Privacy Policy periodically to reflect operational, legal, technical, or website-related changes. Continued use of the website after updates indicates acceptance of the revised policy.`,
+  },
+  {
+    iconKey: "phone-call",
+    title: "9. Contact Us",
+    content: `If you have any questions regarding this Privacy Policy, cookies, data handling, or information submitted through our website, please contact the Nekza team using the contact details provided on the site.`,
   },
 ];
 

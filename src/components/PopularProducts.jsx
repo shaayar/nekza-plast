@@ -2,6 +2,7 @@ import { useMemo, useState } from "react";
 import Card from "../components/UI/Card.jsx";
 import { getPopularProducts, DISCOVERY_CHIPS } from "../data/Data.js";
 import { ArrowRight } from "lucide-react";
+import useHorizontalDragScroll from "../hooks/useHorizontalDragScroll.jsx";
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
@@ -24,6 +25,7 @@ const getSocialProof = (index) => {
 
 export default function PopularProducts() {
   const [activeChip, setActiveChip] = useState("community");
+  const railRef = useHorizontalDragScroll(true);
 
   const visibleProducts = useMemo(() => {
     const list = PRODUCTS.slice();
@@ -45,7 +47,7 @@ export default function PopularProducts() {
       {/* Header */}
       <div className="flex flex-col items-center gap-2 text-center md:gap-3">
         <h2 className="font-bold capitalize leading-snug text-4xl lg:text-5xl" >
-          <span className="outline text-white">Our</span> <span className="underline decoration-4 decoration-alt-yellow">Popular Products</span>
+          Our <span className="text-primary underline decoration-4 decoration-alt-yellow">Popular Products</span>
         </h2>
         <a
           href="/collections/popular"
@@ -75,6 +77,7 @@ export default function PopularProducts() {
 
       {/* Horizontal scroll row — hides scrollbar */}
       <div
+        ref={railRef}
         className="mx-auto flex max-w-full items-stretch gap-4 overflow-x-auto md:gap-6 ps-4 md:ps-10 md:pt-2"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         data-cursor="Drag"

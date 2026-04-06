@@ -5,6 +5,11 @@ html {
   scroll-behavior: smooth;
 }
 
+::selection {
+  background-color: var(--primary-light);
+  color: var(--primary-color);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -28,8 +33,19 @@ html {
 :root {
   font-size: 16px;
   --primary-color: #EA343A;
+  --primary-dark: #C42027;
+  --primary-pale: #FFF0F0;
+  --primary-light: #FDDCDC;
   --accent-color: #71717A;
   --alt-yellow: #F9F312;
+  --yellow-dark: #C4BC00;
+  --ink: #1A1A1A;
+  --ink-soft: #3D3D3D;
+  --warm-bg: #FAF7F4;
+  --cream: #F5EFE8;
+  --cream-dark: #EDE5DA;
+  --border: rgba(26, 26, 26, 0.10);
+  --border-strong: rgba(26, 26, 26, 0.18);
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
   --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
@@ -40,8 +56,11 @@ html {
 }
 
 body {
-  font-size: 1rem; /* 16px */
+  font-size: 1rem;
+  /* 16px */
   font-family: 'Comfortaa', sans-serif;
+  background: var(--warm-bg);
+  color: var(--ink);
 }
 
 /* Optional: enforce always in navbar as requested */
@@ -51,10 +70,6 @@ nav {
 
 body::-webkit-scrollbar {
   display: none;
-}
-
-.outline {
-  -webkit-text-stroke: 1.5px var(--primary-color);
 }
 
 .pressable {
@@ -69,4 +84,23 @@ body::-webkit-scrollbar {
   width: 100%;
   max-width: 1800px;
   margin-inline: auto;
+}
+
+.surface-card {
+  background: color-mix(in srgb, var(--cream) 60%, white 40%);
+  border: 1px solid var(--border);
+}
+
+.drag-scroll-rail {
+  cursor: grab;
+}
+
+.drag-scroll-rail.is-dragging {
+  cursor: grabbing;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.drag-scroll-rail.is-dragging * {
+  cursor: grabbing !important;
 }

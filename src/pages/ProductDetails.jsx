@@ -1,9 +1,11 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import { ALL_PRODUCTS } from "../data/Data";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import AddToCartButton from "../components/AddToCartButton.jsx";
 import BuyNowButton from "../components/BuyNowButton.jsx";
 import Card from "../components/UI/Card.jsx";
+import { Link } from "react-router-dom";
+import { ArrowUpRight } from 'lucide-react';
 
 // ─── Icons ────────────────────────────────────────────────────────────────────
 
@@ -22,6 +24,17 @@ const CheckIcon = () => (
     <path d="M3 8l3.5 3.5L13 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
+
+const SIZE_MAP = {
+  "water-bottle": ["750ml", "900ml", "1200ml", "1500ml"],
+  flask: ["600ml", "800ml", "1700ml"],
+  "water-jug": ["2L", "5L", "10L", "20L"],
+  "lunch-box": ["Small", "Medium", "Large"],
+  casserole: ["1200ml", "2200ml", "3200ml"],
+  "combo-set": ["Standard Set"],
+  "pencil-box": ["Single Size"],
+  "kitchen-product": ["Standard"],
+};
 
 // ─── Sub-components ───────────────────────────────────────────────────────────
 
@@ -174,6 +187,7 @@ function TabSection({ tabs }) {
 
 export default function ProductDetail() {
   const { productSlug } = useParams();
+  const location = useLocation();
   const [size, setSize] = useState(0);
   const [qty, setQty] = useState(1);
   const [pincode, setPincode] = useState("");
@@ -205,33 +219,12 @@ export default function ProductDetail() {
       .slice(0, 4);
   }, [activeProduct]);
 
-  if (!activeProduct) {
-    return (
-      <section className="section-shell min-h-screen bg-white px-4 py-10">
-        <div className="mx-auto max-w-450">
-          <p className="text-lg text-zinc-700">Product not found.</p>
-        </div>
-      </section>
-    );
-  }
-
-  const sizeMap = {
-    "water-bottle": ["750ml", "900ml", "1200ml", "1500ml"],
-    flask: ["600ml", "800ml", "1700ml"],
-    "water-jug": ["2L", "5L", "10L", "20L"],
-    "lunch-box": ["Small", "Medium", "Large"],
-    casserole: ["1200ml", "2200ml", "3200ml"],
-    "combo-set": ["Standard Set"],
-    "pencil-box": ["Single Size"],
-    "kitchen-product": ["Standard"],
-  };
-
-  const variantList = Array.isArray(activeProduct.variants) ? activeProduct.variants : [];
+  const variantList = Array.isArray(activeProduct?.variants) ? activeProduct.variants : [];
   const derivedSizes = variantList.length > 0
     ? variantList.map((variant) => variant.size)
-    : (sizeMap[activeProduct.category] || ["Standard"]);
+    : (SIZE_MAP[activeProduct?.category] || ["Standard"]);
 
-  const fallbackVariants = useMemo(() => {
+  const fallbackVariants = (() => {
     if (variantList.length > 0) return [];
 
     const basePrice = activeProduct.price ?? 199;
@@ -269,15 +262,27 @@ export default function ProductDetail() {
         off: nextOff,
       };
     });
-  }, [activeProduct.price, activeProduct.mrp, derivedSizes, variantList.length]);
+  })();
 
   const effectiveVariants = variantList.length > 0 ? variantList : fallbackVariants;
 
-  useEffect(() => {
-    setSize(0);
-  }, [activeProduct.id]);
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+    requestAnimationFrame(() => window.scrollTo(0, 0));
+  }, [location.pathname, location.search, location.hash]);
 
-  const selectedSize = derivedSizes[size] || derivedSizes[0] || "Standard";
+  if (!activeProduct) {
+    return (
+      <section className="section-shell min-h-screen bg-white px-4 py-10">
+        <div className="mx-auto max-w-450">
+          <p className="text-lg text-zinc-700">Product not found.</p>
+        </div>
+      </section>
+    );
+  }
+
+  const safeSizeIndex = Math.max(0, Math.min(size, derivedSizes.length - 1));
+  const selectedSize = derivedSizes[safeSizeIndex] || derivedSizes[0] || "Standard";
   const selectedVariant = effectiveVariants.find((variant) => variant.size === selectedSize);
 
   const activePrice = selectedVariant?.price ?? activeProduct.price ?? null;
@@ -367,7 +372,7 @@ export default function ProductDetail() {
           <div className="flex flex-col gap-5">
 
             {/* Title */}
-            <h1 className="text-2xl md:text-4xl font-bold leading-snug text-primary">
+            <h1 className="text-2xl md:text-4xl font-bold leading-snug text-primary ">
               {PRODUCT.title}
             </h1>
 
@@ -390,12 +395,19 @@ export default function ProductDetail() {
 
 
             {/* Size */}
-            <SizeSelector sizes={PRODUCT.sizes} selected={size} onChange={setSize} />
+            <SizeSelector sizes={PRODUCT.sizes} selected={safeSizeIndex} onChange={setSize} />
 
-            {/* Quantity */}
-            <div className="space-y-2">
-              <p className="text-sm font-bold text-gray-900">Quantity</p>
-              <QuantitySelector qty={qty} onChange={setQty} />
+            <div className="flex justify-between">
+              {/* Quantity */}
+              <div className="space-y-2">
+                <p className="text-sm font-bold text-gray-900">Quantity</p>
+                <QuantitySelector qty={qty} onChange={setQty} />
+              </div>
+
+              <Link to={`/contact`} className="me-4 self-end text-md font-medium text-gray-700 hover:text-ink transition-colors hover:underline" data-cursor="Open">
+                Bulk Order
+                <ArrowUpRight className="ml-2 inline-block size-5" />
+              </Link>
             </div>
 
             {/* Add to Cart + Buy Now */}
@@ -410,7 +422,7 @@ export default function ProductDetail() {
                 product={productForCart}
                 selectedSize={selectedSize}
                 quantity={qty}
-                className="pressable w-full rounded-full bg-primary px-8 py-4 font-medium text-white "
+                className="pressable w-full rounded-full bg-primary/90 hover:bg-primary px-8 py-4 font-medium text-white "
               >
                 Buy Now
               </BuyNowButton>

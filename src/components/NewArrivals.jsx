@@ -1,7 +1,8 @@
 import { useMemo, useState } from "react";
 import Card from "./UI/Card.jsx";
 import { getNewArrivals, DISCOVERY_CHIPS } from "../data/Data.js";
-          import { ArrowRight } from "lucide-react";
+import { ArrowRight } from "lucide-react";
+import useHorizontalDragScroll from "../hooks/useHorizontalDragScroll.jsx";
 
 
 const PRODUCTS = getNewArrivals();
@@ -20,6 +21,7 @@ const getSocialProof = (index) => {
 
 export default function NewArrivals() {
   const [activeChip, setActiveChip] = useState("fresh");
+  const railRef = useHorizontalDragScroll(true);
 
   const visibleProducts = useMemo(() => {
     const list = PRODUCTS.slice();
@@ -42,8 +44,11 @@ export default function NewArrivals() {
         {/* Header */}
         <div className="flex flex-col items-center gap-2 text-center md:gap-3">
           <h2 className="text-4xl font-bold capitalize leading-snug lg:text-5xl">
-            <span className="outline text-white">New</span> <span className="underline decoration-4 decoration-alt-yellow rounded-xl">Arrivals</span>
+            New <span className="text-primary underline decoration-4 decoration-alt-yellow rounded-xl">Arrivals</span>
           </h2>
+          <p className="max-w-2xl text-sm text-zinc-600 sm:text-base">
+            Fresh drop energy with the latest additions. Swipe through what just landed.
+          </p>
           <a
             href="/collections/new-arrivals"
             className="pressable group flex items-center justify-center rounded text-base text-black hover:underline underline-offset-2 transition-colors duration-200 sm:text-lg lg:text-xl"
@@ -73,14 +78,18 @@ export default function NewArrivals() {
 
 
         {/* Product Rail */}
-        <div className="mt-4">
-          <div className="snap-x snap-mandatory overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-            <div className="flex min-w-max gap-4 md:gap-6" data-cursor="Drag">
+        <div className="mt-5 rounded-3xl border border-zinc-200/80 bg-white/65 p-3 sm:p-4">
+          <div
+            ref={railRef}
+            className="snap-x snap-mandatory overflow-x-auto overscroll-x-contain pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            data-cursor="Drag"
+          >
+            <div className="flex min-w-max gap-3 pr-2 sm:gap-4 md:gap-5">
               {/* Product Cards */}
               {visibleProducts.map((product, i) => (
                 <div
                   key={product.id}
-                  className="relative flex h-full w-[78vw] min-w-65 max-w-90 shrink-0 snap-start animate-slide-up md:pt-2 sm:w-[46vw] lg:w-[30vw] xl:w-[23vw]"
+                  className="relative flex h-full w-[70vw] min-w-56 max-w-80 shrink-0 snap-start snap-always animate-slide-up sm:w-[44vw] md:w-[34vw] lg:w-[27vw] xl:w-[21vw]"
                   style={{ animationDelay: `${i * 80}ms` }}
                 >
                   <Card

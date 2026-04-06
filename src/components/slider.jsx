@@ -52,14 +52,14 @@ export default function HeroSlider() {
               key={`content-${animKey}-${i}`}
               className={[
                 "relative z-10 flex flex-col justify-center h-full",
-                "px-[5vw] pt-28 pb-24 md:pt-32 md:pb-28",
+                "px-[5vw] pt-20 pb-24 md:pt-32 md:pb-28",
                 "max-w-4xl",
                 activeIndex === i ? "animate-slide-up" : "opacity-0",
               ].join(" ")}
             >
               {/* Tag */}
               <div className="flex items-center gap-2.5 mb-5">
-                <span className="block w-7 h-0.5 bg-red-600 shrink-0" />
+                <span className="block w-7 h-0.5 bg-primary shrink-0" />
                 <span className="text-white/60 text-[11px] md:text-[13px] font-medium tracking-[0.12em] uppercase">
                   {slide.tag}
                 </span>
@@ -85,7 +85,7 @@ export default function HeroSlider() {
               {/* CTA */}
               <a
                 href="#"
-                className="pressable group mt-8 md:mt-12 inline-flex items-center gap-3 w-fit border border-white/35 text-white text-[11px] md:text-xs font-medium tracking-[0.08em] uppercase px-6 py-3.5 transition-colors duration-200 hover:bg-red-600 hover:border-red-600"
+                className="pressable group mt-8 md:mt-12 inline-flex items-center gap-3 w-fit border border-white/35 text-white text-[11px] md:text-xs font-medium tracking-[0.08em] uppercase px-6 py-3.5 transition-colors duration-200 hover:bg-primary hover:border-primary"
                 data-cursor="Shop"
               >
                 Discover Collection
@@ -114,7 +114,7 @@ export default function HeroSlider() {
       <button
         onClick={() => swiperRef.current?.slidePrev()}
         aria-label="Previous slide"
-        className="pressable hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center text-white bg-black/30 transition-colors duration-200 hover:bg-red-600/75 hover:border-transparent"
+        className="pressable hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center text-white bg-black/30 transition-colors duration-200 hover:bg-primary/80 hover:border-transparent"
         data-cursor="Open"
       >
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
@@ -125,7 +125,7 @@ export default function HeroSlider() {
       <button
         onClick={() => swiperRef.current?.slideNext()}
         aria-label="Next slide"
-        className="pressable hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center text-white bg-black/30 transition-colors duration-200 hover:bg-red-600/75 hover:border-transparent"
+        className="pressable hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center text-white bg-black/30 transition-colors duration-200 hover:bg-primary/80 hover:border-transparent"
         data-cursor="Open"
       >
         <svg width="18" height="18" viewBox="0 0 18 18" fill="none">

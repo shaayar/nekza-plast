@@ -3,7 +3,7 @@ import { LIFE_WITH_NEKZA_CARDS } from "../data/Data.js";
 
 export default function LifeWithNekza() {
   return (
-    <section className="section-shell my-5 py-10 sm:my-7 lg:my-10">
+    <section className="section-shell my-5 md:py-10">
       <div className="max-w-350 mx-auto px-4 md:px-6 flex flex-col items-center gap-6">
         
         {/* Heading */}

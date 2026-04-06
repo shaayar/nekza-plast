@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { SlidersHorizontal, X, Star, ShoppingCart } from "lucide-react";
 import { ALL_PRODUCTS } from "../data/Data.js";
 import { useCart } from "../hooks/useCart.jsx";
+import { useToast } from "../hooks/useToast.jsx";
 import BuyNowButton from "../components/BuyNowButton.jsx";
 
 const SORT_OPTIONS = [
@@ -116,6 +117,7 @@ function ProductCard({ product, itemInCart, onAddToCart, onOpenProduct }) {
 export default function ProductShowcase() {
   const navigate = useNavigate();
   const { addToCart, isInCart } = useCart();
+  const { showToast } = useToast();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState("all");
   const [activeVendor, setActiveVendor] = useState("all");
@@ -156,7 +158,7 @@ export default function ProductShowcase() {
   };
 
   const handleAddToCart = (product) => {
-    addToCart(
+    const result = addToCart(
       {
         id: product.id,
         title: product.title,
@@ -166,6 +168,16 @@ export default function ProductShowcase() {
       },
       { quantity: 1 }
     );
+
+    if (result?.wasLimited) {
+      showToast({
+        message: "You can add up to 10 units of a single product.",
+        type: "warning",
+      });
+      return;
+    }
+
+    showToast({ message: `${product.title} added to cart.`, type: "success" });
   };
 
   const handleOpenProduct = (productPath) => {

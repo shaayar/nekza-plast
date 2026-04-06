@@ -6,7 +6,7 @@ import { useToast } from "../hooks/useToast.jsx";
 function Cart() {
   const navigate = useNavigate();
   const { showToast } = useToast();
-  const { cartItems, removeFromCart, updateQuantity, getCartSubtotal, getCartTotalMRP } = useCart();
+  const { cartItems, removeFromCart, updateQuantity, getCartSubtotal, getCartTotalMRP, MAX_ITEM_QUANTITY } = useCart();
 
   const notify = (message, type = "info") => {
     showToast({ message, type });
@@ -34,6 +34,10 @@ function Cart() {
   };
 
   const handleIncreaseQty = (item) => {
+    if (item.quantity >= MAX_ITEM_QUANTITY) {
+      notify(`You can only add up to ${MAX_ITEM_QUANTITY} units of ${item.title}.`, "warning");
+      return;
+    }
     updateQuantity(item.id, item.quantity + 1, item.color, item.size);
     notify(`Increased quantity for ${item.title} to ${item.quantity + 1}.`, "success");
   };

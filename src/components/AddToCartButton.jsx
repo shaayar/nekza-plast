@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { ShoppingCart, Check } from "lucide-react";
 import { useCart } from "../hooks/useCart.jsx";
+import { useToast } from "../hooks/useToast.jsx";
 
 export default function AddToCartButton({ product, selectedColor, selectedSize, quantity = 1, className = "" }) {
   const { addToCart, isInCart } = useCart();
+  const { showToast } = useToast();
   const [isAdding, setIsAdding] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
@@ -15,11 +17,19 @@ export default function AddToCartButton({ product, selectedColor, selectedSize, 
     setIsAdding(true);
     
     try {
-      addToCart(product, {
+      const result = addToCart(product, {
         quantity,
         color: selectedColor,
         size: selectedSize,
       });
+
+      if (result?.wasLimited) {
+        showToast({
+          message: "You can add up to 10 units of a single product.",
+          type: "warning",
+        });
+        return;
+      }
       
       // Show success state
       setShowSuccess(true);

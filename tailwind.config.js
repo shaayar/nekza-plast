@@ -4,9 +4,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#EA343A",
-        accent: "#71717A",
-        "alt-yellow": "#F9F312",
+        primary: "var(--primary-color)",
+        "primary-dark": "var(--primary-dark)",
+        "primary-pale": "var(--primary-pale)",
+        "primary-light": "var(--primary-light)",
+        accent: "var(--accent-color)",
+        "alt-yellow": "var(--alt-yellow)",
+        "yellow-dark": "var(--yellow-dark)",
+        ink: "var(--ink)",
+        "ink-soft": "var(--ink-soft)",
+        "warm-bg": "var(--warm-bg)",
+        cream: "var(--cream)",
+        "cream-dark": "var(--cream-dark)",
       },
       fontFamily: {
         comfortaa: ["Comfortaa", "sans-serif"],

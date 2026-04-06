@@ -6,18 +6,24 @@ import LifeWithNekza from "../components/LifeWithNekza";
 import PopularProducts from "../components/PopularProducts.jsx";
 import Testimonials from "../components/Testimonials.jsx";
 import WhyNekza from "../components/WhyNekza.jsx";
+import MarqueeStrip from "../components/sections/MarqueeStrip.jsx";
+import UsageMomentsStrip from "../components/sections/UsageMomentsStrip.jsx";
+import ChooseYourRoutine from "../components/sections/ChooseYourRoutine.jsx";
 
 function Home() {
   return (
     <>
       <ImageSwiper />
       <CategoryGrid />
-      <Bestsellers />
-      <NewArrivals />
-      <PopularProducts />
-      <WhyNekza />
-      <Testimonials />
       <LifeWithNekza />
+      <Bestsellers />
+      <MarqueeStrip />
+      <WhyNekza />
+      <ChooseYourRoutine />
+      <PopularProducts />
+      <UsageMomentsStrip />
+      <NewArrivals />
+      <Testimonials />
     </>
   );
 }

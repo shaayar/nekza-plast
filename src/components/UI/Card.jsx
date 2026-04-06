@@ -12,13 +12,21 @@ export default function Card({ product, slug, badges = [] }) {
     e.preventDefault();
     e.stopPropagation();
 
-    addToCart({
+    const result = addToCart({
       id: product.id || product.title,
       title: product.title,
       price: product.price,
       mrp: product.mrp,
       image: product.img,
     });
+
+    if (result?.wasLimited) {
+      showToast({
+        message: "You can add up to 10 units of a single product.",
+        type: "warning",
+      });
+      return;
+    }
 
     showToast({
       message: `${product.title} added to your cart.`,
@@ -39,7 +47,8 @@ export default function Card({ product, slug, badges = [] }) {
   };
 
   return (
-    <div className="group relative flex h-full w-full min-w-0 flex-col gap-3 overflow-hidden rounded-2xl border border-zinc-200 bg-white p-3 transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-lg">
+    <div className="group relative flex h-full min-w-0 flex-col overflow-hidden rounded-[1.5rem] border border-zinc-200 bg-white transition-all duration-300 hover:-translate-y-1 hover:border-zinc-300 hover:shadow-[0_16px_50px_rgba(0,0,0,0.08)]">
+      {/* Badges */}
       {badges.length > 0 && (
         <div className="pointer-events-none absolute left-3 top-3 z-30 flex flex-col gap-1">
           {badges
@@ -49,8 +58,8 @@ export default function Card({ product, slug, badges = [] }) {
                 key={`${badge.text}-${idx}`}
                 className={
                   badge.tone === "dark"
-                    ? "rounded-full bg-black/80 px-2 py-0.5 text-[10px] font-semibold text-white"
-                    : "rounded-full border border-primary/25 bg-white/90 px-2 py-0.5 text-[10px] font-bold uppercase tracking-wide text-primary shadow-sm"
+                    ? "rounded-full bg-zinc-950/85 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-white"
+                    : "rounded-full border border-zinc-200 bg-white/90 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wide text-zinc-700 shadow-sm"
                 }
               >
                 {badge.text}
@@ -63,10 +72,10 @@ export default function Card({ product, slug, badges = [] }) {
       <div className="pointer-events-none absolute -bottom-10 -right-10 h-38 w-38 rounded-full group-hover:bg-primary/20 blur-xl transition-opacity duration-300 group-hover:opacity-80" />
 
       {/* Image */}
-      <div className="relative z-10 overflow-hidden rounded-xl bg-zinc-50">
+      <div className="relative z-10 overflow-hidden rounded-t-[1.5rem] bg-zinc-50">
         <Link
           to={productPath}
-          className="relative flex aspect-4/5 w-full items-center justify-center overflow-hidden rounded-xl"
+          className="relative flex aspect-[4/4.8] w-full items-center justify-center overflow-hidden px-3 py-4 sm:px-4 sm:py-5"
           data-cursor="View"
         >
           <img
@@ -75,7 +84,7 @@ export default function Card({ product, slug, badges = [] }) {
             width={250}
             height={300}
             loading="lazy"
-            className="h-full w-full object-contain p-6 mix-blend-darken opacity-100 transition-opacity duration-300 group-hover:opacity-0"
+            className="h-full w-full object-contain mix-blend-darken transition-all duration-300 group-hover:scale-[1.03] group-hover:opacity-0"
           />
 
           {product.hoverImage && (
@@ -85,67 +94,66 @@ export default function Card({ product, slug, badges = [] }) {
               width={250}
               height={300}
               loading="lazy"
-              className="absolute inset-0 h-full w-full object-contain p-6 mix-blend-darken opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+              className="absolute inset-0 h-full w-full object-contain px-3 py-4 sm:px-4 sm:py-5 mix-blend-darken opacity-0 transition-all duration-300 group-hover:scale-[1.03] group-hover:opacity-100"
             />
           )}
         </Link>
       </div>
 
-      {/* Title */}
-      <Link
-        to={productPath}
-        className="relative z-10 rounded transition-colors duration-200"
-        data-cursor="View"
-      >
-        <h3 className="line-clamp-2 text-lg font-bold leading-snug text-zinc-900 sm:text-base lg:text-lg">
-          {product.title}
-        </h3>
-      </Link>
-
-      {/* Price */}
-      <div className="relative z-10 flex flex-wrap items-center gap-2 text-black md:gap-3">
-        <span className="text-lg font-bold leading-snug transition-colors group-hover:text-primary sm:text-base lg:text-xl">
-          {product.price ? `₹${product.price}` : "₹"}
-        </span>
-
-        <span className="text-sm leading-snug text-zinc-600 ">
-          MRP{" "}
-          <span className="line-through">
-            {product.mrp ? `₹${product.mrp}` : "₹"}
-          </span>
-        </span>
-
-        {product.off && (
-          <span className="inline-block rounded bg-primary px-1.5 py-0.5 text-[10px] leading-snug text-white md:text-xs">
-            {product.off}% off
-          </span>
-        )}
-      </div>
-
-      {/* Footer */}
-      <div className="relative z-10 mt-auto flex items-center justify-between pt-1 gap-2">
-        <BuyNowButton
-        product={productForCart}
-        quantity={1}
-        stopPropagation
-        className="pressable relative z-10 w-full rounded-lg bg-primary px-3 py-2 text-sm font-semibold text-white transition-opacity duration-200 hover:opacity-90"
-      >
-        Buy Now
-      </BuyNowButton>
-
-        <button
-          type="button"
-          aria-label="Add to cart"
-          onClick={handleAddToCart}
-          className="pressable inline-flex items-center justify-center rounded outline-none transition-colors duration-200"
-          data-cursor="Shop"
+      {/* Content */}
+      <div className="relative z-10 flex flex-1 flex-col space-y-3 p-3 sm:p-4">
+        {/* Title */}
+        <Link
+          to={productPath}
+          className="rounded transition-colors duration-200"
+          data-cursor="View"
         >
-          <span className="relative flex size-7 items-center justify-center">
-            <ShoppingBag size={24} />
+          <h3 className="line-clamp-2 text-xl md:text-xl font-semibold leading-5">
+            {product.title}
+          </h3>
+        </Link>
+
+        {/* Price */}
+        <div className="flex flex-wrap items-center gap-2">
+          <span className="text-lg md:text-xl font-semibold text-ink sm:text-xl">
+            {product.price ? `₹${product.price}` : "Price Unavailable"}
           </span>
-        </button>
+
+          {product.mrp && (
+            <span className="text-sm text-zinc-400 line-through">
+              ₹{product.mrp}
+            </span>
+          )}
+
+          {product.off && (
+            <span className="rounded-full bg-ink-soft px-2 py-0.5 text-[11px] font-medium text-cream">
+              {product.off}% off
+            </span>
+          )}
+        </div>
+
+        {/* Footer */}
+        <div className="mt-auto flex items-center gap-2 pt-1">
+          <BuyNowButton
+            product={productForCart}
+            quantity={1}
+            stopPropagation
+            className="pressable relative z-10 flex-1 rounded-full bg-primary px-4 py-2.5 text-sm font-semibold text-white transition-opacity duration-200 hover:opacity-90"
+          >
+            Buy Now
+          </BuyNowButton>
+
+          <button
+            type="button"
+            aria-label="Add to cart"
+            onClick={handleAddToCart}
+            className="pressable inline-flex h-10 w-10 items-center justify-center rounded-full border border-zinc-200 bg-white text-zinc-800 transition-colors duration-200 hover:border-zinc-300 hover:bg-zinc-50"
+            data-cursor="Shop"
+          >
+            <ShoppingBag size={18} />
+          </button>
+        </div>
       </div>
-      
     </div>
   );
 }

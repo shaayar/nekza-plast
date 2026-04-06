@@ -16,7 +16,7 @@ export default function AboutPage() {
 
       {/* HERO */}
       <section className="w-full">
-        <div className="relative w-full h-62.5 sm:h-87.5 md:h-150 overflow-hidden">
+        <div className="relative w-full h-62.5 md:h-145 overflow-hidden">
           <img
             src="/images/about.webp"
             alt="About Nekza"

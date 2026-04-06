@@ -83,21 +83,23 @@ export default function WhyUsPage() {
 
       {/* Statement Block */}
       <section className="relative px-4 pb-20 md:px-8 lg:px-12">
-        <div className="mx-auto max-w-6xl rounded-4xl border border-zinc-200 bg-zinc-950 px-6 py-10 text-white shadow-[0_20px_80px_rgba(0,0,0,0.18)] md:px-10 md:py-14">
-          <p className="text-sm uppercase tracking-[0.3em] text-white/60">
+        <div className="relative mx-auto max-w-6xl overflow-hidden rounded-4xl border border-zinc-200 bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950 px-6 py-10 text-white shadow-[0_20px_80px_rgba(0,0,0,0.18)] md:px-10 md:py-14">
+
+          {/* subtle glow */}
+          <div className="pointer-events-none absolute -top-16 -right-16 h-48 w-48 rounded-full bg-primary/10 blur-3xl" />
+
+          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-primary/90">
             Our Point of View
           </p>
 
-          <h2 className="mt-4 max-w-4xl text-3xl font-semibold tracking-tight md:text-5xl">
-            We don’t believe everyday essentials should feel disposable,
-            forgettable, or poorly made.
+          <h2 className="mt-4 max-w-4xl text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
+            Everyday essentials shouldn’t feel disposable, forgettable, or poorly made.
           </h2>
 
-          <p className="mt-6 max-w-3xl text-base leading-8 text-zinc-300 md:text-lg">
-            The products people use every day often shape routines more than
-            they realize. That’s why we focus on useful design, dependable
-            construction, and product choices that feel practical without
-            becoming dull.
+          <p className="mt-6 max-w-2xl text-sm leading-7 text-zinc-300 md:text-base md:leading-8">
+            The products people use every day shape routines more than they realize.
+            That’s why we focus on useful design, dependable construction, and
+            practical choices that feel right to live with.
           </p>
         </div>
       </section>
@@ -151,7 +153,7 @@ export default function WhyUsPage() {
           <h2 className="mt-4 text-3xl font-semibold tracking-tight text-zinc-950 md:text-4xl">
             The goal is simple:
             <br className="hidden md:block" />
-            <span className="text-primary">Make everyday products feel more worth keeping.</span>
+            <span className="text-primary underline decoration-3 decoration-alt-yellow">Make everyday products feel more worth keeping.</span>
           </h2>
 
           <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-zinc-600">

@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "../hooks/useCart.jsx";
+import { useToast } from "../hooks/useToast.jsx";
 
 export default function BuyNowButton({
   product,
@@ -13,6 +14,7 @@ export default function BuyNowButton({
 }) {
   const navigate = useNavigate();
   const { addToCart } = useCart();
+  const { showToast } = useToast();
   const [isProcessing, setIsProcessing] = useState(false);
 
   const handleBuyNow = (e) => {
@@ -25,11 +27,17 @@ export default function BuyNowButton({
 
     setIsProcessing(true);
     try {
-      addToCart(product, {
+      const result = addToCart(product, {
         quantity,
         color: selectedColor,
         size: selectedSize,
       });
+      if (result?.wasLimited) {
+        showToast({
+          message: "You can add up to 10 units of a single product.",
+          type: "warning",
+        });
+      }
       navigate("/cart");
     } finally {
       setIsProcessing(false);

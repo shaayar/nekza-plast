@@ -1,8 +1,8 @@
-import { useMemo, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useEffect, useLayoutEffect, useMemo, useState } from "react";
+import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import Card from "../components/UI/Card.jsx";
 import {
-  getGeneralProducts,
+  ALL_PRODUCTS,
   getProductsByCategory,
   getProductsByCollection,
   PRODUCT_LISTING_TITLE_MAP,
@@ -16,6 +16,10 @@ const formatLabel = (value = "") =>
     .join(" ");
 
 function FilterSidebar({
+  categoryOptions,
+  activeCategories,
+  toggleCategory,
+  clearCategories,
   tagOptions,
   activeTags,
   toggleTag,
@@ -43,6 +47,64 @@ function FilterSidebar({
           <option value="price-high">Price: High to Low</option>
           <option value="name">Name: A-Z</option>
         </select>
+      </div>
+
+      <div className="mb-6">
+        <div className="mb-3 flex items-center justify-between">
+          <h3 className="text-sm font-semibold uppercase tracking-wide text-zinc-900">
+            Category
+          </h3>
+          <button
+            onClick={clearCategories}
+            className="text-xs text-zinc-400 transition-colors hover:text-zinc-600"
+            data-cursor="Open"
+          >
+            Clear
+          </button>
+        </div>
+
+        {categoryOptions.length > 0 ? (
+          <div className="space-y-2">
+            {categoryOptions.map(({ category, count }) => (
+              <label
+                key={category}
+                className="group flex cursor-pointer items-center justify-between"
+              >
+                <div className="flex items-center gap-2">
+                  <div
+                    onClick={() => toggleCategory(category)}
+                    className={`flex h-4 w-4 items-center justify-center rounded border transition-colors ${activeCategories.includes(category)
+                      ? "border-zinc-900 bg-zinc-900"
+                      : "border-zinc-300 group-hover:border-zinc-500"
+                      }`}
+                  >
+                    {activeCategories.includes(category) && (
+                      <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
+                        <path
+                          d="M1 4l2.5 2.5L9 1"
+                          stroke="white"
+                          strokeWidth="1.5"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    )}
+                  </div>
+
+                  <span
+                    onClick={() => toggleCategory(category)}
+                    className="text-sm text-zinc-700 transition-colors group-hover:text-zinc-900"
+                  >
+                    {formatLabel(category)}
+                  </span>
+                </div>
+                <span className="text-xs text-zinc-400">{count}</span>
+              </label>
+            ))}
+          </div>
+        ) : (
+          <p className="text-xs text-zinc-400">No categories available.</p>
+        )}
       </div>
 
       <div className="mb-6">
@@ -138,14 +200,17 @@ function FilterSidebar({
 
 function Products() {
   const { collectionSlug, categorySlug, slug } = useParams();
+  const location = useLocation();
+  const [searchParams] = useSearchParams();
   const requestedSlug = collectionSlug || categorySlug || slug;
+  const requestedCategoriesParam = searchParams.get("categories") || "";
 
   const { sampleProducts, hasDirectMatch } = useMemo(() => {
     if (collectionSlug) {
       const collectionProducts = getProductsByCollection(collectionSlug);
       return {
         sampleProducts:
-          collectionProducts.length > 0 ? collectionProducts : getGeneralProducts(),
+          collectionProducts.length > 0 ? collectionProducts : ALL_PRODUCTS,
         hasDirectMatch: collectionProducts.length > 0,
       };
     }
@@ -154,13 +219,13 @@ function Products() {
       const categoryProducts = getProductsByCategory(categorySlug);
       return {
         sampleProducts:
-          categoryProducts.length > 0 ? categoryProducts : getGeneralProducts(),
+          categoryProducts.length > 0 ? categoryProducts : ALL_PRODUCTS,
         hasDirectMatch: categoryProducts.length > 0,
       };
     }
 
     return {
-      sampleProducts: getGeneralProducts(),
+      sampleProducts: ALL_PRODUCTS,
       hasDirectMatch: true,
     };
   }, [collectionSlug, categorySlug]);
@@ -173,10 +238,40 @@ function Products() {
     return numericPrices.length > 0 ? Math.max(...numericPrices) : 0;
   }, [sampleProducts]);
 
+  const requestedCategories = useMemo(() => {
+    return requestedCategoriesParam
+      .split(",")
+      .map((category) => category.trim())
+      .filter(Boolean);
+  }, [requestedCategoriesParam]);
+
   const [sortBy, setSortBy] = useState("featured");
+  const [activeCategories, setActiveCategories] = useState(requestedCategories);
   const [activeTags, setActiveTags] = useState([]);
   const [priceRange, setPriceRange] = useState([0, maxPrice]);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  useEffect(() => {
+    setActiveCategories(requestedCategories);
+  }, [requestedCategories]);
+
+  useLayoutEffect(() => {
+    window.scrollTo(0, 0);
+    requestAnimationFrame(() => window.scrollTo(0, 0));
+  }, [location.pathname, location.search, location.hash]);
+
+  const categoryOptions = useMemo(() => {
+    const counts = new Map();
+
+    sampleProducts.forEach((product) => {
+      if (!product?.category) return;
+      counts.set(product.category, (counts.get(product.category) || 0) + 1);
+    });
+
+    return [...counts.entries()]
+      .map(([category, count]) => ({ category, count }))
+      .sort((a, b) => b.count - a.count);
+  }, [sampleProducts]);
 
   const tagOptions = useMemo(() => {
     const counts = new Map();
@@ -202,6 +297,10 @@ function Products() {
 
   const filteredProducts = useMemo(() => {
     return sampleProducts.filter((product) => {
+      const categoryMatch =
+        activeCategories.length === 0 ||
+        activeCategories.includes(product.category);
+
       const tagMatch =
         activeTags.length === 0 ||
         activeTags.some((tag) => (Array.isArray(product.tags) ? product.tags.includes(tag) : false));
@@ -210,9 +309,9 @@ function Products() {
       const priceMatch =
         typeof price !== "number" || (price >= priceRange[0] && price <= priceRange[1]);
 
-      return tagMatch && priceMatch;
+      return categoryMatch && tagMatch && priceMatch;
     });
-  }, [sampleProducts, activeTags, priceRange]);
+  }, [sampleProducts, activeCategories, activeTags, priceRange]);
 
   const sortedProducts = useMemo(() => {
     const products = [...filteredProducts];
@@ -235,6 +334,15 @@ function Products() {
     );
   };
 
+  const toggleCategory = (category) => {
+    setActiveCategories((prev) =>
+      prev.includes(category)
+        ? prev.filter((item) => item !== category)
+        : [...prev, category]
+    );
+  };
+
+  const clearCategories = () => setActiveCategories([]);
   const clearTags = () => setActiveTags([]);
 
   return (
@@ -253,9 +361,9 @@ function Products() {
               Nekza Collection
             </span>
 
-            {activeTags.length > 0 && (
+            {(activeCategories.length > 0 || activeTags.length > 0) && (
               <span className="rounded-full border border-zinc-200 bg-zinc-50 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-zinc-600">
-                {activeTags.length} Active Filter{activeTags.length > 1 ? "s" : ""}
+                {activeCategories.length + activeTags.length} Active Filter{activeCategories.length + activeTags.length > 1 ? "s" : ""}
               </span>
             )}
           </div>
@@ -298,9 +406,9 @@ function Products() {
                   />
                 </svg>
                 Filters
-                {activeTags.length > 0 && (
+                {(activeCategories.length > 0 || activeTags.length > 0) && (
                   <span className="rounded-full bg-zinc-900 px-1.5 py-0.5 text-xs leading-none text-white">
-                    {activeTags.length}
+                    {activeCategories.length + activeTags.length}
                   </span>
                 )}
               </button>
@@ -347,6 +455,10 @@ function Products() {
               </div>
 
               <FilterSidebar
+                categoryOptions={categoryOptions}
+                activeCategories={activeCategories}
+                toggleCategory={toggleCategory}
+                clearCategories={clearCategories}
                 tagOptions={tagOptions}
                 activeTags={activeTags}
                 toggleTag={toggleTag}
@@ -365,8 +477,18 @@ function Products() {
             {sortedProducts.length > 0 ? (
               <>
                 {/* Active tags row */}
-                {activeTags.length > 0 && (
+                {(activeCategories.length > 0 || activeTags.length > 0) && (
                   <div className="mb-5 flex flex-wrap gap-2">
+                    {activeCategories.map((category) => (
+                      <button
+                        key={category}
+                        onClick={() => toggleCategory(category)}
+                        className="rounded-full border border-zinc-300 bg-zinc-100 px-3 py-1.5 text-xs font-medium capitalize text-zinc-700 transition hover:bg-zinc-900 hover:text-white"
+                        data-cursor="Open"
+                      >
+                        {category.replace(/-/g, " ")} ×
+                      </button>
+                    ))}
                     {activeTags.map((tag) => (
                       <button
                         key={tag}

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 import Navbar from "./components/layout/Navbar.jsx";
 import Footer from "./components/layout/Footer.jsx";
@@ -19,11 +19,37 @@ import WhyUsPage from "./pages/WhyUsPage.jsx";
 import CartDrawer from "./components/CartDrawer.jsx";
 
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, search, hash } = useLocation();
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-  }, [pathname]);
+    if ("scrollRestoration" in window.history) {
+      window.history.scrollRestoration = "manual";
+    }
+  }, []);
+
+  useLayoutEffect(() => {
+    const html = document.documentElement;
+    const previousScrollBehavior = html.style.scrollBehavior;
+    html.style.scrollBehavior = "auto";
+
+    const resetTop = () => {
+      window.scrollTo(0, 0);
+      if (document.scrollingElement) {
+        document.scrollingElement.scrollTop = 0;
+      }
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    };
+
+    resetTop();
+    requestAnimationFrame(() => {
+      resetTop();
+      setTimeout(() => {
+        resetTop();
+        html.style.scrollBehavior = previousScrollBehavior;
+      }, 0);
+    });
+  }, [pathname, search, hash]);
 
   return null;
 }

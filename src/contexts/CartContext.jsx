@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import CartContext from "./cartContext.js";
-const normalizeQuantity = (value, fallback = 1) => {
+export const MAX_ITEM_QUANTITY = 10;
+
+const normalizeQuantity = (value, fallback = 1, max = MAX_ITEM_QUANTITY) => {
   const parsed = Number(value);
   if (!Number.isFinite(parsed) || parsed <= 0) return fallback;
-  return Math.floor(parsed);
+  return Math.min(Math.floor(parsed), max);
 };
 
 export function CartProvider({ children }) {
@@ -16,7 +18,7 @@ export function CartProvider({ children }) {
       return Array.isArray(parsedCart)
         ? parsedCart.map((item) => ({
             ...item,
-            quantity: normalizeQuantity(item?.quantity),
+            quantity: normalizeQuantity(item?.quantity, 1, MAX_ITEM_QUANTITY),
           }))
         : [];
     } catch (error) {
@@ -33,8 +35,9 @@ export function CartProvider({ children }) {
 
   const addToCart = (product, options = {}) => {
     const { quantity = 1, color, size } = options;
-    const safeQuantity = normalizeQuantity(quantity);
-    
+    const safeQuantity = normalizeQuantity(quantity, 1, MAX_ITEM_QUANTITY);
+    let wasLimited = false;
+
     setCartItems(prevItems => {
       // Check if item already exists in cart
       const existingItemIndex = prevItems.findIndex(
@@ -49,16 +52,19 @@ export function CartProvider({ children }) {
         return prevItems.map((item, index) => {
           if (index !== existingItemIndex) return item;
           const currentQty = normalizeQuantity(item.quantity);
-          return { ...item, quantity: currentQty + safeQuantity };
+          const nextQty = Math.min(currentQty + safeQuantity, MAX_ITEM_QUANTITY);
+          if (nextQty < currentQty + safeQuantity) wasLimited = true;
+          return { ...item, quantity: nextQty };
         });
       } else {
         // Add new item to cart
+        if (safeQuantity >= MAX_ITEM_QUANTITY) wasLimited = Number(quantity) > MAX_ITEM_QUANTITY;
         const newItem = {
           id: product.id,
           title: product.title,
           price: product.price,
           mrp: product.mrp || product.price,
-          quantity: safeQuantity,
+          quantity: Math.min(safeQuantity, MAX_ITEM_QUANTITY),
           color: color || product.defaultColor || "Default",
           size: size || product.defaultSize || "Standard",
           image: product.image || product.images?.[0] || "/images/placeholder.webp",
@@ -66,6 +72,8 @@ export function CartProvider({ children }) {
         return [...prevItems, newItem];
       }
     });
+
+    return { wasLimited, maxQuantity: MAX_ITEM_QUANTITY };
   };
 
   const removeFromCart = (itemId, color = null, size = null) => {
@@ -79,18 +87,26 @@ export function CartProvider({ children }) {
   };
 
   const updateQuantity = (itemId, newQuantity, color = null, size = null) => {
-    const safeQuantity = normalizeQuantity(newQuantity, 0);
+    const safeQuantity = normalizeQuantity(newQuantity, 0, MAX_ITEM_QUANTITY);
     if (safeQuantity < 1) return;
-    
+    let wasLimited = false;
+
     setCartItems(prevItems =>
       prevItems.map(item =>
         item.id === itemId && 
         (!color || item.color === color) && 
         (!size || item.size === size)
-          ? { ...item, quantity: safeQuantity }
+          ? (() => {
+              if (safeQuantity >= MAX_ITEM_QUANTITY && Number(newQuantity) > MAX_ITEM_QUANTITY) {
+                wasLimited = true;
+              }
+              return { ...item, quantity: safeQuantity };
+            })()
           : item
       )
     );
+
+    return { wasLimited, maxQuantity: MAX_ITEM_QUANTITY };
   };
 
   const clearCart = () => {
@@ -135,6 +151,7 @@ export function CartProvider({ children }) {
     getCartSubtotal,
     getCartTotalMRP,
     isInCart,
+    MAX_ITEM_QUANTITY,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

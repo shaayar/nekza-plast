@@ -7,7 +7,7 @@ import { useToast } from "../hooks/useToast.jsx";
 function CartDrawer({ open, onClose }) {
   const navigate = useNavigate();
   const { showToast } = useToast();
-  const { cartItems, removeFromCart, updateQuantity, getCartSubtotal, getCartTotalMRP } = useCart();
+  const { cartItems, removeFromCart, updateQuantity, getCartSubtotal, getCartTotalMRP, MAX_ITEM_QUANTITY } = useCart();
 
   useEffect(() => {
     if (!open) return;
@@ -47,6 +47,10 @@ function CartDrawer({ open, onClose }) {
   };
 
   const handleIncreaseQty = (item) => {
+    if (item.quantity >= MAX_ITEM_QUANTITY) {
+      notify(`You can only add up to ${MAX_ITEM_QUANTITY} units of ${item.title}.`, "warning");
+      return;
+    }
     updateQuantity(item.id, item.quantity + 1, item.color, item.size);
   };
 

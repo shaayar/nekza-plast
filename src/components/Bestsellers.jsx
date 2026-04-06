@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import Card from "./UI/Card.jsx";
 import { getBestsellers, DISCOVERY_CHIPS } from "../data/Data.js";
 import { ArrowRight } from "lucide-react";
+import useHorizontalDragScroll from "../hooks/useHorizontalDragScroll.jsx";
 
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
@@ -34,6 +35,7 @@ function ProductCard({ product, badges }) {
 
 export default function Bestsellers() {
   const [activeChip, setActiveChip] = useState("for-you");
+  const railRef = useHorizontalDragScroll(true);
 
   const visibleProducts = useMemo(() => {
     const scored = PRODUCTS.slice().map((item) => {
@@ -60,9 +62,9 @@ export default function Bestsellers() {
     <section className="section-shell flex flex-col items-center gap-6 py-5 sm:py-7  lg:gap-8 lg:py-10">
 
       {/* Header */}
-      <div className="flex w-full flex-col items-center gap-2 text-center md:gap-3">
+      <div className="flex w-full flex-col items-center gap-2 text-center md:gap-4">
         <h2 className="font-bold capitalize leading-snug text-4xl lg:text-5xl">
-          <span className="outline text-white">Our</span> <span className="underline decoration-4 decoration-alt-yellow">Bestsellers</span>
+          Our <span className="text-primary underline decoration-4 decoration-alt-yellow">Bestsellers</span>
         </h2>
         <a
           href="/collections/bestseller"
@@ -93,6 +95,7 @@ export default function Bestsellers() {
 
       {/* Horizontal scroll row — hides scrollbar */}
       <div
+        ref={railRef}
         className="mx-auto flex max-w-full items-stretch gap-4 overflow-x-auto md:gap-6 ps-4 md:ps-10 md:pt-2"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
         data-cursor="Drag"
