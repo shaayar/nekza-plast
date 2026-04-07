@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { ALL_PRODUCTS, navbarItems } from "../../data/Data";
 import {
   X,
+  Menu,
   Search,
   User,
   ChevronDown,
@@ -39,7 +40,7 @@ function Navbar() {
       {/* TOP ROW */}
       <div className="relative flex items-center justify-between px-4 md:px-10 py-3 border-b border-white/20">
         {/* LEFT */}
-        <div className="flex items-center gap-5 md:gap-6 lg:hidden z-10">
+        <div className="flex items-center lg:hidden z-10">
           {/* Mobile menu button */}
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -49,9 +50,6 @@ function Navbar() {
             {mobileOpen ? <X size={28} /> : <i className="ri-menu-4-fill text-2xl"></i>}
           </button>
 
-          <Link to="/account" className="pressable" data-cursor="Open">
-            <User size={22} />
-          </Link>
         </div>
 
 
@@ -106,11 +104,7 @@ function Navbar() {
 
         {/* RIGHT */}
         <div className="flex items-center gap-4 md:gap-6">
-          <button className="pressable lg:hidden transition-colors" data-cursor="Open">
-            <Search size={22} />
-          </button>
-
-          <Link to="/account" className="pressable hidden lg:block" data-cursor="Open">
+          <Link to="/account" className="pressable" data-cursor="Open">
             <User size={22} />
           </Link>
 
@@ -190,126 +184,125 @@ function Navbar() {
 
       {/* MOBILE MENU */}
       <div
-        className={`lg:hidden overflow-hidden bg-black border-t border-white/10 px-4 space-y-4 transition-[max-height,opacity,padding] duration-200 ${
-          mobileOpen ? "max-h-[80vh] opacity-100 py-4" : "max-h-0 opacity-0 py-0 pointer-events-none"
-        }`}
+        className={`lg:hidden overflow-hidden bg-black border-t border-white/10 px-4 space-y-4 transition-[max-height,opacity,padding] duration-200 ${mobileOpen ? "max-h-[80vh] opacity-100 py-4" : "max-h-0 opacity-0 py-0 pointer-events-none"
+          }`}
       >
-          {/* Mobile Search */}
-          <div className="flex items-center bg-[#111] border border-white/10 rounded-xl px-4 h-12">
-            <Search size={18} className="text-gray-400" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search..."
-              className="bg-transparent outline-none w-full ml-3 text-sm text-white placeholder:text-gray-400"
-            />
-          </div>
+        {/* Mobile Search */}
+        <div className="flex items-center bg-[#111] border border-white/10 rounded-xl px-4 h-12">
+          <Search size={18} className="text-gray-400" />
+          <input
+            type="text"
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            placeholder="Search..."
+            className="bg-transparent outline-none w-full ml-3 text-sm text-white placeholder:text-gray-400"
+          />
+        </div>
 
-          {searchTerm && (
-            <div className="overflow-hidden rounded-xl border border-white/10 bg-[#111]">
-              {searchSuggestions.length > 0 ? (
-                <ul className="py-2">
-                  {searchSuggestions.map((product) => (
-                    <li key={product.id}>
-                      <Link
-                        to={product.href}
-                        className="block px-4 py-2 text-sm text-white transition-colors hover:bg-white/10"
-                        onClick={() => {
-                          setSearchQuery("");
-                          setMobileOpen(false);
-                        }}
-                        data-cursor="Open"
-                      >
-                        <span className="block">{product.title}</span>
-                        <span className="block text-xs text-gray-400 capitalize">
-                          {product.category?.replace(/-/g, " ")}
-                        </span>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p className="px-4 py-2 text-sm text-gray-400">No products found.</p>
+        {searchTerm && (
+          <div className="overflow-hidden rounded-xl border border-white/10 bg-[#111]">
+            {searchSuggestions.length > 0 ? (
+              <ul className="py-2">
+                {searchSuggestions.map((product) => (
+                  <li key={product.id}>
+                    <Link
+                      to={product.href}
+                      className="block px-4 py-2 text-sm text-white transition-colors hover:bg-white/10"
+                      onClick={() => {
+                        setSearchQuery("");
+                        setMobileOpen(false);
+                      }}
+                      data-cursor="Open"
+                    >
+                      <span className="block">{product.title}</span>
+                      <span className="block text-xs text-gray-400 capitalize">
+                        {product.category?.replace(/-/g, " ")}
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className="px-4 py-2 text-sm text-gray-400">No products found.</p>
+            )}
+          </div>
+        )}
+
+        {/* Mobile Links */}
+        {navItems.map((item, index) => (
+          <div key={index} className="border-b border-white/10 pb-3">
+            <div className="flex items-center justify-between">
+              <Link
+                to={item.path}
+                className={`pressable text-[16px] ${item.featured ? "text-primary" : "text-white hover:text-primary"
+                  }`}
+                onClick={() => setMobileOpen(false)}
+                data-cursor="Open"
+              >
+                {item.title}
+              </Link>
+
+              {item.dropdown && (
+                <button className="pressable transition-transform" onClick={() => toggleMobileDropdown(index)} data-cursor="Open">
+                  <ChevronDown
+                    size={18}
+                    className={`transition-transform ${mobileDropdown === index ? "rotate-180" : ""
+                      }`}
+                  />
+                </button>
               )}
             </div>
-          )}
 
-          {/* Mobile Links */}
-          {navItems.map((item, index) => (
-            <div key={index} className="border-b border-white/10 pb-3">
-              <div className="flex items-center justify-between">
-                <Link
-                  to={item.path}
-                  className={`pressable text-[16px] ${item.featured ? "text-primary" : "text-white hover:text-primary"
-                    }`}
-                  onClick={() => setMobileOpen(false)}
-                  data-cursor="Open"
-                >
-                  {item.title}
-                </Link>
-
-                {item.dropdown && (
-                  <button className="pressable transition-transform" onClick={() => toggleMobileDropdown(index)} data-cursor="Open">
-                    <ChevronDown
-                      size={18}
-                      className={`transition-transform ${mobileDropdown === index ? "rotate-180" : ""
-                        }`}
-                    />
-                  </button>
-                )}
-              </div>
-
-              {/* Mobile Dropdown */}
-              {item.dropdown && mobileDropdown === index && (
-                <div className="mt-3 ml-4 space-y-3">
-                  {item.dropdown.columns.map((column, colIndex) => (
-                    <div key={colIndex}>
-                      {column.title && (
-                        <p className="text-xs uppercase tracking-[0.12em] text-gray-400 mb-2">
-                          {column.title}
-                        </p>
-                      )}
-                      <div className="space-y-2">
-                        {column.links.map((link, linkIndex) => (
-                          <Link
-                            key={linkIndex}
-                            to={link.path}
-                            className="block text-sm text-gray-300 hover:text-primary"
-                            onClick={() => setMobileOpen(false)}
-                            data-cursor="Open"
-                          >
-                            {link.label}
-                          </Link>
-                        ))}
-                      </div>
+            {/* Mobile Dropdown */}
+            {item.dropdown && mobileDropdown === index && (
+              <div className="mt-3 ml-4 space-y-3">
+                {item.dropdown.columns.map((column, colIndex) => (
+                  <div key={colIndex}>
+                    {column.title && (
+                      <p className="text-xs uppercase tracking-[0.12em] text-gray-400 mb-2">
+                        {column.title}
+                      </p>
+                    )}
+                    <div className="space-y-2">
+                      {column.links.map((link, linkIndex) => (
+                        <Link
+                          key={linkIndex}
+                          to={link.path}
+                          className="block text-sm text-gray-300 hover:text-primary"
+                          onClick={() => setMobileOpen(false)}
+                          data-cursor="Open"
+                        >
+                          {link.label}
+                        </Link>
+                      ))}
                     </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          ))}
-
-          <hr />
-
-          <div className="pt-2 space-y-3 flex flex-col gap-3">
-            <Link
-              to="/about"
-              className="pressable block text-white"
-              onClick={() => setMobileOpen(false)}
-              data-cursor="Open"
-            >
-              About Us
-            </Link>
-            <Link
-              to="/contact"
-              className="pressable block text-white"
-              onClick={() => setMobileOpen(false)}
-              data-cursor="Open"
-            >
-              Contact Us
-            </Link>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
+        ))}
+
+        <hr />
+
+        <div className="pt-2 space-y-3 flex flex-col gap-3">
+          <Link
+            to="/about"
+            className="pressable block text-white"
+            onClick={() => setMobileOpen(false)}
+            data-cursor="Open"
+          >
+            About Us
+          </Link>
+          <Link
+            to="/contact"
+            className="pressable block text-white"
+            onClick={() => setMobileOpen(false)}
+            data-cursor="Open"
+          >
+            Contact Us
+          </Link>
+        </div>
       </div>
     </header>
   );

@@ -12,9 +12,9 @@ export default function OwnersNote() {
           
           {/* Content */}
           <div className="relative z-10">
-            <h2 className="text-2xl md:text-3xl font-semibold text-primary mb-6">
+            <h1 className="text-2xl md:text-3xl font-semibold text-primary mb-6">
               A Message From Founder
-            </h2>
+            </h1>
             
             <blockquote className="space-y-4 text-gray-700 text-base md:text-lg leading-8 italic">
               <p>

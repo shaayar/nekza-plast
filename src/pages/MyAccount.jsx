@@ -50,7 +50,7 @@ export default function MyAccount() {
       {/* Background */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute left-1/2 top-24 h-112 w-md -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.035)_1px,transparent_1px)] bg-size:42px_42px opacity-[0.18]" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.035)_1px,transparent_1px)] [background-size:42px_42px] opacity-[0.18]" />
       </div>
 
       {/* Hero */}
@@ -82,9 +82,9 @@ export default function MyAccount() {
                 </div>
 
                 <div>
-                  <h2 className="text-2xl font-semibold text-zinc-950">
+                  <h1 className="text-2xl font-semibold text-zinc-950">
                     Rampal Yadav
-                  </h2>
+                  </h1>
                   <p className="text-sm text-zinc-500">
                     Welcome back to Nekza
                   </p>
@@ -121,9 +121,9 @@ export default function MyAccount() {
           <div className="space-y-8">
             {/* Quick Links */}
             <div>
-              <h2 className="mb-5 text-2xl font-semibold tracking-tight text-zinc-950">
+              <h1 className="mb-5 text-2xl font-semibold tracking-tight text-zinc-950">
                 Account Shortcuts
-              </h2>
+              </h1>
 
               <div className="grid gap-4 sm:grid-cols-2">
                 {quickLinks.map((item) => {
@@ -166,9 +166,9 @@ export default function MyAccount() {
                   <Package size={22} />
                 </div>
                 <div>
-                  <h2 className="text-2xl font-semibold tracking-tight text-zinc-950">
+                  <h1 className="text-2xl font-semibold tracking-tight text-zinc-950">
                     Recent Orders
-                  </h2>
+                  </h1>
                   <p className="text-sm text-zinc-500">
                     A quick look at your recent purchases
                   </p>

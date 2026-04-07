@@ -1,41 +1,8 @@
 import { useState } from "react";
+import { ChevronDown, ArrowUpRight } from "lucide-react";
 import { footerSections } from "../../data/Data";
 
 // ─── Icons ───────────────────────────────────────────────────────────────────
-
-const ExternalIcon = () => (
-    <svg
-        width="11"
-        height="11"
-        viewBox="0 0 13 13"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="size-2.75 shrink-0 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-    >
-        <path
-            d="M2.08064 11.7301L11.4802 2.33049L11.4802 12.9371L12.4801 12.9371L12.4801 0.623532L0.166506 0.623533L0.166507 1.62338L10.7731 1.62338L1.37354 11.023L2.08064 11.7301Z"
-            fill="currentColor"
-        />
-    </svg>
-);
-
-const ChevronIcon = ({ open }) => (
-    <svg
-        width="16"
-        height="16"
-        viewBox="0 0 16 16"
-        fill="none"
-        className={`shrink-0 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
-    >
-        <path
-            d="M4 6L8 10L12 6"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-        />
-    </svg>
-);
 
 const FacebookIcon = () => (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -64,7 +31,12 @@ const FooterLink = ({ href, label, external = false }) => (
         className="group flex items-center gap-2 py-1 text-sm transition-colors duration-200 hover:text-primary hover:underline underline-offset-3 decoration-2 decoration-alt-yellow md:text-base font-light"
     >
         {label}
-        {external && <ExternalIcon />}
+        {external && (
+            <ArrowUpRight
+                size={15}
+                className="size-4.75 shrink-0 transition-transform duration-200 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+            />
+        )}
     </a>
 );
 
@@ -83,7 +55,10 @@ const AccordionSection = ({ section }) => {
                 data-cursor="Open"
             >
                 <span className="text-sm font-bold text-primary">{section.heading}</span>
-                <ChevronIcon open={open} />
+                <ChevronDown
+                    size={16}
+                    className={`shrink-0 transition-transform duration-300 ${open ? "rotate-180" : ""}`}
+                />
             </button>
 
             <div
@@ -161,7 +136,7 @@ export default function Footer() {
                         {/* Socials — inline on mobile, pushed to bottom on md */}
                         <div className="flex items-center gap-4 md:mt-auto md:pt-16">
                             <a
-                                href="https://www.facebook.com/share/1Yhpp7osHb/"
+                                href="https://www.facebook.com/NekzaPlast/"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 aria-label="Facebook"

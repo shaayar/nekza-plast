@@ -178,7 +178,7 @@ function Cart() {
           {/* Order Summary */}
           <div className="lg:col-span-1">
             <div className="border border-zinc-200 bg-zinc-50 rounded-xl p-6 sticky top-24">
-              <h2 className="text-xl font-semibold mb-6">Order Summary</h2>
+              <h1 className="text-xl font-semibold mb-6">Order Summary</h1>
 
               <div className="space-y-3 mb-6">
                 <div className="flex justify-between text-zinc-600">

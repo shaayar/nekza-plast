@@ -72,10 +72,10 @@ export default function Card({ product, slug, badges = [] }) {
       <div className="pointer-events-none absolute -bottom-10 -right-10 h-38 w-38 rounded-full group-hover:bg-primary/20 blur-xl transition-opacity duration-300 group-hover:opacity-80" />
 
       {/* Image */}
-      <div className="relative z-10 overflow-hidden rounded-t-[1.5rem] bg-zinc-50">
+      <div className="relative z-10 overflow-hidden rounded-t-3xl bg-zinc-50">
         <Link
           to={productPath}
-          className="relative flex aspect-[4/4.8] w-full items-center justify-center overflow-hidden px-3 py-4 sm:px-4 sm:py-5"
+          className="relative flex aspect-[4/4.2] w-full items-center justify-center overflow-hidden px-2.5 py-3 sm:aspect-[4/4.8] sm:px-4 sm:py-5"
           data-cursor="View"
         >
           <img
@@ -94,51 +94,51 @@ export default function Card({ product, slug, badges = [] }) {
               width={250}
               height={300}
               loading="lazy"
-              className="absolute inset-0 h-full w-full object-contain px-3 py-4 sm:px-4 sm:py-5 mix-blend-darken opacity-0 transition-all duration-300 group-hover:scale-[1.03] group-hover:opacity-100"
+              className="absolute inset-0 h-full w-full object-contain px-2.5 py-3 sm:px-4 sm:py-5 mix-blend-darken opacity-0 transition-all duration-300 group-hover:scale-[1.03] group-hover:opacity-100"
             />
           )}
         </Link>
       </div>
 
       {/* Content */}
-      <div className="relative z-10 flex flex-1 flex-col space-y-3 p-3 sm:p-4">
+      <div className="relative z-10 flex flex-1 flex-col space-y-2.5 p-2.5 sm:space-y-3 sm:p-4">
         {/* Title */}
         <Link
           to={productPath}
           className="rounded transition-colors duration-200"
           data-cursor="View"
         >
-          <h3 className="line-clamp-2 text-xl md:text-xl font-semibold leading-5">
+          <h3 className="line-clamp-2 text-sm font-semibold leading-snug sm:text-base md:text-xl">
             {product.title}
           </h3>
         </Link>
 
         {/* Price */}
         <div className="flex flex-wrap items-center gap-2">
-          <span className="text-lg md:text-xl font-semibold text-ink sm:text-xl">
+          <span className="text-base font-semibold text-ink sm:text-lg md:text-xl">
             {product.price ? `₹${product.price}` : "Price Unavailable"}
           </span>
 
           {product.mrp && (
-            <span className="text-sm text-zinc-400 line-through">
+            <span className="text-xs text-zinc-400 line-through sm:text-sm">
               ₹{product.mrp}
             </span>
           )}
 
           {product.off && (
-            <span className="rounded-full bg-ink-soft px-2 py-0.5 text-[11px] font-medium text-cream">
+            <span className="rounded-full bg-ink-soft px-2 py-0.5 text-[10px] font-medium text-cream sm:text-[11px]">
               {product.off}% off
             </span>
           )}
         </div>
 
         {/* Footer */}
-        <div className="mt-auto flex items-center gap-2 pt-1">
+        <div className="mt-auto flex items-center gap-1.5 pt-0.5 sm:gap-2 sm:pt-1">
           <BuyNowButton
             product={productForCart}
             quantity={1}
             stopPropagation
-            className="pressable relative z-10 flex-1 rounded-full bg-primary px-4 py-2.5 text-sm font-semibold text-white transition-opacity duration-200 hover:opacity-90"
+            className="pressable relative z-10 flex-1 rounded-full bg-primary px-3 py-2 text-xs font-semibold text-white transition-opacity duration-200 hover:opacity-90 sm:px-4 sm:py-2.5 sm:text-sm"
           >
             Buy Now
           </BuyNowButton>
@@ -147,7 +147,7 @@ export default function Card({ product, slug, badges = [] }) {
             type="button"
             aria-label="Add to cart"
             onClick={handleAddToCart}
-            className="pressable inline-flex h-10 w-10 items-center justify-center rounded-full border border-zinc-200 bg-white text-zinc-800 transition-colors duration-200 hover:border-zinc-300 hover:bg-zinc-50"
+            className="pressable inline-flex h-9 w-9 items-center justify-center rounded-full border border-zinc-200 bg-white text-zinc-800 transition-colors duration-200 hover:border-zinc-300 hover:bg-zinc-50 sm:h-10 sm:w-10"
             data-cursor="Shop"
           >
             <ShoppingBag size={18} />

@@ -329,9 +329,9 @@ function Products() {
             </div>
           ) : (
             <div className="rounded-3xl border border-dashed border-zinc-300 px-6 py-20 text-center">
-              <h2 className="text-2xl font-semibold text-zinc-900">
+              <h1 className="text-2xl font-semibold text-zinc-900">
                 No products found
-              </h2>
+              </h1>
               <p className="mt-2 text-zinc-600">
                 Try changing tags or price range to see more products.
               </p>

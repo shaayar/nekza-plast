@@ -76,7 +76,7 @@ function CartDrawer({ open, onClose }) {
       >
         <div className="flex items-center justify-between border-b border-zinc-200 px-5 py-4">
           <div>
-            <h2 className="text-2xl font-bold text-zinc-900">Shopping Cart</h2>
+            <h1 className="text-2xl font-bold text-zinc-900">Shopping Cart</h1>
             <p className="text-sm text-zinc-500">
               {cartItems.length} {cartItems.length === 1 ? "item" : "items"}
             </p>

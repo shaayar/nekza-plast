@@ -1,11 +1,7 @@
+import { MARQUEE_STRIP_ITEMS } from "../../data/Data.js";
+
 export default function MarqueeStrip({
-  items = [
-    "BUILT FOR DAILY USE",
-    "LEAK RESISTANT",
-    "CLEAN UTILITY",
-    "SCHOOL TO KITCHEN",
-    "NEKZA ESSENTIALS",
-  ],
+  items = MARQUEE_STRIP_ITEMS,
 }) {
   const loopItems = [...items, ...items, ...items];
 

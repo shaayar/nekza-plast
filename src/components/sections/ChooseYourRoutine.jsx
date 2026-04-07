@@ -1,56 +1,13 @@
 import { useState } from "react";
 import { GraduationCap, Plane, Home, Briefcase, ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { ALL_PRODUCTS } from "../../data/Data.js";
+import { ALL_PRODUCTS, ROUTINE_OPTIONS, ROUTINE_COLLECTION_MAP } from "../../data/Data.js";
 
-const routines = [
-    {
-        id: "school",
-        label: "School",
-        icon: GraduationCap,
-        eyebrow: "Built for School Days",
-        title: "Packed for school mornings",
-        description:
-            "Lunch boxes, bottles, and everyday carry essentials designed for busy school routines.",
-        chip: "Daily Carry",
-    },
-    {
-        id: "travel",
-        label: "Travel",
-        icon: Plane,
-        eyebrow: "Built for Movement",
-        title: "Ready for life on the move",
-        description:
-            "Carry-friendly utility products made for travel, movement, and everyday convenience.",
-        chip: "Travel Ready",
-    },
-    {
-        id: "home",
-        label: "Home",
-        icon: Home,
-        eyebrow: "Built for Home Utility",
-        title: "Essentials for everyday home life",
-        description:
-            "Practical products designed to fit naturally into kitchen counters, storage, and everyday routines.",
-        chip: "Kitchen Utility",
-    },
-    {
-        id: "office",
-        label: "Office",
-        icon: Briefcase,
-        eyebrow: "Built for Work Days",
-        title: "Desk-to-day essentials",
-        description:
-            "Clean, practical utility for work setups, commutes, and everyday office life.",
-        chip: "Work Friendly",
-    },
-];
-
-const ROUTINE_COLLECTION_MAP = {
-    school: ["kidzbee", "tiffin-boxes"],
-    travel: ["insulated-water-bottle", "water-bottle"],
-    home: ["kitchen", "casseroles", "water-jug"],
-    office: ["insulated-water-bottle", "tiffin-boxes", "water-bottle"],
+const ROUTINE_ICON_MAP = {
+    school: GraduationCap,
+    travel: Plane,
+    home: Home,
+    office: Briefcase,
 };
 
 const getRoutineProducts = (routineId) => {
@@ -86,13 +43,13 @@ const scrollToPageTop = () => {
 };
 
 export default function ChooseYourRoutine() {
-    const [activeRoutine, setActiveRoutine] = useState(routines[0]);
+    const [activeRoutine, setActiveRoutine] = useState(ROUTINE_OPTIONS[0]);
     const activeRoutineProducts = getRoutineProducts(activeRoutine.id);
 
     return (
         <section className="section-shell overflow-hidden px-4 py-8 lg:py-16 md:px-10 bg-cream">
 
-            <h1 className="text-3xl md:text-5xl font-semibold mb-6 text-center">
+            <h1 className="text-4xl md:text-5xl font-semibold mb-6 text-center">
                 What's <span className="text-primary underline decoration-3 decoration-alt-yellow">Your Day</span> like?
             </h1>
 
@@ -107,30 +64,33 @@ export default function ChooseYourRoutine() {
 
                         {/* Header */}
                         <div>
-                            <h2 className="mt-3 text-2xl font-semibold leading-[1.15] tracking-tight text-ink md:text-3xl">
+                            <h1 className="mt-3 text-2xl font-semibold leading-[1.15] tracking-tight text-ink md:text-3xl">
                                 Utility looks different in every routine.
-                            </h2>
-                            <p className="mt-3 text-sm leading-relaxed text-accent-color md:text-base">
+                            </h1>
+                            <p className="mt-3 text-sm leading-relaxed text-accent md:text-base">
                                 Pick a setting and explore essentials designed for the rhythm of everyday life.
                             </p>
                         </div>
 
                         {/* Active context chip — bridges header to tabs */}
                         <div className="inline-flex w-fit items-center gap-1.5 rounded-full border border-cream-dark bg-cream px-3 py-1.5 text-sm font-semibold text-ink-soft">
-                            {(() => { const Icon = activeRoutine.icon; return <Icon size={12} />; })()}
+                            {(() => {
+                                const Icon = ROUTINE_ICON_MAP[activeRoutine.iconKey] || GraduationCap;
+                                return <Icon size={12} />;
+                            })()}
                             {activeRoutine.chip} · {activeRoutineProducts.length} products
                         </div>
 
                         {/* Mobile: horizontal scrollable pill tabs */}
                         <div className="flex gap-2 overflow-x-auto pb-0.5 [scrollbar-width:none] lg:hidden">
-                            {routines.map((routine) => {
-                                const Icon = routine.icon;
+                            {ROUTINE_OPTIONS.map((routine) => {
+                                const Icon = ROUTINE_ICON_MAP[routine.iconKey] || GraduationCap;
                                 const isActive = activeRoutine.id === routine.id;
                                 return (
                                     <button
                                         key={routine.id}
                                         onClick={() => setActiveRoutine(routine)}
-                                        className={`flex shrink-0 items-center gap-1.5 rounded-full border px-4 py-2 text-md font-semibold transition-all duration-300 ${isActive
+                                        className={`flex shrink-0 items-center gap-1.5 rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-300 ${isActive
                                             ? "border-ink bg-ink text-white shadow-md"
                                             : "border-cream-dark bg-white text-ink-soft hover:border-zinc-300 hover:bg-cream"
                                             }`}
@@ -144,8 +104,8 @@ export default function ChooseYourRoutine() {
 
                         {/* Desktop: 2×2 tab grid — pushes to bottom naturally */}
                         <div className="hidden grid-cols-2 gap-2.5 lg:grid lg:items-end">
-                            {routines.map((routine) => {
-                                const Icon = routine.icon;
+                            {ROUTINE_OPTIONS.map((routine) => {
+                                const Icon = ROUTINE_ICON_MAP[routine.iconKey] || GraduationCap;
                                 const isActive = activeRoutine.id === routine.id;
                                 return (
                                     <button
@@ -165,10 +125,10 @@ export default function ChooseYourRoutine() {
                                             <Icon size={18} />
                                         </div>
                                         <div>
-                                            <p className={`text-md font-semibold ${isActive ? "text-white" : "text-ink"}`}>
+                                            <p className={`text-sm font-semibold ${isActive ? "text-white" : "text-ink"}`}>
                                                 {routine.label}
                                             </p>
-                                            <p className={`mt-0.5 text-sm ${isActive ? "text-white/50" : "text-accent-color"}`}>
+                                            <p className={`mt-0.5 text-sm ${isActive ? "text-white/50" : "text-accent"}`}>
                                                 {routine.chip}
                                             </p>
                                         </div>
@@ -182,7 +142,7 @@ export default function ChooseYourRoutine() {
                     <div className="relative overflow-hidden rounded-3xl border-t border-cream-dark p-6 md:p-8 lg:rounded-l-none lg:rounded-r-3xl lg:border-t-0 lg:border-l bg-warm-bg">
 
                         {/* Very subtle top accent line */}
-                        <div className="absolute inset-x-0 top-0 h-0.75 rounded-tr-3xl bg-primary-color lg:rounded-tl-none" />
+                        <div className="absolute inset-x-0 top-0 h-0.5 rounded-tr-3xl bg-primary lg:rounded-tl-none" />
 
                         <div key={activeRoutine.id} className="animate-routineFade">
 
@@ -193,13 +153,13 @@ export default function ChooseYourRoutine() {
                             <h3 className="mt-2 text-2xl font-semibold leading-snug tracking-tight text-ink md:text-3xl">
                                 {activeRoutine.title}
                             </h3>
-                            <p className="mt-2 text-sm leading-relaxed text-accent-color md:text-base">
+                            <p className="mt-2 text-sm leading-relaxed text-accent md:text-base">
                                 {activeRoutine.description}
                             </p>
 
                             {/* Count divider */}
                             <div className="mt-5 flex items-center gap-3">
-                                <span className="whitespace-nowrap text-[10px] font-semibold uppercase tracking-widest text-accent-color">
+                                <span className="whitespace-nowrap text-[10px] font-semibold uppercase tracking-widest text-accent">
                                     {activeRoutineProducts.length} essentials
                                 </span>
                                 <div className="h-px flex-1 bg-cream-dark" />

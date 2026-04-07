@@ -1,29 +1,10 @@
 import { useLayoutEffect, useMemo, useRef, useState } from "react";
 import { ALL_PRODUCTS } from "../data/Data";
-import { useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import AddToCartButton from "../components/AddToCartButton.jsx";
 import BuyNowButton from "../components/BuyNowButton.jsx";
 import Card from "../components/UI/Card.jsx";
-import { Link } from "react-router-dom";
-import { ArrowUpRight } from 'lucide-react';
-
-// ─── Icons ────────────────────────────────────────────────────────────────────
-
-const ChevronLeft = ({ cls = "" }) => (
-  <svg className={cls} width="18" height="18" viewBox="0 0 18 18" fill="none">
-    <path d="M11 4L6 9L11 14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
-const ChevronRight = ({ cls = "" }) => (
-  <svg className={cls} width="18" height="18" viewBox="0 0 18 18" fill="none">
-    <path d="M7 4L12 9L7 14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
-const CheckIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
-    <path d="M3 8l3.5 3.5L13 4" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-);
+import { ArrowUpRight, Check, ChevronLeft, ChevronRight } from "lucide-react";
 
 const SIZE_MAP = {
   "water-bottle": ["750ml", "900ml", "1200ml", "1500ml"],
@@ -386,10 +367,10 @@ export default function ProductDetail() {
                 ) : ( "Price on request" )}
               </span>
               {PRODUCT.mrp && (
-                <span className="text-md text-gray-400 line-through">MRP ₹{PRODUCT.mrp}</span>
+                <span className="text-sm text-gray-400 line-through">MRP ₹{PRODUCT.mrp}</span>
               )}
               {discount && (
-                <span className="text-md font-semibold text-white bg-primary rounded p-1">{discount}% off</span>
+                <span className="text-sm font-semibold text-white bg-primary rounded p-1">{discount}% off</span>
               )}
             </div>
 
@@ -404,7 +385,7 @@ export default function ProductDetail() {
                 <QuantitySelector qty={qty} onChange={setQty} />
               </div>
 
-              <Link to={`/contact`} className="me-4 self-end text-md font-medium text-gray-700 hover:text-ink transition-colors hover:underline" data-cursor="Open">
+              <Link to={`/contact`} className="me-4 self-end text-sm font-medium text-gray-700 hover:text-ink transition-colors hover:underline" data-cursor="Open">
                 Bulk Order
                 <ArrowUpRight className="ml-2 inline-block size-5" />
               </Link>
@@ -443,7 +424,7 @@ export default function ProductDetail() {
                   className="flex-1 py-2 text-sm text-gray-700 placeholder-gray-400 bg-transparent outline-none"
                 />
                 <button className="pressable flex items-center gap-1 text-xs font-semibold text-gray-500 hover:text-gray-900 transition-colors pb-2" data-cursor="Open">
-                  <CheckIcon /> Check
+                  <Check size={14} strokeWidth={2.2} /> Check
                 </button>
               </div>
             </div>
@@ -470,9 +451,9 @@ export default function ProductDetail() {
 
         {/* ══ You May Also Like ════════════════════════════════════════════ */}
         <div className="mt-12 md:mt-16">
-          <h2 className="mb-6 text-center text-2xl md:text-3xl font-bold text-gray-900">
+          <h1 className="mb-6 text-center text-2xl md:text-3xl font-bold text-gray-900">
             You May Also Like
-          </h2>
+          </h1>
 
           {/* Mobile: 2-col grid  |  Desktop: 4-col grid */}
           <div className="grid grid-cols-2 gap-4 md:grid-cols-4 md:gap-6">

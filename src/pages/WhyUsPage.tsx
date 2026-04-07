@@ -92,9 +92,9 @@ export default function WhyUsPage() {
             Our Point of View
           </p>
 
-          <h2 className="mt-4 max-w-4xl text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
+          <h1 className="mt-4 max-w-4xl text-3xl font-semibold leading-tight tracking-tight md:text-5xl">
             Everyday essentials shouldn’t feel disposable, forgettable, or poorly made.
-          </h2>
+          </h1>
 
           <p className="mt-6 max-w-2xl text-sm leading-7 text-zinc-300 md:text-base md:leading-8">
             The products people use every day shape routines more than they realize.
@@ -111,9 +111,9 @@ export default function WhyUsPage() {
             <p className="text-sm uppercase tracking-[0.3em] text-primary">
               What Sets Us Apart
             </p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-tight text-zinc-950 md:text-4xl">
+            <h1 className="mt-3 text-3xl font-semibold tracking-tight text-zinc-950 md:text-4xl">
               Practical choices, built with more intention.
-            </h2>
+            </h1>
           </div>
 
           <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
@@ -150,11 +150,11 @@ export default function WhyUsPage() {
             Built for Real Life
           </p>
 
-          <h2 className="mt-4 text-3xl font-semibold tracking-tight text-zinc-950 md:text-4xl">
+          <h1 className="mt-4 text-3xl font-semibold tracking-tight text-zinc-950 md:text-4xl">
             The goal is simple:
             <br className="hidden md:block" />
             <span className="text-primary underline decoration-3 decoration-alt-yellow">Make everyday products feel more worth keeping.</span>
-          </h2>
+          </h1>
 
           <p className="mx-auto mt-5 max-w-2xl text-base leading-7 text-zinc-600">
             Explore a range designed around practical use, cleaner utility,

@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useMemo, useState } from "react";
+import { Check, SlidersHorizontal } from "lucide-react";
 import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import Card from "../components/UI/Card.jsx";
 import {
@@ -79,15 +80,7 @@ function FilterSidebar({
                       }`}
                   >
                     {activeCategories.includes(category) && (
-                      <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
-                        <path
-                          d="M1 4l2.5 2.5L9 1"
-                          stroke="white"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
+                      <Check size={10} strokeWidth={2.5} className="text-white" />
                     )}
                   </div>
 
@@ -137,15 +130,7 @@ function FilterSidebar({
                       }`}
                   >
                     {activeTags.includes(tag) && (
-                      <svg width="10" height="8" viewBox="0 0 10 8" fill="none">
-                        <path
-                          d="M1 4l2.5 2.5L9 1"
-                          stroke="white"
-                          strokeWidth="1.5"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
+                      <Check size={10} strokeWidth={2.5} className="text-white" />
                     )}
                   </div>
 
@@ -397,14 +382,7 @@ function Products() {
                 className="flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-4 py-2 text-sm text-zinc-700 shadow-sm transition-colors hover:bg-zinc-50 md:hidden"
                 data-cursor="Open"
               >
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                  <path
-                    d="M2 4h12M4 8h8M6 12h4"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                  />
-                </svg>
+                <SlidersHorizontal size={16} />
                 Filters
                 {(activeCategories.length > 0 || activeTags.length > 0) && (
                   <span className="rounded-full bg-zinc-900 px-1.5 py-0.5 text-xs leading-none text-white">
@@ -518,9 +496,9 @@ function Products() {
                 <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] text-primary">
                   No Match Found
                 </p>
-                <h2 className="text-3xl font-semibold text-zinc-900">
+                <h1 className="text-3xl font-semibold text-zinc-900">
                   Nothing fits this filter set
-                </h2>
+                </h1>
                 <p className="mx-auto mt-3 max-w-md text-zinc-600">
                   Try changing tags, adjusting price range, or clearing filters to
                   reveal more products.

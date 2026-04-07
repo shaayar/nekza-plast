@@ -20,6 +20,7 @@ function Home() {
       <MarqueeStrip />
       <WhyNekza />
       <ChooseYourRoutine />
+      <MarqueeStrip />
       <PopularProducts />
       <UsageMomentsStrip />
       <NewArrivals />

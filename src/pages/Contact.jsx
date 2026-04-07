@@ -25,7 +25,7 @@ export default function Contact() {
           
           {/* Form */}
           <div className="rounded-4xl border border-zinc-200 bg-white/80 p-6 shadow-lg backdrop-blur md:p-8">
-            <h2 className="text-2xl font-semibold">Send a message</h2>
+            <h1 className="text-2xl font-semibold">Send a message</h1>
 
             <form className="mt-6 space-y-5">
               <input

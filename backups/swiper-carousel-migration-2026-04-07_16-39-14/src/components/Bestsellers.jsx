@@ -7,19 +7,12 @@ import {
   BESTSELLER_SOCIAL_PROOF_LABELS,
 } from "../data/Data.js";
 import { ArrowRight } from "lucide-react";
-import ProductCarousel from "./UI/ProductCarousel.jsx";
+import useHorizontalDragScroll from "../hooks/useHorizontalDragScroll.jsx";
 
 
 // ─── Data ─────────────────────────────────────────────────────────────────────
 
 const PRODUCTS = getBestsellers();
-const BESTSELLERS_BREAKPOINTS = {
-  480: { slidesPerView: 1.45, spaceBetween: 14 },
-  640: { slidesPerView: 2.1, spaceBetween: 16 },
-  768: { slidesPerView: 2.35, spaceBetween: 18 },
-  1024: { slidesPerView: 3.05, spaceBetween: 20 },
-  1280: { slidesPerView: 3.7, spaceBetween: 22 },
-};
 
 const getProductMood = (title = "") => {
   const lowered = title.toLowerCase();
@@ -45,6 +38,7 @@ function ProductCard({ product, badges }) {
 
 export default function Bestsellers() {
   const [activeChip, setActiveChip] = useState("for-you");
+  const railRef = useHorizontalDragScroll(true);
 
   const visibleProducts = useMemo(() => {
     const scored = PRODUCTS.slice().map((item) => {
@@ -102,17 +96,17 @@ export default function Bestsellers() {
         </div>
       </div>
 
-      <ProductCarousel
-        items={visibleProducts}
-        getItemKey={(product, i) => product.id || i}
-        className="w-full px-4 md:px-10 md:pt-2"
-        slidesPerView={1.2}
-        spaceBetween={12}
-        breakpoints={BESTSELLERS_BREAKPOINTS}
-        freeMode
-        renderSlide={(product, i) => (
+      {/* Horizontal scroll row — hides scrollbar */}
+      <div
+        ref={railRef}
+        className="mx-auto flex max-w-full items-stretch gap-4 overflow-x-auto md:gap-6 ps-4 md:ps-10 md:pt-2"
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+        data-cursor="Drag"
+      >
+        {visibleProducts.map((product, i) => (
           <div
-            className="relative flex h-full animate-slide-up py-1"
+            key={product.id || i}
+            className="relative flex h-full w-[78vw] min-w-65 max-w-90 shrink-0 animate-slide-up sm:w-[46vw] lg:w-[30vw] xl:w-[23vw]"
             style={{ animationDelay: `${i * 80}ms` }}
           >
             <ProductCard
@@ -123,8 +117,8 @@ export default function Bestsellers() {
               ]}
             />
           </div>
-        )}
-      />
+        ))}
+      </div>
 
     </section>
   );

@@ -1,4 +1,5 @@
 import React from "react";
+import { ArrowRight } from "lucide-react";
 import { LIFE_WITH_NEKZA_CARDS } from "../data/Data.js";
 
 export default function LifeWithNekza() {
@@ -8,9 +9,9 @@ export default function LifeWithNekza() {
         
         {/* Heading */}
         <div className="flex flex-col gap-2 text-center max-w-3xl">
-          <h2 className=" text-4xl lg:text-5xl font-bold leading-tight">
+          <h1 className=" text-4xl lg:text-5xl font-bold leading-tight">
             Everyday life with <span className="text-primary underline decoration-4 decoration-alt-yellow">Nekza</span>
-          </h2>
+          </h1>
           <p className="text-sm sm:text-base lg:text-xl text-neutral-600 font-light">
             Be inspired by our recipes, tips, and tricks from culinary experts.
           </p>
@@ -45,19 +46,11 @@ export default function LifeWithNekza() {
                 data-cursor="Shop"
               >
                 <span>Shop now</span>
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 16 18"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+                <ArrowRight
+                  size={20}
+                  strokeWidth={1.9}
                   className="transition-transform duration-200 group-hover:translate-x-1"
-                >
-                  <path
-                    d="M0.5 9.49997H13.793L6.293 17L7 17.707L15.707 8.99997L7 0.292969L6.293 0.999969L13.793 8.49997H0.5V9.49997Z"
-                    fill="currentColor"
-                  />
-                </svg>
+                />
               </a>
             </div>
           ))}

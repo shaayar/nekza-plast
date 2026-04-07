@@ -176,6 +176,23 @@ if (window.matchMedia("(pointer: fine)").matches) {
   - Added 150px offset to account for fixed header visibility.
   - Added filter to remove empty sections from `TERMS_SECTIONS` before rendering.
 
+## 15) New Arrivals horizontal swipe not working on mobile
+- **Situation**: on mobile/coarse-pointer screens, the `New Arrivals` rail felt non-scrollable.
+- **Cause**:
+  - The drag hook still attached pointer/click interception logic to all devices.
+  - Mixed pointer environments made this interfere with native touch swipe behavior.
+- **Fix**:
+  - Limited drag-hook setup to fine-pointer devices only:
+```js
+const isFinePointerDevice = window.matchMedia("(pointer: fine)").matches;
+if (!isFinePointerDevice) return;
+```
+  - Removed runtime `touchAction` mutations from the hook.
+  - Added iOS momentum scrolling hint on the New Arrivals rail:
+```jsx
+className="... overflow-x-auto ... [-webkit-overflow-scrolling:touch] ..."
+```
+
 ---
 
 ## Chronological Changelog
@@ -323,3 +340,13 @@ Notes:
 - Added 150px offset for header clearance.
 - Filtered empty sections from TERMS_SECTIONS.
 
+[2026-04-07 16:27 IST] [nekza-015-newarrivals-mobile-swipe]
+Change:
+- Fixed New Arrivals rail swipe behavior on mobile/coarse-pointer environments.
+Files:
+- src/hooks/useHorizontalDragScroll.jsx
+- src/components/NewArrivals.jsx
+Notes:
+- Hook now activates only on `(pointer: fine)` devices.
+- Removed hook-driven `touchAction` style writes.
+- Added `-webkit-overflow-scrolling: touch` for smoother native horizontal swipe.

@@ -1475,6 +1475,132 @@ export const DISCOVERY_CHIPS = {
   ],
 };
 
+// Product showcase sort options
+export const PRODUCT_SHOWCASE_SORT_OPTIONS = [
+  { label: "Featured", value: "featured" },
+  { label: "Price: Low to High", value: "price-asc" },
+  { label: "Price: High to Low", value: "price-desc" },
+  { label: "Best Discount", value: "discount-desc" },
+];
+
+// Marquee strip items
+export const MARQUEE_STRIP_ITEMS = [
+  "BUILT FOR DAILY USE",
+  "LEAK RESISTANT",
+  "CLEAN UTILITY",
+  "SCHOOL TO KITCHEN",
+  "NEKZA ESSENTIALS",
+];
+
+// Preloader drawing helpers
+export const PRELOADER_RIB_Y_POSITIONS = [110, 140, 168];
+export const PRELOADER_DOT_INDICES = [0, 1, 2];
+
+// ChooseYourRoutine section data
+export const ROUTINE_OPTIONS = [
+  {
+    id: "school",
+    label: "School",
+    iconKey: "school",
+    eyebrow: "Built for School Days",
+    title: "Packed for school mornings",
+    description:
+      "Lunch boxes, bottles, and everyday carry essentials designed for busy school routines.",
+    chip: "Daily Carry",
+    accent: "from-primary/15 via-primary/5 to-transparent",
+  },
+  {
+    id: "travel",
+    label: "Travel",
+    iconKey: "travel",
+    eyebrow: "Built for Movement",
+    title: "Ready for life on the move",
+    description:
+      "Carry-friendly utility products made for travel, movement, and everyday convenience.",
+    chip: "Travel Ready",
+    accent: "from-zinc-200/50 via-zinc-100/40 to-transparent",
+  },
+  {
+    id: "home",
+    label: "Home",
+    iconKey: "home",
+    eyebrow: "Built for Home Utility",
+    title: "Essentials for everyday home life",
+    description:
+      "Practical products designed to fit naturally into kitchen counters, storage, and everyday routines.",
+    chip: "Kitchen Utility",
+    accent: "from-alt-yellow/25 via-alt-yellow/10 to-transparent",
+  },
+  {
+    id: "office",
+    label: "Office",
+    iconKey: "office",
+    eyebrow: "Built for Work Days",
+    title: "Desk-to-day essentials",
+    description:
+      "Clean, practical utility for work setups, commutes, and everyday office life.",
+    chip: "Work Friendly",
+    accent: "from-primary/10 via-zinc-100/30 to-transparent",
+  },
+];
+
+export const ROUTINE_COLLECTION_MAP = {
+  school: ["kidzbee", "tiffin-boxes"],
+  travel: ["insulated-water-bottle", "water-bottle"],
+  home: ["kitchen", "casseroles", "water-jug"],
+  office: ["insulated-water-bottle", "tiffin-boxes", "water-bottle"],
+};
+
+// Usage moments section data
+export const USAGE_MOMENTS = [
+  {
+    title: "For School",
+    desc: "Lunch boxes, bottles, and everyday carry essentials made for busy school routines.",
+    iconKey: "school",
+    accent: "bg-primary/10",
+  },
+  {
+    title: "For Travel",
+    desc: "Carry-friendly utility products designed for movement, convenience, and repeat use.",
+    iconKey: "travel",
+    accent: "bg-zinc-200",
+  },
+  {
+    title: "For Home",
+    desc: "Practical daily-use essentials that fit naturally into kitchen and home life.",
+    iconKey: "home",
+    accent: "bg-alt-yellow/20",
+  },
+  {
+    title: "For Office",
+    desc: "Practical daily-use essentials that fit naturally into office environments.",
+    iconKey: "office",
+    accent: "bg-cream-dark/60",
+  },
+];
+
+// Social proof label data
+export const BESTSELLER_SOCIAL_PROOF_LABELS = [
+  "23 bought today",
+  "Low stock",
+  "Back in demand",
+  "Fast moving",
+];
+
+export const POPULAR_SOCIAL_PROOF_LABELS = [
+  "Popular this week",
+  "Shoppers' pick",
+  "Hot right now",
+  "Selling fast",
+];
+
+export const NEW_ARRIVAL_SOCIAL_PROOF_LABELS = [
+  "New this week",
+  "Recently added",
+  "Early favorite",
+  "Just landed",
+];
+
 // Testimonials data
 export const TESTIMONIALS = [
   {
@@ -1599,26 +1725,26 @@ export const HERO_SLIDES = [
   {
     tag: "Hydration Essentials",
     title: "Discover Premium Water Companions",
-    titleItalic: ["Companions"],
     bg: "/images/slide-n1.png",
+    url: "/collections/water-bottle"
   },
   {
     tag: "Smart Kitchen Organization",
     title: "Elegant Storage Solutions for Contemporary Living",
-    titleItalic: [],
     bg: "/images/slide-2.webp",
+    url: "/collections/kitchen"
   },
   {
     tag: "Fresh Food Preservation",
     title: "Modern Serving Solutions",
-    titleItalic: [],
     bg: "/images/slide-3.webp",
+    url: "/collections/kitchen"
   },
   {
     tag: "Meal Prep Solutions",
     title: "Innovative Food Storage for Today's Households",
-    titleItalic: [],
     bg: "/images/slide-4.webp",
+    url: "/collections/kitchen "
   },
 ];
 

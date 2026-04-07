@@ -6,17 +6,10 @@ import {
   NEW_ARRIVAL_SOCIAL_PROOF_LABELS,
 } from "../data/Data.js";
 import { ArrowRight } from "lucide-react";
-import ProductCarousel from "./UI/ProductCarousel.jsx";
+import useHorizontalDragScroll from "../hooks/useHorizontalDragScroll.jsx";
 
 
 const PRODUCTS = getNewArrivals();
-const NEW_ARRIVALS_BREAKPOINTS = {
-  480: { slidesPerView: 1.3, spaceBetween: 14 },
-  640: { slidesPerView: 1.8, spaceBetween: 16 },
-  768: { slidesPerView: 2.3, spaceBetween: 18 },
-  1024: { slidesPerView: 3, spaceBetween: 20 },
-  1280: { slidesPerView: 3.8, spaceBetween: 22 },
-};
 
 const getProductMood = (title = "") => {
   const lowered = title.toLowerCase();
@@ -31,6 +24,7 @@ const getSocialProof = (index) => {
 
 export default function NewArrivals() {
   const [activeChip, setActiveChip] = useState("fresh");
+  const railRef = useHorizontalDragScroll(true);
 
   const visibleProducts = useMemo(() => {
     const list = PRODUCTS.slice();
@@ -88,28 +82,30 @@ export default function NewArrivals() {
 
         {/* Product Rail */}
         <div className="mt-5 rounded-3xl border border-zinc-200/80 bg-white/65 p-3 sm:p-4">
-          <ProductCarousel
-            items={visibleProducts}
-            getItemKey={(product) => product.id}
-            className="w-full [--swiper-theme-color:var(--primary-color)]"
-            slidesPerView={1.15}
-            spaceBetween={12}
-            breakpoints={NEW_ARRIVALS_BREAKPOINTS}
-            renderSlide={(product, i) => (
-              <div
-                className="relative flex h-full animate-slide-up py-1"
-                style={{ animationDelay: `${i * 80}ms` }}
-              >
-                <Card
-                  product={product}
-                  badges={[
-                    { tone: "light", text: getProductMood(product.title) },
-                    { tone: "dark", text: getSocialProof(i) },
-                  ]}
-                />
-              </div>
-            )}
-          />
+          <div
+            ref={railRef}
+            className="snap-x snap-mandatory overflow-x-auto overscroll-x-contain pb-2 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden"
+            data-cursor="Drag"
+          >
+            <div className="flex min-w-max gap-3 pr-2 sm:gap-4 md:gap-5">
+              {/* Product Cards */}
+              {visibleProducts.map((product, i) => (
+                <div
+                  key={product.id}
+                  className="relative flex h-full w-[70vw] min-w-56 max-w-80 shrink-0 snap-start snap-always animate-slide-up sm:w-[44vw] md:w-[34vw] lg:w-[27vw] xl:w-[21vw]"
+                  style={{ animationDelay: `${i * 80}ms` }}
+                >
+                  <Card
+                    product={product}
+                    badges={[
+                      { tone: "light", text: getProductMood(product.title) },
+                      { tone: "dark", text: getSocialProof(i) },
+                    ]}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

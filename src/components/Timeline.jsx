@@ -21,9 +21,9 @@ export default function Timeline() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-semibold mb-4">
+          <h1 className="text-3xl md:text-4xl font-semibold mb-4">
             Our Journey <span className="text-primary underline decoration-3 decoration-alt-yellow">Through Time</span>
-          </h2>
+          </h1>
           <p className="text-gray-700 text-base md:text-lg leading-8 max-w-3xl mx-auto">
             From our early years to today, this journey reflects steady growth,
             practical innovation, and a consistent focus on everyday utility.

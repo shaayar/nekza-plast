@@ -1,17 +1,10 @@
 import React, { useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SlidersHorizontal, X, Star, ShoppingCart } from "lucide-react";
-import { ALL_PRODUCTS } from "../data/Data.js";
+import { ALL_PRODUCTS, PRODUCT_SHOWCASE_SORT_OPTIONS } from "../data/Data.js";
 import { useCart } from "../hooks/useCart.jsx";
 import { useToast } from "../hooks/useToast.jsx";
 import BuyNowButton from "../components/BuyNowButton.jsx";
-
-const SORT_OPTIONS = [
-  { label: "Featured", value: "featured" },
-  { label: "Price: Low to High", value: "price-asc" },
-  { label: "Price: High to Low", value: "price-desc" },
-  { label: "Best Discount", value: "discount-desc" },
-];
 
 function formatPrice(value) {
   return `₹${value}`;
@@ -218,7 +211,7 @@ export default function ProductShowcase() {
               onChange={(e) => setSortBy(e.target.value)}
               className="w-full rounded-md border border-zinc-300 px-4 py-2 text-sm font-medium text-zinc-800 outline-none transition hover:border-primary/50 focus:border-primary sm:w-auto"
             >
-              {SORT_OPTIONS.map((option) => (
+              {PRODUCT_SHOWCASE_SORT_OPTIONS.map((option) => (
                 <option key={option.value} value={option.value}>
                   Sort by: {option.label}
                 </option>
@@ -232,7 +225,7 @@ export default function ProductShowcase() {
         <aside className="hidden w-[270px] shrink-0 border-r border-zinc-200 bg-white lg:block">
           <div className="sticky top-0 p-5">
             <div className="mb-6 flex items-center justify-between">
-              <h2 className="text-sm font-bold tracking-wide">FILTERS</h2>
+              <h1 className="text-sm font-bold tracking-wide">FILTERS</h1>
               <button onClick={clearFilters} className="pressable text-xs font-semibold text-primary transition-opacity duration-200 hover:opacity-90" data-cursor="Open">
                 CLEAR ALL
               </button>
@@ -303,7 +296,7 @@ export default function ProductShowcase() {
 
           <div className="absolute left-0 top-0 h-full w-[85%] max-w-sm overflow-y-auto bg-white shadow-xl">
             <div className="sticky top-0 z-10 flex items-center justify-between border-b border-zinc-200 bg-white px-4 py-4">
-              <h2 className="text-base font-semibold">Filters</h2>
+              <h1 className="text-base font-semibold">Filters</h1>
               <button onClick={() => setMobileFiltersOpen(false)} className="pressable rounded-md p-2 transition-colors duration-200 hover:bg-primary/5" data-cursor="Open">
                 <X className="h-5 w-5" />
               </button>

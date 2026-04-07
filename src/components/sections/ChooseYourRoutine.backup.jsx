@@ -1,63 +1,12 @@
 import { useState } from "react";
 import { GraduationCap, Plane, Home, Briefcase, ArrowRight } from "lucide-react";
-import { ALL_PRODUCTS } from "../../data/Data.js";
+import { ALL_PRODUCTS, ROUTINE_OPTIONS, ROUTINE_COLLECTION_MAP } from "../../data/Data.js";
 
-const routines = [
-  {
-    id: "school",
-    label: "School",
-    icon: GraduationCap,
-    eyebrow: "Built for School Days",
-    title: "Packed for school mornings",
-    description:
-      "Lunch boxes, bottles, and everyday carry essentials designed for busy school routines.",
-    accent: "from-primary/15 via-primary/5 to-transparent",
-    chip: "Daily Carry",
-    // products: [],
-  },
-  {
-    id: "travel",
-    label: "Travel",
-    icon: Plane,
-    eyebrow: "Built for Movement",
-    title: "Ready for life on the move",
-    description:
-      "Carry-friendly utility products made for travel, movement, and everyday convenience.",
-    accent: "from-zinc-200/50 via-zinc-100/40 to-transparent",
-    chip: "Travel Ready",
-    // products: [],
-  },
-  {
-    id: "home",
-    label: "Home",
-    icon: Home,
-    eyebrow: "Built for Home Utility",
-    title: "Essentials for everyday home life",
-    description:
-      "Practical products designed to fit naturally into kitchen counters, storage, and everyday routines.",
-    accent: "from-alt-yellow/25 via-alt-yellow/10 to-transparent",
-    chip: "Kitchen Utility",
-    // products: [],
-  },
-  {
-    id: "office",
-    label: "Office",
-    icon: Briefcase,
-    eyebrow: "Built for Work Days",
-    title: "Desk-to-day essentials",
-    description:
-      "Clean, practical utility for work setups, commutes, and everyday office life.",
-    accent: "from-primary/10 via-zinc-100/30 to-transparent",
-    chip: "Work Friendly",
-    // products: [],
-  },
-];
-
-const ROUTINE_COLLECTION_MAP = {
-  school: ["kidzbee", "tiffin-boxes"],
-  travel: ["insulated-water-bottle", "water-bottle"],
-  home: ["kitchen", "casseroles", "water-jug"],
-  office: ["insulated-water-bottle", "tiffin-boxes", "water-bottle"],
+const ROUTINE_ICON_MAP = {
+  school: GraduationCap,
+  travel: Plane,
+  home: Home,
+  office: Briefcase,
 };
 
 const getRoutineProducts = (routineId) => {
@@ -75,7 +24,7 @@ const getRoutineProducts = (routineId) => {
 };
 
 export default function ChooseYourRoutine() {
-  const [activeRoutine, setActiveRoutine] = useState(routines[0]);
+  const [activeRoutine, setActiveRoutine] = useState(ROUTINE_OPTIONS[0]);
   const activeRoutineProducts = getRoutineProducts(activeRoutine.id);
 
   return (
@@ -90,9 +39,9 @@ export default function ChooseYourRoutine() {
                 Choose Your Routine
               </p>
 
-              <h2 className="mt-4 text-3xl font-semibold tracking-tight text-zinc-950 md:text-5xl">
+              <h1 className="mt-4 text-3xl font-semibold tracking-tight text-zinc-950 md:text-5xl">
                 Utility looks different in every routine.
-              </h2>
+              </h1>
 
               <p className="mt-5 max-w-xl text-sm leading-7 text-zinc-600 md:text-base">
                 Pick a setting and explore essentials designed for the rhythm of everyday life.
@@ -101,8 +50,8 @@ export default function ChooseYourRoutine() {
 
             {/* Tabs */}
             <div className="mt-8 grid grid-cols-2 gap-3">
-              {routines.map((routine) => {
-                const Icon = routine.icon;
+              {ROUTINE_OPTIONS.map((routine) => {
+                const Icon = ROUTINE_ICON_MAP[routine.iconKey] || GraduationCap;
                 const isActive = activeRoutine.id === routine.id;
 
                 return (

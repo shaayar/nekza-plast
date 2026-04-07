@@ -70,9 +70,9 @@ export default function FAQ() {
         <div className="mx-auto max-w-4xl space-y-10">
           {FAQ_DATA.map((group, groupIndex) => (
             <div key={group.category}>
-              <h2 className="mb-5 text-xl font-semibold text-zinc-900">
+              <h1 className="mb-5 text-xl font-semibold text-zinc-900">
                 {group.category}
-              </h2>
+              </h1>
 
               <div className="space-y-3">
                 {group.items.map((item, i) => {

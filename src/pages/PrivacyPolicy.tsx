@@ -110,9 +110,9 @@ export default function PrivacyPolicy() {
                     <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-primary/10 text-primary">
                       <Icon size={22} />
                     </div>
-                    <h2 className="text-2xl font-semibold tracking-tight text-zinc-950">
+                    <h1 className="text-2xl font-semibold tracking-tight text-zinc-950">
                       {section.title}
-                    </h2>
+                    </h1>
                   </div>
 
                   <p className="text-[15px] leading-8 text-zinc-600 md:text-base">

@@ -52,7 +52,7 @@ export default function AboutPage() {
         </h1>
         <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-10">
           <div className="text-center md:text-left relative border border-gray-200 rounded-2xl p-6 md:p-9 overflow-hidden">
-            <h2 className="text-2xl md:text-3xl text-primary font-semibold mb-4">Mission</h2>
+            <h1 className="text-2xl md:text-3xl text-primary font-semibold mb-4">Mission</h1>
             <p className="text-gray-700 leading-8 text-base md:text-lg">
               As a leading homeware brand, Nekza is dedicated to crafting exceptional products that address everyday challenges through continuous innovation, setting industry benchmarks, and delivering unparalleled quality.
             </p>
@@ -62,7 +62,7 @@ export default function AboutPage() {
           </div>
 
           <div className="text-center md:text-left relative border border-gray-200 rounded-2xl p-6 md:p-9 overflow-hidden">
-            <h2 className="text-2xl md:text-3xl text-primary font-semibold mb-4">Vision</h2>
+            <h1 className="text-2xl md:text-3xl text-primary font-semibold mb-4">Vision</h1>
             <p className="text-gray-700 leading-8 text-base md:text-lg">
               To become the definitive leader in homeware solutions by offering innovative products that harmonize functionality, aesthetics, and value, transforming the way people experience their daily lives.
             </p>
@@ -98,9 +98,9 @@ export default function AboutPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Company Details */}
           <div className="space-y-6">
-            <h2 className="text-3xl md:text-5xl font-semibold text-primary mb-6">
+            <h1 className="text-3xl md:text-5xl font-semibold text-primary mb-6">
               Company Information
-            </h2>
+            </h1>
 
             <div className="space-y-4">
               <div>
@@ -155,9 +155,9 @@ export default function AboutPage() {
       {/* KUCH NAYA */}
       <section className="px-4 md:px-8 lg:px-16 py-12 md:py-20">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-5xl font-semibold mb-4">
+          <h1 className="text-3xl md:text-5xl font-semibold mb-4">
             Beyond <span className="text-primary underline decoration-3 decoration-alt-yellow">the Ordinary</span>
-          </h2>
+          </h1>
           <h3 className="text-xl md:text-3xl font-medium mb-6 text-gray-800">
             Where Vision Meets Innovation
           </h3>
@@ -181,9 +181,9 @@ export default function AboutPage() {
       {/* AWARDS INTRO */}
       <section className="px-4 md:px-8 lg:px-16 py-12 md:py-20 h-150 md:h-190" style={{ background: `url('/images/building.webp') no-repeat center bottom/cover` }}>
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-5xl font-semibold text-white mb-4">
+          <h1 className="text-3xl md:text-5xl font-semibold text-white mb-4">
             Recognition & Excellence
-          </h2>
+          </h1>
           <h3 className="text-xl md:text-3xl font-medium mb-6 text-white">
             Honored for Our Innovation
           </h3>

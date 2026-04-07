@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { PRELOADER_DOT_INDICES, PRELOADER_RIB_Y_POSITIONS } from "../../data/Data.js";
 
 export default function Preloader() {
   const [phase, setPhase] = useState(() => {
@@ -351,7 +352,7 @@ export default function Preloader() {
               />
 
               {/* subtle body ribs */}
-              {[110, 140, 168].map((y) => (
+              {PRELOADER_RIB_Y_POSITIONS.map((y) => (
                 <path
                   key={y}
                   d={`M26 ${y} Q48 ${y - 3} 70 ${y}`}
@@ -374,10 +375,10 @@ export default function Preloader() {
             <div className="accent-line h-1 w-60 bg-linear-to-r from-transparent via-primary to-transparent" />
 
             <div className="mt-1 flex items-center gap-2">
-              {[0, 1, 2].map((i) => (
+              {PRELOADER_DOT_INDICES.map((i) => (
                 <div
                   key={i}
-                  className={`dot${i + 1} h-0.75 w-0.75 rounded-full bg-white/80`}
+                  className={`dot${i + 1} h-0.75 rounded-full bg-white/80`}
                 />
               ))}
             </div>

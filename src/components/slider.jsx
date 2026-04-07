@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, EffectFade } from "swiper/modules";
 import { HERO_SLIDES } from "../data/Data.js";
@@ -66,44 +67,27 @@ export default function HeroSlider() {
               </div>
 
               {/* Headline */}
-              <h2
+              <h1
                 className="text-white font-bold leading-[1.1] tracking-tight font-comfortaa"
                 style={{
                   fontSize: "clamp(36px, 6.5vw, 88px)",
                 }}
               >
                 {slide.title}
-                <em className="block not-italic">
-                  {slide.titleItalic.map((line, j) => (
-                    <span key={j} className="block italic">
-                      {line}
-                    </span>
-                  ))}
-                </em>
-              </h2>
+              </h1>
 
               {/* CTA */}
               <a
-                href="#"
+                href={slide.url}
                 className="pressable group mt-8 md:mt-12 inline-flex items-center gap-3 w-fit border border-white/35 text-white text-[11px] md:text-xs font-medium tracking-[0.08em] uppercase px-6 py-3.5 transition-colors duration-200 hover:bg-primary hover:border-primary"
                 data-cursor="Shop"
               >
                 Discover Collection
-                <svg
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  fill="none"
+                <ArrowRight
+                  size={16}
+                  strokeWidth={1.6}
                   className="transition-transform duration-200 group-hover:translate-x-1"
-                >
-                  <path
-                    d="M3 8H13M13 8L9 4M13 8L9 12"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+                />
               </a>
             </div>
           </SwiperSlide>
@@ -117,9 +101,7 @@ export default function HeroSlider() {
         className="pressable hidden md:flex absolute left-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center text-white bg-black/30 transition-colors duration-200 hover:bg-primary/80 hover:border-transparent"
         data-cursor="Open"
       >
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-          <path d="M11 4L6 9L11 14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
+        <ChevronLeft size={18} strokeWidth={1.6} />
       </button>
 
       <button
@@ -128,9 +110,7 @@ export default function HeroSlider() {
         className="pressable hidden md:flex absolute right-6 top-1/2 -translate-y-1/2 z-20 w-12 h-12 items-center justify-center text-white bg-black/30 transition-colors duration-200 hover:bg-primary/80 hover:border-transparent"
         data-cursor="Open"
       >
-        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-          <path d="M7 4L12 9L7 14" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
+        <ChevronRight size={18} strokeWidth={1.6} />
       </button>
 
       {/* ── Progress-bar pagination ── */}
