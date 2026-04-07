@@ -10,13 +10,22 @@ const sectionIcons = {
   "alert-triangle": AlertTriangle,
 };
 
+const scrollToSection = (id) => {
+  const el = document.getElementById(id);
+  if (el) {
+    const offset = 150;
+    const top = el.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: "smooth" });
+  }
+};
+
 export default function TermsConditions() {
   return (
     <main className="relative bg-white text-zinc-900">
       {/* Background */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute left-1/2 top-28 h-[28rem] w-[28rem] -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.035)_1px,transparent_1px)] bg-[size:42px_42px] opacity-[0.18]" />
+        <div className="absolute left-1/2 top-28 h-112 w-md -translate-x-1/2 rounded-full bg-primary/10 blur-3xl" />
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(0,0,0,0.035)_1px,transparent_1px),linear-gradient(to_bottom,rgba(0,0,0,0.035)_1px,transparent_1px)] bg-size-[42px_42px] opacity-[0.18]" />
       </div>
 
       {/* Hero */}
@@ -57,39 +66,24 @@ export default function TermsConditions() {
             </p>
 
             <nav className="space-y-2">
-              {TERMS_SECTIONS.map((section) => (
-                <a
-                  key={section.title}
-                  href={`#${section.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
-                  className="block rounded-xl px-3 py-2 text-sm text-zinc-600 transition-colors duration-200 hover:bg-primary/5 hover:text-primary"
-                >
-                  {section.title}
-                </a>
-              ))}
-              <a
-                href="#general-usage"
-                className="block rounded-xl px-3 py-2 text-sm text-zinc-600 transition-colors duration-200 hover:bg-primary/5 hover:text-primary"
-              >
-                7. General Website Use
-              </a>
-              <a
-                href="#updates"
-                className="block rounded-xl px-3 py-2 text-sm text-zinc-600 transition-colors duration-200 hover:bg-primary/5 hover:text-primary"
-              >
-                8. Updates to Terms
-              </a>
-              <a
-                href="#contact"
-                className="block rounded-xl px-3 py-2 text-sm text-zinc-600 transition-colors duration-200 hover:bg-primary/5 hover:text-primary"
-              >
-                9. Contact
-              </a>
+              {TERMS_SECTIONS.filter(s => s.title && s.content).map((section) => {
+                const id = section.title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+                return (
+                  <button
+                    key={section.title}
+                    onClick={() => scrollToSection(id)}
+                    className="block w-full rounded-xl px-3 py-2 text-left text-sm text-zinc-600 transition-colors duration-200 hover:bg-primary/5 hover:text-primary"
+                  >
+                    {section.title}
+                  </button>
+                );
+              })}
             </nav>
           </aside>
 
           {/* Main content */}
           <div className="space-y-6">
-            {TERMS_SECTIONS.map((section) => {
+            {TERMS_SECTIONS.filter(s => s.title && s.content).map((section) => {
               const Icon = sectionIcons[section.iconKey] ?? FileText;
               const id = section.title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 
@@ -115,52 +109,7 @@ export default function TermsConditions() {
               );
             })}
 
-            <article
-              id="general-usage"
-              className="rounded-[2rem] border border-zinc-200 bg-white/80 p-6 shadow-[0_10px_40px_rgba(0,0,0,0.04)] backdrop-blur md:p-8"
-            >
-              <h2 className="text-2xl font-semibold tracking-tight text-zinc-950">
-                7. General Website Use
-              </h2>
-              <p className="mt-5 text-[15px] leading-8 text-zinc-600 md:text-base">
-                You agree not to misuse this website, interfere with its normal operation, attempt
-                unauthorized access, or use its content in any misleading or unlawful manner. The
-                website is intended to provide information, showcase products, and support legitimate
-                customer interaction with the Nekza brand.
-              </p>
-            </article>
-
-            <article
-              id="updates"
-              className="rounded-[2rem] border border-zinc-200 bg-white/80 p-6 shadow-[0_10px_40px_rgba(0,0,0,0.04)] backdrop-blur md:p-8"
-            >
-              <h2 className="text-2xl font-semibold tracking-tight text-zinc-950">
-                8. Updates to Terms
-              </h2>
-              <p className="mt-5 text-[15px] leading-8 text-zinc-600 md:text-base">
-                We may revise these Terms and Conditions from time to time to reflect operational,
-                legal, or product-related updates. Continued use of the website after such changes
-                implies acceptance of the updated terms.
-              </p>
-            </article>
-
-            <article
-              id="contact"
-              className="rounded-4xl border border-zinc-200 bg-white/80 p-6 shadow-[0_18px_60px_rgba(0,0,0,0.16)] md:p-8"
-            >
-              <h2 className="text-2xl font-semibold tracking-tight">
-                9. Contact
-              </h2>
-              <p className="mt-5 max-w-2xl text-[15px] leading-8 text-zinc-600 md:text-base">
-                If you have any questions regarding these Terms & Conditions, product information,
-                support policies, or website usage, please contact the Nekza team through the contact
-                details provided on the website.
-              </p>
-
-              <div className="mt-6 inline-flex rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm text-zinc-600">
-                Replace with your actual support email / contact details
-              </div>
-            </article>
+            
           </div>
         </div>
       </section>

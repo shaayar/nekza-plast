@@ -16,7 +16,8 @@ export default function useHorizontalDragScroll(enabled = true) {
     let activePointerId = null;
 
     const onPointerDown = (event) => {
-      if (event.pointerType !== "mouse" || event.button !== 0) return;
+      if (event.pointerType !== "mouse") return;
+      if (event.button !== 0) return;
 
       isDragging = true;
       moved = false;
@@ -58,7 +59,11 @@ export default function useHorizontalDragScroll(enabled = true) {
     };
 
     rail.classList.add("drag-scroll-rail");
-    rail.style.touchAction = "pan-y";
+
+    // Only add touch scrolling prevention for mouse, not touch devices
+    if (window.matchMedia("(pointer: fine)").matches) {
+      rail.style.touchAction = "none";
+    }
 
     rail.addEventListener("pointerdown", onPointerDown);
     rail.addEventListener("pointermove", onPointerMove);
@@ -69,7 +74,9 @@ export default function useHorizontalDragScroll(enabled = true) {
 
     return () => {
       rail.classList.remove("drag-scroll-rail", "is-dragging");
-      rail.style.touchAction = "";
+      if (window.matchMedia("(pointer: fine)").matches) {
+        rail.style.touchAction = "";
+      }
       rail.removeEventListener("pointerdown", onPointerDown);
       rail.removeEventListener("pointermove", onPointerMove);
       rail.removeEventListener("pointerup", endDrag);
