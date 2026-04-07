@@ -1,27 +1,27 @@
-# Nekza Problem/Fix Log
+# Nekza Problem/**Fix** Log
 
-This document captures the issues we faced during implementation, what caused them, and how we fixed them.
+This document captures the issues we faced during implementation, what **Cause**d them, and how we **Fix**ed them.
 
 ## 1) Repetitive homepage product sections
-- Situation: `Bestsellers`, `New Arrivals`, and `Popular Products` looked too similar (same rail-like structure).
-- Cause snippet:
+- **Situation**: `Bestsellers`, `New Arrivals`, and `Popular Products` looked too similar (same rail-like structure).
+- **Cause** snippet:
 ```jsx
 <div className="... overflow-x-auto ..." data-cursor="Drag">
   {visibleProducts.map(...)}
 </div>
 ```
-- Fix:
+- **Fix**:
   - `Bestsellers`: converted to responsive grid (2 cols mobile, 3/4 desktop).
   - `New Arrivals`: kept horizontal rail with improved spacing/snap behavior.
   - `Popular Products`: changed to editorial split layout (left content + right compact cards).
 
 ## 2) `ChooseYourRoutine` had invalid Tailwind token classes
-- Situation: styling inconsistencies / classes not applying.
-- Cause snippet:
+- **Situation**: styling inconsistencies / classes not applying.
+- **Cause** snippet:
 ```jsx
 className="border-(--cream-dark) bg-(--primary-color) text-(--ink-soft)"
 ```
-- Fix snippet:
+- **Fix snippet**:
 ```jsx
 className="border-cream-dark bg-primary text-ink-soft"
 ```
@@ -31,8 +31,8 @@ bg-size-[40px_40px] -> [background-size:40px_40px]
 ```
 
 ## 3) `ChooseYourRoutine` mobile scrollbar CSS leaked globally
-- Situation: unrelated horizontal areas were affected.
-- Cause snippet:
+- **Situation**: unrelated horizontal areas were affected.
+- **Cause** snippet:
 ```css
 .overflow-x-auto::-webkit-scrollbar { display: none; }
 ```
@@ -43,8 +43,8 @@ bg-size-[40px_40px] -> [background-size:40px_40px]
 ```
 
 ## 4) Horizontal rails were not mouse-draggable
-- Situation: touchpad swipe worked, mouse click-and-drag did not.
-- Cause:
+- **Situation**: touchpad swipe worked, mouse click-and-drag did not.
+- **Cause**:
   - Native `overflow-x-auto` without drag logic.
   - `data-cursor="Drag"` only changed cursor label, not behavior.
 - Fix:
@@ -56,8 +56,8 @@ bg-size-[40px_40px] -> [background-size:40px_40px]
     - `.drag-scroll-rail`, `.is-dragging` in `src/index.css`
 
 ## 5) `ProductDetails` hook/order and memo errors (reported lines around 232/278)
-- Situation: rules-of-hooks and memo/dependency lint errors.
-- Cause:
+- **Situation**: rules-of-hooks and memo/dependency lint errors.
+- **Cause**:
   - Hooks called after early return path.
   - fragile memo/effect sequence.
 - Fix:
@@ -69,8 +69,8 @@ const safeSizeIndex = Math.max(0, Math.min(size, derivedSizes.length - 1));
 ```
 
 ## 6) Terms/Privacy sidebars not sticking
-- Situation: aside looked static.
-- Causes:
+- **Situation**: aside looked static.
+- **Causes**s:
   - ancestor overflow behavior and sticky breakpoint setup.
   - grid/sidebar setup made sticky less reliable.
 - Fix:
@@ -79,8 +79,8 @@ const safeSizeIndex = Math.max(0, Math.min(size, derivedSizes.length - 1));
   - sticky moved to `md:sticky md:top-... md:self-start`.
 
 ## 7) Privacy sections 7/8/9 icon mapping issues
-- Situation: new sections didn’t show intended icons.
-- Cause:
+- **Situation**: new sections didn’t show intended icons.
+- **Cause**:
   - icon keys mismatched or not mapped.
 - Fix:
   - Data keys updated:
@@ -88,8 +88,8 @@ const safeSizeIndex = Math.max(0, Math.min(size, derivedSizes.length - 1));
   - Added icon map/imports in `PrivacyPolicy.tsx`.
 
 ## 8) `general` filter/tag cleanup
-- Situation: requested removal of generic filter concept.
-- Cause:
+- **Situation**: requested removal of generic filter concept.
+- **Cause**:
   - `Products.jsx` depended on `getGeneralProducts`.
   - `Data.js` had many `"general"` tags.
 - Fix:
@@ -98,9 +98,9 @@ const safeSizeIndex = Math.max(0, Math.min(size, derivedSizes.length - 1));
   - Removed `"general"` from product tags in `Data.js`.
 
 ## 9) Cart quantity needed hard cap + warnings
-- Situation: users could exceed desired per-item quantity.
+- **Situation**: users could exceed desired per-item quantity.
 - Requirement: max 10 units + toast warning when exceeding.
-- Fix:
+- **Fix**:
   - Added central cap in `CartContext`:
 ```js
 export const MAX_ITEM_QUANTITY = 10;
@@ -113,10 +113,10 @@ return { wasLimited, maxQuantity: MAX_ITEM_QUANTITY };
     - `Card`, `AddToCartButton`, `BuyNowButton`, `ProductShowcase`, `Cart`, `CartDrawer`.
 
 ## 10) `ChooseYourRoutine` navigation behavior
-- Situation:
+- **Situation**:
   - cards were not opening product details.
   - routine CTA needed filtered product listing.
-- Fix:
+- **Fix**:
   - cards converted to `Link` using product `href`.
   - CTA now builds query route:
 ```js
@@ -125,8 +125,8 @@ return { wasLimited, maxQuantity: MAX_ITEM_QUANTITY };
   - `Products.jsx` now reads `categories` query param and pre-applies category filter.
 
 ## 11) Navigation sometimes opened destination near footer
-- Situation: after redirects, page could appear near bottom.
-- Fix layers:
+- **Situation**: after redirects, page could appear near bottom.
+- **Fix layers** layers:
   - Global hardened scroll reset in `App.jsx`:
     - `history.scrollRestoration = "manual"`
     - multi-pass top reset (`immediate + requestAnimationFrame + timeout`)
@@ -136,11 +136,11 @@ return { wasLimited, maxQuantity: MAX_ITEM_QUANTITY };
     - `ProductDetails.jsx`
 
 ## 12) Vercel production routes returned 404 on refresh/direct URL access
-- Situation: app worked locally, but on Vercel, opening nested routes directly (or refreshing) failed.
-- Cause:
+- **Situation**: app worked locally, but on Vercel, opening nested routes directly (or refreshing) failed.
+- **Cause**:
   - SPA routing (`react-router`) needs all unknown paths to serve `index.html`.
   - Vercel tried to resolve those paths as static files instead.
-- Fix:
+- **Fix**:
   - Added rewrite rule in `vercel.json`:
 ```json
 {
@@ -150,6 +150,31 @@ return { wasLimited, maxQuantity: MAX_ITEM_QUANTITY };
 }
 ```
   - This ensures every route is rewritten to the app entry and client-side routing handles the path.
+
+## 13) Horizontal rails not scrollable on mobile
+- **Situation**: after adding mouse drag-to-scroll, mobile touch swipe stopped working.
+- **Cause**:
+  - `touch-action: none` was applied unconditionally to the scroll container.
+  - This CSS property disables native touch scrolling (swipe gestures) on all devices.
+- **Fix**:
+  - Modified hook to detect device pointer type:
+```js
+if (window.matchMedia("(pointer: fine)").matches) {
+  rail.style.touchAction = "none";
+}
+```
+  - Only applies `touch-action: none` on mouse/fine pointer devices.
+  - Touch devices retain native swipe behavior.
+
+## 14) TermsConditions sidebar scroll not working
+- **Situation**: clicking sidebar links didn't scroll to sections.
+- **Cause**:
+  - Used `<a href="#id">` which conflicted with scroll restoration in App.jsx.
+  - Hash navigation triggered browser behavior that was overridden.
+- **Fix**:
+  - Changed to `<button onClick={scrollToSection(id)}>` for JS-based scrolling.
+  - Added 150px offset to account for fixed header visibility.
+  - Added filter to remove empty sections from `TERMS_SECTIONS` before rendering.
 
 ---
 
@@ -279,4 +304,22 @@ Files:
 - vercel.json
 Notes:
 - Prevents 404 on direct nested route access / refresh in production.
+
+[2026-04-07 10:27 IST] [nekza-013-mobile-scroll-fix]
+Change:
+- Fixed mobile touch scroll being blocked after adding mouse drag-to-scroll.
+Files:
+- src/hooks/useHorizontalDragScroll.jsx
+Notes:
+- Only applies touch-action: none on fine pointer (mouse) devices.
+
+[2026-04-07 11:05 IST] [nekza-014-terms-sidebar-scroll]
+Change:
+- Fixed sidebar navigation not scrolling to sections.
+Files:
+- src/pages/TermsConditions.jsx
+Notes:
+- Converted anchor links to button onClick handlers.
+- Added 150px offset for header clearance.
+- Filtered empty sections from TERMS_SECTIONS.
 

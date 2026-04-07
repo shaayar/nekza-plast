@@ -1682,6 +1682,28 @@ export const TERMS_SECTIONS = [
     title: "6. Limitation of Liability",
     content: `Nekza shall not be held liable for any indirect, incidental, or consequential damages arising from the use of this website, product misuse, delayed availability, third-party logistics issues, or technical interruptions. Users are expected to use the website and products responsibly.`,
   },
+  {
+    iconKey: "refresh-ccw",
+    title: "7. General Website Use",
+    content: `You agree not to misuse this website, interfere with its normal operation, attempt
+                unauthorized access, or use its content in any misleading or unlawful manner. The
+                website is intended to provide information, showcase products, and support legitimate
+                customer interaction with the Nekza brand.`
+  },
+  {
+    iconKey: "refresh-ccw",
+    title: "8. Updates to Terms",
+    content: `We may revise these Terms and Conditions from time to time to reflect operational,
+                legal, or product-related updates. Continued use of the website after such changes
+                implies acceptance of the updated terms.`
+  },
+  {
+    iconKey: "refresh-ccw",
+    title: "9. Contact",
+    content: `If you have any questions regarding these Terms & Conditions, product information,
+                support policies, or website usage, please contact the Nekza team through the contact
+                details provided on the website.`
+  }
 ];
 
 // Privacy policy sections

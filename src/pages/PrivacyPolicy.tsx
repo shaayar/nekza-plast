@@ -23,6 +23,15 @@ const sectionIcons: Record<string, typeof ShieldCheck> = {
   "phone-call": PhoneCall,
 };
 
+const scrollToSection = (id: string) => {
+  const el = document.getElementById(id);
+  if (el) {
+    const offset = 150;
+    const top = el.getBoundingClientRect().top + window.scrollY - offset;
+    window.scrollTo({ top, behavior: "smooth" });
+  }
+};
+
 export default function PrivacyPolicy() {
   return (
     <section className="section-shell relative bg-white text-zinc-900">
@@ -70,22 +79,24 @@ export default function PrivacyPolicy() {
             </p>
 
             <nav className="space-y-2">
-              {PRIVACY_POLICY_SECTIONS.map((section) => (
-                <a
-                  key={section.title}
-                  href={`#${section.title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}`}
-                  className="block rounded-xl px-3 py-2 text-sm text-zinc-600 transition-colors duration-200 hover:bg-primary/5 hover:text-primary"
-                >
-                  {section.title}
-                </a>
-              ))}
-              
+              {PRIVACY_POLICY_SECTIONS.filter(s => s.title && s.content).map((section) => {
+                const id = section.title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
+                return (
+                  <button
+                    key={section.title}
+                    onClick={() => scrollToSection(id)}
+                    className="block w-full rounded-xl px-3 py-2 text-left text-sm text-zinc-600 transition-colors duration-200 hover:bg-primary/5 hover:text-primary"
+                  >
+                    {section.title}
+                  </button>
+                );
+              })}
             </nav>
           </aside>
 
           {/* Main Content */}
           <div className="space-y-6">
-            {PRIVACY_POLICY_SECTIONS.map((section) => {
+            {PRIVACY_POLICY_SECTIONS.filter(s => s.title && s.content).map((section) => {
               const Icon = section.iconKey ? sectionIcons[section.iconKey] ?? ShieldCheck : ShieldCheck;
               const id = section.title.toLowerCase().replace(/[^a-z0-9]+/g, "-");
 

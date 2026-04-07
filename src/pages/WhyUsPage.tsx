@@ -83,7 +83,7 @@ export default function WhyUsPage() {
 
       {/* Statement Block */}
       <section className="relative px-4 pb-20 md:px-8 lg:px-12">
-        <div className="relative mx-auto max-w-6xl overflow-hidden rounded-4xl border border-zinc-200 bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950 px-6 py-10 text-white shadow-[0_20px_80px_rgba(0,0,0,0.18)] md:px-10 md:py-14">
+        <div className="relative mx-auto max-w-6xl overflow-hidden rounded-4xl border border-zinc-200 bg-linear-to-br from-zinc-950 via-zinc-900 to-zinc-950 px-6 py-10 text-white shadow-[0_20px_80px_rgba(0,0,0,0.18)] md:px-10 md:py-14">
 
           {/* subtle glow */}
           <div className="pointer-events-none absolute -top-16 -right-16 h-48 w-48 rounded-full bg-primary/10 blur-3xl" />
