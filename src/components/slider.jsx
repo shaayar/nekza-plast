@@ -54,32 +54,28 @@ export default function HeroSlider() {
               className={[
                 "relative z-10 flex flex-col justify-center h-full",
                 "px-[5vw] pt-20 pb-24 md:pt-32 md:pb-28",
-                "max-w-4xl",
+                "md:max-w-3xl",
                 activeIndex === i ? "animate-slide-up" : "opacity-0",
               ].join(" ")}
             >
               {/* Tag */}
               <div className="flex items-center gap-2.5 mb-5">
                 <span className="block w-7 h-0.5 bg-primary shrink-0" />
-                <span className="text-white/60 text-[11px] md:text-[13px] font-medium tracking-[0.12em] uppercase">
+                <span className="text-white/60 text-[11px] md:text-sm font-medium tracking-[0.12em] uppercase">
                   {slide.tag}
                 </span>
               </div>
 
               {/* Headline */}
               <h1
-                className="text-white font-bold leading-[1.1] tracking-tight font-comfortaa"
-                style={{
-                  fontSize: "clamp(36px, 6.5vw, 88px)",
-                }}
-              >
+                className="text-white font-bold md:leading-[1.1] tracking-tight font-comfortaa text-4xl md:text-6xl">
                 {slide.title}
               </h1>
 
               {/* CTA */}
               <a
                 href={slide.url}
-                className="pressable group mt-8 md:mt-12 inline-flex items-center gap-3 w-fit border border-white/35 text-white text-[11px] md:text-xs font-medium tracking-[0.08em] uppercase px-6 py-3.5 transition-colors duration-200 hover:bg-primary hover:border-primary"
+                className="pressable group mt-8 lg:mt-12 inline-flex items-center gap-3 w-fit border border-white/35 text-white text-[11px] md:text-xs font-medium tracking-[0.08em] uppercase px-6 py-3.5 transition-colors duration-200 hover:bg-primary hover:border-primary"
                 data-cursor="Shop"
               >
                 Discover Collection
@@ -114,7 +110,7 @@ export default function HeroSlider() {
       </button>
 
       {/* ── Progress-bar pagination ── */}
-      <div className="absolute bottom-5 md:bottom-10 left-[5vw] lg:left-[45vw] z-20 flex items-center gap-2.5">
+      <div className="absolute bottom-5 md:bottom-9 left-[5vw] md:left-[40%]  z-20 flex items-center gap-2.5">
         {HERO_SLIDES.map((_, i) => (
           <button
             key={i}
@@ -137,7 +133,7 @@ export default function HeroSlider() {
       <div
         className="hidden md:block absolute bottom-6 right-[3vw] z-20 text-white/60 text-lg tracking-widest font-comfortaa"
       >
-        <span className="text-white/90 text-2xl font-bold">0{activeIndex + 1}</span>
+        <span className="text-white/90 text-2xl 2xl:text-4xl font-bold">0{activeIndex + 1}</span>
         {" "}/ 0{HERO_SLIDES.length}
       </div>
     </section>

@@ -88,9 +88,9 @@ function App() {
         <Route path="/popular-products" element={<Navigate to="/collections/popular" replace />} />
         <Route path="/bestsellers" element={<Navigate to="/collections/bestseller" replace />} />
         <Route path="/new-arrivals" element={<Navigate to="/collections/new-arrivals" replace />} />
-        <Route path="/pages/terms-and-conditions" element={ <TermsConditions /> } />
-        <Route path="/pages/privacy-policy" element={ <PrivacyPolicy /> } />
-        <Route path="/pages/faq" element={ <FAQ /> } />
+        <Route path="/pages/terms-and-conditions" element={<TermsConditions />} />
+        <Route path="/pages/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/pages/faq" element={<FAQ />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/account" element={<MyAccount />} />
         <Route path="/whyus" element={<WhyUsPage />} />
